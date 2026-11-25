@@ -1,0 +1,3465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>导师汇报｜前期调研与双实验整合设计方案</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --primary: #1e3a5f;
+      --primary-light: #2b5b84;
+      --primary-soft: #eff6ff;
+      --teal: #0f766e;
+      --teal-soft: #f0fdfa;
+      --amber: #b45309;
+      --amber-soft: #fffbeb;
+      --rose: #be123c;
+      --rose-soft: #fff1f2;
+      --indigo: #4338ca;
+      --indigo-soft: #eef2ff;
+      --violet: #6d28d9;
+      --violet-soft: #f5f3ff;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Sticky Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .progress-bar {
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--teal), var(--indigo));
+      transition: width 0.1s ease-out;
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .nav-brand .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+    }
+
+    /* Master View Switcher */
+    .master-tabs {
+      display: inline-flex;
+      background: var(--surface-soft);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      gap: 4px;
+    }
+
+    .master-tab {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .master-tab:hover {
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .master-tab.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(30, 58, 95, 0.22);
+    }
+
+    .master-tab.active.exp2-tab {
+      background: linear-gradient(135deg, #0f766e, #1e3a5f);
+    }
+
+    .tab-pill-badge {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.08);
+      color: inherit;
+    }
+
+    .master-tab.active .tab-pill-badge {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-print {
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-main);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-print:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Sub-nav bar per view */
+    .sub-nav-bar {
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      padding: 7px 24px;
+    }
+
+    .sub-nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .sub-nav-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 6px;
+    }
+
+    .sub-nav-inner a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 999px;
+      transition: all 0.18s;
+    }
+
+    .sub-nav-inner a:hover,
+    .sub-nav-inner a.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Container & Views */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 24px 80px;
+    }
+
+    .view-panel {
+      display: none;
+      animation: fadeSlide 0.28s ease;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #162c47 0%, #1e3a5f 55%, #134e4a 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 38px 44px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(22, 44, 71, 0.16);
+    }
+
+    .hero.hero-exp2 {
+      background: linear-gradient(135deg, #134e4a 0%, #1e3a5f 58%, #312e81 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      line-height: 1.35;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .hero-meta-item {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 12px 15px;
+    }
+
+    .hero-meta-item .label {
+      font-size: 11px;
+      color: #94a3b8;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+
+    .hero-meta-item .value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 36px;
+      scroll-margin-top: 112px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .section-num {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #ffffff;
+      background: var(--primary);
+      padding: 2px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .section-num.teal { background: var(--teal); }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* Cards & Grids */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card + .card { margin-top: 16px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    /* Pills & Badges */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .pill.teal { background: var(--teal-soft); color: var(--teal); }
+    .pill.amber { background: var(--amber-soft); color: var(--amber); }
+    .pill.rose { background: var(--rose-soft); color: var(--rose); }
+    .pill.indigo { background: var(--indigo-soft); color: var(--indigo); }
+    .pill.violet { background: var(--violet-soft); color: var(--violet); }
+    .pill.gray { background: var(--surface-soft); color: var(--text-secondary); }
+
+    .citation-chip {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* Interactive Segmented Control / Sub-tabs */
+    .seg-tabs {
+      display: inline-flex;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .seg-btn:hover {
+      color: var(--primary);
+      background: rgba(255,255,255,0.7);
+    }
+
+    .seg-btn.active {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+    }
+
+    .seg-panel { display: none; animation: fadeSlide 0.22s ease; }
+    .seg-panel.active { display: block; }
+
+    /* Dual-Experiment Pipeline Interactive Strip */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .pipe-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      text-align: left;
+    }
+
+    .pipe-card:hover {
+      border-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .pipe-card.active {
+      border-color: var(--primary);
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+      box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+    }
+
+    .pipe-card.active.teal-active {
+      border-color: var(--teal);
+      background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .pipe-step {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .pipe-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .pipe-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .pipe-detail-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pipe-detail-text {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .pipe-detail-text h4 {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: #5eead4;
+      margin-bottom: 6px;
+    }
+
+    .pipe-detail-text p {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
+
+    .btn-jump {
+      border: none;
+      background: #14b8a6;
+      color: #042f2e;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-jump:hover {
+      background: #2dd4bf;
+      transform: translateY(-1px);
+    }
+
+    /* Overview Cards */
+    .overview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      border-top: 3px solid var(--primary);
+    }
+    .overview-card.teal { border-top-color: var(--teal); }
+    .overview-card.amber { border-top-color: var(--amber); }
+    .overview-card.indigo { border-top-color: var(--indigo); }
+    .overview-card h3 { font-size: 13.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+    .overview-card p { font-size: 14px; color: var(--text-main); line-height: 1.65; }
+
+    /* Interactive Social Support 4-Dimension Explorer */
+    .ss-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .ss-card {
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .ss-card:hover {
+      border-color: var(--primary-light);
+      background: #ffffff;
+    }
+
+    .ss-card.active {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+    }
+
+    .ss-card .ss-tag {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    .ss-card h4 {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .ss-card small {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .ss-detail {
+      background: #f8fafc;
+      border: 1px solid var(--border-strong);
+      border-left: 4px solid var(--teal);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .ss-detail strong { color: var(--text-main); }
+
+    /* Interactive Level Cards (IV1 & IV2) */
+    .iv-levels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+    .iv-levels.two-col { grid-template-columns: repeat(2, 1fr); }
+
+    .level-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 15px 17px;
+      transition: all 0.2s;
+    }
+    .level-box .en { font-size: 11.5px; font-weight: 700; color: var(--teal); letter-spacing: 0.03em; }
+    .level-box .zh { font-size: 15px; font-weight: 800; color: var(--text-main); margin: 2px 0 6px; }
+    .level-box .desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .level-box .quote {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: #ffffff;
+      border: 1px dashed var(--border-strong);
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--primary);
+    }
+
+    /* Accordion / Drawer for Literature Deep Dive */
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .accordion-head {
+      width: 100%;
+      border: none;
+      background: #f8fafc;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .accordion-head:hover { background: var(--primary-soft); }
+
+    .accordion-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .accordion-title-wrap strong {
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    .accordion-arrow {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.22s;
+      flex-shrink: 0;
+    }
+
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+
+    .accordion-body {
+      display: none;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .accordion-item.open .accordion-body { display: block; }
+    .accordion-body strong { color: var(--text-main); }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: var(--surface);
+    }
+
+    th {
+      background: #f8fafc;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: left;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-strong);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--text-main);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr.highlight-row { background: #f0fdfa; }
+    tr.highlight-row td:first-child { border-left: 3px solid var(--teal); }
+    tr.highlight-row-amber { background: #fffbeb; }
+    tr.highlight-row-amber td:first-child { border-left: 3px solid var(--amber); }
+
+    .toggle-btn {
+      background: var(--surface-soft);
+      border: 1px solid var(--border-strong);
+      color: var(--primary);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-btn:hover { background: var(--primary-soft); }
+    .non-selected-row.collapsed { display: none; }
+
+    /* Interactive RQ-H-DV Linked Section */
+    .rq-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+    }
+
+    .rq-filter-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface-soft);
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .rq-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .rq-filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .rq-item, .h-item {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.22s ease;
+    }
+
+    .rq-item + .rq-item, .h-item + .h-item { margin-top: 10px; }
+
+    .rq-item.linked-active, .h-item.linked-active {
+      border-color: var(--teal);
+      background: #f0fdfa;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .rq-item.linked-dim, .h-item.linked-dim, .dv-card.linked-dim {
+      opacity: 0.42;
+    }
+
+    .badge-code {
+      flex-shrink: 0;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 52px;
+    }
+    .badge-rq { background: var(--primary); color: #ffffff; }
+    .badge-h { background: var(--teal); color: #ffffff; }
+
+    .rq-body h4, .h-body h4 { font-size: 14px; font-weight: 800; color: var(--primary); margin-bottom: 3px; }
+    .h-body h4 { color: var(--teal); }
+    .rq-body p, .h-body p { font-size: 14px; color: var(--text-main); line-height: 1.65; }
+
+    /* Interactive DV Cards (Exp 2) */
+    .dv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .dv-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      transition: all 0.22s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dv-card.linked-active {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .dv-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .dv-card h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .dv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .dv-list li {
+      background: var(--surface-soft);
+      padding: 9px 12px;
+      border-radius: 8px;
+      line-height: 1.55;
+    }
+
+    .dv-list li strong { color: var(--text-main); }
+
+    .dv-ref {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+
+    /* Interactive Matrix Simulator (Both Exp 1 & Exp 2) */
+    .matrix-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: 112px 1fr 1fr;
+      gap: 10px;
+    }
+
+    .matrix-head {
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .matrix-row-head {
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .matrix-row-head small {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .matrix-cell {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .matrix-cell:hover {
+      border-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .matrix-cell.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+    }
+
+    .matrix-cell.exp2-cell.active {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+    }
+
+    .matrix-cell .cell-id { font-size: 11.5px; font-weight: 800; color: var(--teal); margin-bottom: 3px; }
+    .matrix-cell .cell-title { font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 3px; }
+    .matrix-cell .cell-brief { font-size: 12px; color: var(--text-muted); line-height: 1.45; }
+
+    .baseline-btn {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      background: #f8fafc;
+      border: 1.5px dashed var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .baseline-btn:hover { border-color: var(--primary); background: #ffffff; }
+    .baseline-btn.active {
+      border-style: solid;
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+    }
+
+    /* Dark Vision Pro Preview Panel */
+    .preview-panel {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .preview-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preview-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: #5eead4;
+      background: rgba(94, 234, 212, 0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .preview-scene-label { font-size: 12px; color: #94a3b8; }
+
+    .chat-bubble {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+    }
+    .chat-bubble .speaker { font-size: 11.5px; font-weight: 700; color: #94a3b8; margin-bottom: 3px; display: block; }
+    .chat-bubble.user-stuck { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.35); }
+    .chat-bubble.ai-help { background: rgba(45, 212, 191, 0.14); border-color: rgba(45, 212, 191, 0.45); }
+    .chat-bubble.ai-help .speaker { color: #5eead4; }
+    .chat-bubble.npc-affect { background: rgba(129, 140, 248, 0.15); border-color: rgba(129, 140, 248, 0.45); }
+    .chat-bubble.npc-affect .speaker { color: #a5b4fc; }
+
+    .npc-visual-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .npc-avatar-svg {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .npc-meta-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .npc-meta-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #e2e8f0;
+    }
+
+    .preview-analysis {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .preview-analysis strong { color: #ffffff; }
+
+    /* Scenario switcher pills */
+    .scene-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .scene-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .scene-btn.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #ffffff;
+    }
+
+    /* Dilemma & Findings (Exp 1) */
+    .dilemma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+    .dilemma-col { border-radius: var(--radius-md); padding: 16px 18px; border: 1px solid var(--border); }
+    .dilemma-col.withhold { background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%); border-color: #99f6e4; }
+    .dilemma-col.give { background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%); border-color: #fde68a; }
+    .dilemma-col h4 { font-size: 14.5px; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+    .dilemma-col.withhold h4 { color: var(--teal); }
+    .dilemma-col.give h4 { color: var(--amber); }
+    .dilemma-list { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+    .dilemma-list li { padding-left: 12px; position: relative; color: var(--text-secondary); }
+    .dilemma-list li::before { content: "•"; position: absolute; left: 0; font-weight: 800; }
+    .dilemma-list li strong { color: var(--text-main); }
+
+    .findings-box {
+      margin-top: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .findings-box h5 { font-size: 13.5px; font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+    .findings-box ol { padding-left: 18px; font-size: 13px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 5px; }
+    .findings-box ol strong { color: var(--text-main); }
+
+    .note-banner {
+      margin-top: 14px;
+      background: var(--primary-soft);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--primary);
+    }
+
+    .note-banner.teal {
+      background: var(--teal-soft);
+      border-color: #99f6e4;
+      color: #115e59;
+    }
+
+    .flow-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .flow-step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 18px; }
+    .flow-step .step-tag { font-size: 11.5px; font-weight: 700; color: var(--teal); margin-bottom: 4px; display: block; }
+    .flow-step h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+    .flow-step p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    .context-card {
+      background: var(--surface-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      border-left: 3px solid var(--primary-light);
+    }
+    .context-card strong { display: block; font-size: 13.5px; color: var(--primary); margin-bottom: 4px; }
+    .context-card span { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+    .sub-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sub-head h3 { font-size: 16.5px; font-weight: 800; color: var(--primary); }
+
+    .master-tab.active.research-tab {
+      background: linear-gradient(135deg, #3730a3, #1e3a5f);
+    }
+
+    .hero.hero-research {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 52%, #1e3a5f 100%);
+    }
+
+    .section-num.indigo { background: var(--indigo); }
+
+    /* Research Entry Cards on Overview */
+    .research-entry-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.2s ease;
+    }
+    .research-entry-card:hover {
+      border-color: var(--indigo);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .research-entry-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 6px 0;
+    }
+    .research-entry-card p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .btn-research-go {
+      align-self: flex-start;
+      border: none;
+      background: var(--indigo);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-research-go:hover {
+      background: #3730a3;
+      transform: translateY(-1px);
+    }
+    .btn-research-go.teal {
+      background: var(--teal);
+    }
+    .btn-research-go.teal:hover {
+      background: #115e59;
+    }
+
+    /* Word Document Preview Component */
+    .word-viewer-shell {
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #e5eaf1;
+      box-shadow: var(--shadow-md);
+    }
+
+    .word-toolbar {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .word-doc-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .word-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+    }
+
+    .word-filename {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 310px;
+    }
+
+    .word-meta-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.18);
+      border: 1px solid rgba(147, 197, 253, 0.25);
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .word-jump-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .word-jump-btn {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .word-jump-btn:hover {
+      background: rgba(255,255,255,0.18);
+      color: #ffffff;
+    }
+
+    .word-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .word-zoom-group {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .word-zoom-btn {
+      border: none;
+      background: transparent;
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .word-zoom-btn:hover {
+      background: rgba(255,255,255,0.16);
+      color: #ffffff;
+    }
+
+    .word-zoom-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f8fafc;
+      min-width: 44px;
+      text-align: center;
+      border-left: 1px solid rgba(255,255,255,0.12);
+      border-right: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 6px;
+    }
+
+    .btn-word-expand {
+      border: none;
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-word-expand:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .word-viewport {
+      height: 640px;
+      overflow: auto;
+      padding: 28px 20px;
+      background: radial-gradient(circle at top, #e8edf4 0%, #dce3ec 100%);
+      scroll-behavior: smooth;
+    }
+
+    .word-paper {
+      --doc-scale: 1;
+      width: calc(760px * var(--doc-scale));
+      max-width: none;
+      margin: 0 auto;
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.14);
+      padding: 3.1em 3.5em 3.4em;
+      font-size: calc(14px * var(--doc-scale));
+      line-height: 1.75;
+      transition: width 0.15s ease, font-size 0.15s ease;
+    }
+
+    .word-running-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78em;
+      color: #94a3b8;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.65em;
+      margin-bottom: 1.8em;
+    }
+
+    .word-running-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78em;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 0.8em;
+      margin-top: 2.2em;
+    }
+
+    .wq-title {
+      font-size: 1.48em;
+      font-weight: 800;
+      text-align: center;
+      color: #0f172a;
+      margin-bottom: 0.85em;
+      letter-spacing: 0.02em;
+    }
+
+    .wq-intro {
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      padding: 0.9em 1.15em;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.94em;
+      color: #334155;
+      margin-bottom: 1.7em;
+      text-indent: 2em;
+    }
+
+    .wq-sec-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+      margin: 1.7em 0 1em;
+      font-size: 0.82em;
+      font-weight: 800;
+      color: #1d4ed8;
+      letter-spacing: 0.04em;
+    }
+    .wq-sec-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #dbeafe;
+    }
+
+    .wq-item {
+      margin-bottom: 1.35em;
+      padding-bottom: 1.1em;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+    .wq-item:last-of-type { border-bottom: none; }
+
+    .wq-q {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.65em;
+      font-size: 1em;
+    }
+
+    .wq-type {
+      display: inline-block;
+      font-size: 0.78em;
+      font-weight: 700;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 0.05em 0.5em;
+      border-radius: 4px;
+      margin-left: 0.45em;
+      vertical-align: middle;
+    }
+
+    .wq-req {
+      color: #dc2626;
+      font-weight: 800;
+      margin-left: 0.25em;
+    }
+
+    .wq-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35em;
+      padding-left: 0.6em;
+    }
+
+    .wq-opt {
+      padding: 0.38em 0.75em;
+      border-radius: 5px;
+      border: 1px solid #f1f5f9;
+      background: #fafcff;
+      font-size: 0.94em;
+      color: #334155;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .wq-opt:hover {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .wq-matrix-wrap {
+      overflow-x: auto;
+      margin-top: 0.5em;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+    }
+
+    .wq-matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88em;
+      background: #ffffff;
+    }
+
+    .wq-matrix-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.6em 0.5em;
+      border-bottom: 1px solid #cbd5e1;
+      border-right: 1px solid #e2e8f0;
+      white-space: normal;
+      line-height: 1.35;
+    }
+    .wq-matrix-table th:first-child { text-align: left; width: 46%; }
+    .wq-matrix-table th:last-child { border-right: none; }
+
+    .wq-matrix-table td {
+      padding: 0.58em 0.6em;
+      border-bottom: 1px solid #e2e8f0;
+      border-right: 1px solid #f1f5f9;
+      text-align: center;
+      vertical-align: middle;
+      color: #475569;
+    }
+    .wq-matrix-table td:first-child {
+      text-align: left;
+      color: #1e293b;
+      line-height: 1.55;
+    }
+    .wq-matrix-table td:last-child { border-right: none; }
+    .wq-matrix-table tr:nth-child(even) td { background: #fafcff; }
+    .wq-matrix-table tr:hover td { background: #eff6ff; }
+    .wq-matrix-table tr:last-child td { border-bottom: none; }
+
+    .wq-textarea-mock {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #f8fafc;
+      min-height: 5.5em;
+      padding: 0.8em 1em;
+      color: #94a3b8;
+      font-size: 0.9em;
+      margin-top: 0.4em;
+    }
+
+    .word-statusbar {
+      background: #f1f5f9;
+      border-top: 1px solid var(--border-strong);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .word-statusbar button {
+      border: none;
+      background: transparent;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .word-statusbar button:hover { text-decoration: underline; }
+
+    /* Fullscreen Word Lightbox Modal */
+    .word-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(6px);
+      flex-direction: column;
+    }
+    .word-modal.open {
+      display: flex;
+      animation: fadeSlide 0.2s ease;
+    }
+
+    .word-modal-bar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    .word-modal-viewport {
+      flex: 1;
+      overflow: auto;
+      padding: 28px 24px 60px;
+      scroll-behavior: smooth;
+    }
+
+    .btn-modal-close {
+      border: 1px solid rgba(248, 113, 113, 0.45);
+      background: rgba(239, 68, 68, 0.16);
+      color: #fecaca;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+    .btn-modal-close:hover {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+
+    /* Qualitative Interview Table Accents */
+    .interview-table th { white-space: normal; }
+    .interview-stage-cell {
+      background: #f8fafc;
+      font-weight: 800;
+      color: var(--primary);
+      border-right: 1px solid var(--border);
+    }
+    .interview-stage-cell.core-stage {
+      background: #f0fdfa;
+      color: var(--teal);
+      border-left: 3px solid var(--teal);
+    }
+    .interview-q-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 1px 7px;
+      border-radius: 5px;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
+    .interview-q-badge.core {
+      background: var(--teal);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      padding-top: 24px;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero { padding: 26px 22px; }
+      .hero-meta-grid, .grid-4, .ss-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow-steps, .grid-3, .iv-levels, .dilemma-grid, .matrix-layout, .pipeline-grid, .dv-grid, .grid-2 { grid-template-columns: 1fr; }
+      .section-desc { margin-left: 0; width: 100%; }
+      .master-tabs { width: 100%; justify-content: center; flex-wrap: wrap; }
+      .word-viewport { height: 520px; padding: 14px 10px; }
+      .word-filename { max-width: 210px; }
+    }
+
+    /* Print All Views cleanly */
+    @media print {
+      .top-nav, .btn-print, .toggle-btn, .seg-tabs, .rq-filter-bar, .scene-switcher, .btn-jump, .word-toolbar, .word-statusbar, #wordPreviewModal, .btn-research-go { display: none !important; }
+      body { background: #fff; font-size: 12.5px; }
+      .container { max-width: 100%; padding: 0; }
+      .view-panel, .seg-panel, .accordion-body { display: block !important; opacity: 1 !important; }
+      .non-selected-row.collapsed { display: table-row !important; }
+      .word-viewer-shell { border: none !important; box-shadow: none !important; background: #fff !important; }
+      .word-viewport { height: auto !important; overflow: visible !important; background: #fff !important; padding: 0 !important; }
+      .word-paper { --doc-scale: 1 !important; width: 100% !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
+      .card, .overview-card, .rq-item, .h-item, .dv-card { box-shadow: none !important; break-inside: avoid; }
+      .hero { color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-before: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation with Master Switcher -->
+  <nav class="top-nav">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="dot"></span>
+        <span>硕士课题导师汇报</span>
+      </div>
+
+      <div class="master-tabs" role="tablist">
+        <button class="master-tab active" data-view="view-overview" onclick="switchMasterView('view-overview')">
+          总览与双实验架构
+        </button>
+        <button class="master-tab research-tab" data-view="view-research" onclick="switchMasterView('view-research')">
+          前期调研：问卷与访谈 <span class="tab-pill-badge">定量+定性</span>
+        </button>
+        <button class="master-tab" data-view="view-exp1" onclick="switchMasterView('view-exp1')">
+          实验一：语言帮助 <span class="tab-pill-badge">3×2</span>
+        </button>
+        <button class="master-tab exp2-tab" data-view="view-exp2" onclick="switchMasterView('view-exp2')">
+          实验二：NPC情感支持 <span class="tab-pill-badge">2×2+G0</span>
+        </button>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-print" onclick="window.print()">打印 / 导出 PDF</button>
+      </div>
+    </div>
+
+    <!-- Context-aware Sub Navigation -->
+    <div class="sub-nav-bar">
+      <div class="sub-nav-inner" id="subNavOverview">
+        <span class="sub-nav-label">本页导览：</span>
+        <a href="#ov-bg">课题定位</a>
+        <a href="#ov-pipeline">双实验递进架构</a>
+        <a href="#ov-scenarios">贯通的3类困难情境</a>
+        <a href="#ov-research">前期用户调研工具</a>
+      </div>
+      <div class="sub-nav-inner" id="subNavResearch" style="display:none;">
+        <span class="sub-nav-label">前期调研导览：</span>
+        <a href="#rs-survey">定量调查问卷（Word预览）</a>
+        <a href="#rs-interview">定性深度访谈提纲（Q1–Q12）</a>
+      </div>
+      <div class="sub-nav-inner" id="subNavExp1" style="display:none;">
+        <span class="sub-nav-label">实验一导览：</span>
+        <a href="#e1-scenario">用户场景</a>
+        <a href="#e1-iv">自变量与理论</a>
+        <a href="#e1-rq">RQ与假设</a>
+        <a href="#e1-dv">因变量</a>
+      </div>
+      <div class="sub-nav-inner" id="subNavExp2" style="display:none;">
+        <span class="sub-nav-label">实验二导览：</span>
+        <a href="#e2-iv">自变量与理论支撑</a>
+        <a href="#e2-rq-dv">RQ·假设·因变量联动</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ========================================================= -->
+    <!-- VIEW 0: 课题总览与双实验递进架构                            -->
+    <!-- ========================================================= -->
+    <div class="view-panel active" id="view-overview">
+      <header class="hero">
+        <div class="hero-badge">硕士学位论文阶段汇报 · 整体实验架构</div>
+        <h1>基于自我决定理论的英语碎片化学习系统设计研究</h1>
+        <p class="hero-subtitle">Vision Pro 空间计算环境下：从「AI 语言支架（实验一）」到「数字人 NPC 多模态情感支持（实验二）」的递进式实证设计</p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <div class="label">顶层动机框架</div>
+            <div class="value">自我决定理论（SDT）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">实验一（信息支持层）</div>
+            <div class="value">AI 介入方式 × 帮助具体程度</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">实验二（情感支持层）</div>
+            <div class="value">言语支持 × 非语言共情 + G0</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">贯通测试情境</div>
+            <div class="value">表达受阻 / 表达错误 / 沟通受阻</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 01 课题定位 -->
+      <section class="section" id="ov-bg">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <h2 class="section-title">课题背景与研究目标</h2>
+          <span class="section-desc">聚焦真实场景口语表达困难，构建 SDT 三大基本心理需求闭环</span>
+        </div>
+        <div class="grid-2">
+          <div class="overview-card">
+            <h3>目标用户</h3>
+            <p>有一定英语基础、存在真实英语交流需求，但在真实场景口语表达和持续练习上存在困难的人群（经常出现“知道意思却说不出来”、缺乏高频持续练习机会的成年英语学习者）。</p>
+          </div>
+          <div class="overview-card teal">
+            <h3>产品长期目标</h3>
+            <p>帮助用户更自信、更有效地在真实生活中使用英语——提升真实情境中的开口意愿与即兴表达流畅度，降低卡壳和出错带来的挫败感，建立可持续的口语练习习惯。</p>
+          </div>
+          <div class="overview-card amber">
+            <h3>想要解决的核心问题</h3>
+            <p>如何设计一套英语碎片化学习系统，让学习者练习<strong>与自己有关的内容</strong>，并在<strong>表达困难时获得适当支持</strong>（既包含语言支架，也包含数字人情感支持），从而改善练习动机和口语表达体验？</p>
+          </div>
+          <div class="overview-card indigo">
+            <h3>总体研究目标</h3>
+            <p>基于<strong>自我决定理论（自主感、胜任感、关系感）</strong>，本课题旨在设计一套围绕用户真实生活场景的英语碎片化学习系统：一方面，从用户的<strong>真实生活经历中提取独立的口语交际场景</strong>，让学习者围绕与自己有关的内容自主练习；另一方面，在口语交流遇到表达困难时，通过恰当的 <strong>AI 语言帮助与自然的数字人情感支持</strong>，缓解学习者的开口压力，改善其<strong>情境性开口意愿（WTC）、口语表达体验与独立表达能力</strong>。</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+              <span class="pill">自主感（真实生活自主选景+实验一）</span>
+              <span class="pill teal">胜任感（实验一+二）</span>
+              <span class="pill indigo">关系感（实验二）</span>
+              <span class="pill amber">情境性 WTC &amp; 独立表达能力</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 交互式双实验递进架构 -->
+      <section class="section" id="ov-pipeline">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2 class="section-title">双实验分层解耦与递进关系</h2>
+          <span class="section-desc">点击下方任意模块，查看双通道分工、理论衔接与实验承接关系</span>
+        </div>
+
+        <div class="pipeline-grid">
+          <button type="button" class="pipe-card active" data-pipe="p1" onclick="selectPipe('p1')">
+            <div class="pipe-step">STAGE 01 · 信息支持层（认知支架）</div>
+            <h3>实验一：AI 语言帮助介入策略</h3>
+            <p>采用 <strong>3 × 2 析因设计</strong>，解决空间悬浮 UI 卡片「何时介入」与「给多细」的认知权衡。</p>
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="pill">自主感 & 胜任感</span>
+              <span class="pill gray">信息支持</span>
+            </div>
+          </button>
+
+          <button type="button" class="pipe-card teal-active" data-pipe="p2" onclick="selectPipe('p2')">
+            <div class="pipe-step">STAGE 02 · 情感支持层（具身共情）</div>
+            <h3>实验二：NPC 多模态情感支持策略</h3>
+            <p>锁死实验一最优 UI 策略，采用 <strong>2 × 2 + G0 设计</strong>，探究数字人「言语支持 × 非语言共情」效应。</p>
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="pill teal">关系感 & WTC</span>
+              <span class="pill gray">情感 & 尊重支持</span>
+            </div>
+          </button>
+
+          <button type="button" class="pipe-card" data-pipe="p3" onclick="selectPipe('p3')">
+            <div class="pipe-step">STAGE 03 · 策略整合与系统落地</div>
+            <h3>双通道解耦的产品整体策略</h3>
+            <p>将语言帮助（空间 UI）与情感支持（3D NPC）彻底解耦，避免 NPC 扮演外教“出戏”，输出分情境适配规范。</p>
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="pill indigo">空间UI × 3D数字人</span>
+              <span class="pill amber">分情境策略矩阵</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="pipe-detail-box" id="pipeDetailBox">
+          <div class="pipe-detail-text">
+            <h4 id="pipeTitle">实验一（信息支持层）：解决「怎么帮你说」的认知脚手架与自主权博弈</h4>
+            <p id="pipeDesc">通过 Cody et al. (2020) 的三类介入方式（Reactive / Proactive-Permission / Proactive-Direct）与 Koedinger & Aleven (2007) 帮助两难困境下的两类帮助具体程度（Cue / Model），在 3 类困难情境下测出最优语言帮助策略，既保障当场表达流畅，又保护自主感与无帮助迁移留存。</p>
+          </div>
+          <button type="button" class="btn-jump" id="pipeJumpBtn" onclick="switchMasterView('view-exp1')">进入实验一完整方案 →</button>
+        </div>
+      </section>
+
+      <!-- 03 贯通的 3 类困难情境 -->
+      <section class="section" id="ov-scenarios">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2 class="section-title">贯通两个实验的三类口语表达困难情境</h2>
+          <span class="section-desc">作为固定测试语境（拉丁方平衡），直接导出分情境产品设计策略</span>
+        </div>
+        <div class="grid-3">
+          <div class="context-card" style="background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);padding:16px 18px;">
+            <strong>① 表达受阻（产出卡壳）</strong>
+            <span>想表达真实需求，但忘记关键词或句式导致长停顿、卡壳冷场。<strong>实验一</strong>侧重如何及时打破无效卡死；<strong>实验二</strong>侧重如何接住冷场焦虑与尴尬。</span>
+          </div>
+          <div class="context-card" style="background:#fff;border:1px solid var(--border);border-left:4px solid var(--teal);padding:16px 18px;">
+            <strong>② 表达错误（局部偏差）</strong>
+            <span>完整说出了句子，NPC 能懂大意，但存在局部语法或用词偏差。<strong>实验一</strong>侧重低打断修正与迁移；<strong>实验二</strong>侧重维护面子、肯定有效沟通并稳住自信。</span>
+          </div>
+          <div class="context-card" style="background:#fff;border:1px solid var(--border);border-left:4px solid var(--amber);padding:16px 18px;">
+            <strong>③ 沟通受阻（交际中断）</strong>
+            <span>表达歧义导致 NPC 无法理解，或用户未听清 NPC 提问导致交流停滞。<strong>实验一</strong>侧重快速提供澄清支架；<strong>实验二</strong>侧重用体谅/轻松姿态自然修复对话。</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 前期用户调研工具入口 -->
+      <section class="section" id="ov-research">
+        <div class="section-header">
+          <span class="section-num indigo">04</span>
+          <h2 class="section-title">前期用户调研工具（定量问卷 + 定性访谈）</h2>
+          <span class="section-desc">为痛点验证、用户体验地图绘制与双实验变量设定提供前期实证支撑</span>
+        </div>
+        <div class="grid-2">
+          <div class="research-entry-card">
+            <div>
+              <span class="pill">定量调研 · Word 文档仿真预览</span>
+              <h3>成年人真实生活场景英语口语交流与练习需求调研问卷（共 23 题）</h3>
+              <p>覆盖受访者筛选与背景（Q1–Q5）、真实场景与困难痛点（Q6–Q14）、AI 语言提示与 NPC 情感回应偏好（Q15–Q19）、临场感与随身记录隐私边界（Q20–Q23）。支持页内缩放滚动预览与一键放大全屏精览。</p>
+            </div>
+            <button type="button" class="btn-research-go" onclick="jumpToResearchSection('rs-survey')">预览问卷并支持放大查看 →</button>
+          </div>
+          <div class="research-entry-card">
+            <div>
+              <span class="pill teal">定性调研 · 10～12 人深度访谈</span>
+              <h3>半结构化深度访谈提纲（四阶段 · Q1–Q12）</h3>
+              <p>包含受访者招募与三维度抽样分层建议，以及开场背景、真实故事复盘（核心）、深挖“怎么帮”与“怎么回应”、临场感与概念探针四大阶段完整提问、追问方向与论文分析用途。</p>
+            </div>
+            <button type="button" class="btn-research-go teal" onclick="jumpToResearchSection('rs-interview')">查看完整访谈提纲 →</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- VIEW R: 前期用户调研（定量问卷 Word 预览 + 定性访谈提纲）    -->
+    <!-- ========================================================= -->
+    <div class="view-panel" id="view-research">
+      <header class="hero hero-research">
+        <div class="hero-badge">前期用户调研工具 · 混合研究设计（定量问卷 + 定性访谈）</div>
+        <h1>成年人真实生活场景英语口语交流与练习需求调研方案</h1>
+        <p class="hero-subtitle">量化摸底口语困难分布与支持偏好（23 题问卷）× 质性深挖真实卡壳体验与心理机制（12 题深度访谈）</p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <div class="label">定量调研工具</div>
+            <div class="value">匿名问卷（23 题 · 4～5 分钟）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">定性调研工具</div>
+            <div class="value">半结构化深度访谈（Q1–Q12）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">定性样本规划</div>
+            <div class="value">10～12 人（单场 25～35 分钟）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">支撑课题环节</div>
+            <div class="value">痛点验证 · 体验地图 · 双实验前测</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- RS-01: 定量调查问卷 Word 预览组件 -->
+      <section class="section" id="rs-survey">
+        <div class="section-header">
+          <span class="section-num indigo">01</span>
+          <h2 class="section-title">定量调查问卷（Word 文档仿真预览）</h2>
+          <span class="section-desc">支持页内缩放、分节速跳，点击「放大全屏查看」或双击纸面可放大精览</span>
+        </div>
+
+        <div class="word-viewer-shell">
+          <div class="word-toolbar">
+            <div class="word-doc-meta">
+              <div class="word-icon">W</div>
+              <span class="word-filename" title="成年人真实生活场景英语口语交流与练习需求调研问卷.docx">成年人真实生活场景英语口语交流与练习需求调研问卷.docx</span>
+              <span class="word-meta-tag">23 题 · 匿名调研</span>
+            </div>
+
+            <div class="word-jump-group">
+              <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordInlineViewport', '1')">Q1–5 背景筛选</button>
+              <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordInlineViewport', '2')">Q6–14 场景与痛点</button>
+              <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordInlineViewport', '3')">Q15–19 AI与NPC</button>
+              <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordInlineViewport', '4')">Q20–23 临场与隐私</button>
+            </div>
+
+            <div class="word-controls">
+              <div class="word-zoom-group" aria-label="文档缩放">
+                <button type="button" class="word-zoom-btn" onclick="zoomInlineDoc(-0.1)" title="缩小">−</button>
+                <span class="word-zoom-val" id="wordInlineZoomVal">100%</span>
+                <button type="button" class="word-zoom-btn" onclick="zoomInlineDoc(0.1)" title="放大">+</button>
+              </div>
+              <button type="button" class="btn-word-expand" onclick="openWordModal()">⤢ 放大全屏查看</button>
+            </div>
+          </div>
+
+          <div class="word-viewport" id="wordInlineViewport">
+            <div class="word-paper" id="wordInlinePaper" ondblclick="openWordModal()" title="双击可放大全屏预览">
+              <div class="word-running-header">
+                <span>调研问卷原稿 · 学术研究匿名调研</span>
+                <span>共 23 题 · 预计填写 4～5 分钟</span>
+              </div>
+
+              <div class="wq-title">成年人真实生活场景英语口语交流与练习需求调研问卷</div>
+              <div class="wq-intro">
+                您好！本问卷旨在了解成年英语学习者在真实生活场景中用英语交流的体验、遇到的困难以及对口语练习方式的真实需求。问卷采用匿名形式，所有数据仅用于学术研究分析，绝不泄露您的个人信息，填写约需4～5分钟。感谢您的支持！
+              </div>
+
+              <div class="wq-sec-divider" data-wq-sec="1">第一部分 · 知情同意与基础筛选（Q1–Q5）</div>
+
+              <div class="wq-item">
+                <div class="wq-q">1.参与本次调研前，请确认您已阅读并了解问卷说明。<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.我已了解上述说明，同意参与本次调研</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">2.您目前的英语口语水平大致处于以下哪种状态?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.几乎零基础，看不太懂简单英文，也基本说不出口</div>
+                  <div class="wq-opt">○ B.有一定基础，能看懂常规英文，但真到开口交流时不太顺畅</div>
+                  <div class="wq-opt">○ C.能完成日常简单交流，但在表达具体需求或深入聊天时仍容易卡壳</div>
+                  <div class="wq-opt">○ D.英语口语非常流利，在各类生活场景中几乎无交流障碍</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">3.在过去一年或未来一年内，您是否有在真实生活中用英语交流的需求或机会（如出国旅游、结识外国朋友、涉外消费、工作/留学等）?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.有，经常会遇到</div>
+                  <div class="wq-opt">○ B.有，偶尔会遇到或近期有相关计划</div>
+                  <div class="wq-opt">○ C.基本没有真实交流需求，只是为了应付笔试考试或没有学英语的打算</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">4.您的年龄段是?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.18–24岁</div>
+                  <div class="wq-opt">○ B.25–30岁</div>
+                  <div class="wq-opt">○ C.31–40岁</div>
+                  <div class="wq-opt">○ D.41岁及以上</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">5.您目前的身份是?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.在校本科生/研究生</div>
+                  <div class="wq-opt">○ B.职场人士</div>
+                  <div class="wq-opt">○ C.自由职业/其他</div>
+                </div>
+              </div>
+
+              <div class="wq-sec-divider" data-wq-sec="2">第二部分 · 真实生活场景、练习痛点与交流困难（Q6–Q14）</div>
+
+              <div class="wq-item">
+                <div class="wq-q">6.在真实生活中，您最常遇到或最希望能顺畅应对的英语交流场景有哪些?（）<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.出行住宿（如酒店入住提需求、问路、机场过关）</div>
+                  <div class="wq-opt">□ B.餐饮消费（如咖啡馆、餐厅按个人偏好点单）</div>
+                  <div class="wq-opt">□ C.休闲社交（如酒馆、聚会、旅行途中结识外国朋友闲聊）</div>
+                  <div class="wq-opt">□ D.购物与生活办事（如商场退换货、看病、办卡咨询）</div>
+                  <div class="wq-opt">□ E.职场沟通（如跨国同事寒暄、会议发言、接待外宾）</div>
+                  <div class="wq-opt">□ F.校园与学术交流（如课堂讨论、外教沟通）</div>
+                  <div class="wq-opt">□ G.其他（请注明）: _________________*</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">7.您平时主要通过哪些方式练习英语口语?<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.使用口语练习App或AI对话软件</div>
+                  <div class="wq-opt">□ B.看美剧/英文视频、听播客并跟读模仿</div>
+                  <div class="wq-opt">□ C.背诵口语模板句、高频词组或教材对话</div>
+                  <div class="wq-opt">□ D.找外教、语伴或英语角进行真人对话</div>
+                  <div class="wq-opt">□ E.基本没有固定练习，大多临场现查现说</div>
+                  <div class="wq-opt">□ F.其他（请注明）: _________________*</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">8.在以往的口语练习中，主要有哪些原因会让您觉得难坚持或半途而废？<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.教材或软件里的对话太模板化，和自己生活中真正想说的话对不上号</div>
+                  <div class="wq-opt">□ B.平时缺乏真实开口环境，练了半天也用不上，慢慢失去动力</div>
+                  <div class="wq-opt">□ C.开口容易卡壳或总被软件打分纠错，挫败感太强</div>
+                  <div class="wq-opt">□ D.工作/学习忙，很难抽出整块时间去按章节系统学习</div>
+                  <div class="wq-opt">□ E.一个人对着冷冰冰的界面练习太枯燥，缺乏真实互动感</div>
+                  <div class="wq-opt">□ F.练完当时记住了，过几天真遇到类似场景还是想不起来怎么说</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">9.关于练习内容与个人真实生活的关联度，请评价您对以下说法的同意程度。<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>非常不同意（1）</th>
+                        <th>比较不同意（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较同意（4）</th>
+                        <th>非常同意（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>我觉得很多英语学习软件里的情景对话过于“标准通用”，很难覆盖我自己的个性化需求（如个人饮食习惯、住宿偏好、日常趣事）。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>在真实生活里想和外国人分享一件跟自己有关的事时，我常因为“以前从没练过怎么说这件事”而张不开嘴。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果能把我真实经历过的生活小事整理成2~5分钟的独立口语场景，让我按需挑选练习，我会更有动力坚持。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">10.当您在生活中遇到某句英语当时没表达好时，您更习惯在什么时机去补练或复盘?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.当下立刻搜一下翻译，但过后很快忘记，不会专门再练</div>
+                  <div class="wq-opt">○ B.回到家或有相对安静、专注的空闲时段，专门把这几个真实场景集中练熟</div>
+                  <div class="wq-opt">○ C.通勤、排队等零散间隙随手刷几分钟</div>
+                  <div class="wq-opt">○ D.事情过去就算了，很少回头再练</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">11.在真实生活中，当您很想用英语和对方交流、但还没张嘴之前，以下想法与您的符合程度如何？<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>完全不符合（1）</th>
+                        <th>不太符合（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较符合（4）</th>
+                        <th>非常符合（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>我担心自己表达得不够准确，说出来会让人觉得很奇怪或闹笑话。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>我担心自己说的话对方听不懂，导致两人陷入冷场尴尬。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>一想到聊到一半可能会卡壳接不下去，我有时干脆放弃开口或只应付两句。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">12.在实际用英语和他人交流的过程中，以下具体情况给您造成困扰的频繁程度如何?<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>几乎不会遇到（1）</th>
+                        <th>很少遇到（2）</th>
+                        <th>偶尔遇到（3）</th>
+                        <th>经常遇到（4）</th>
+                        <th>非常频繁且困扰（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>心里很清楚想说什么，但关键的英文词或短语突然卡壳想不起来。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>句子虽然说出口了，但隐约觉得语法不对或用词不地道，心里很发虚。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>没听清或没听懂对方说的话，不知道该怎么顺畅接下去。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>零散单词都知道一点，但临时在脑子里组装不成完整顺畅的句子。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>我把想说的话说完了，但对方露出困惑的表情，明显没明白我的意思。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>习惯用中文思维硬直译，说完不确定对方到底有没有理解准确。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>想连续提出多个具体要求，或解释一件带个人/文化背景的事时，说到一半接不下去。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>对方语速太快或带口音，自己一时间完全反应不过来。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">13.当交流中突然卡壳、说不下去或没听懂对方时，您在现实中通常怎么救场?（）<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.用肢体动作比划，或者指着周围的实物辅助对方理解</div>
+                  <div class="wq-opt">□ B.放弃原本想说的话，换成更简单、笼统的词勉强绕过去</div>
+                  <div class="wq-opt">□ C.重复对方句子里没听懂的关键词（例如反问“xxx?”），示意对方换种说法解释</div>
+                  <div class="wq-opt">□ D.赶紧掏出手机打开翻译软件查词或直接给对方看屏幕</div>
+                  <div class="wq-opt">□ E.和对方互相笑笑带过，顺势跳过或结束这个话题</div>
+                  <div class="wq-opt">□ F.愣在原地硬想半天，造成短暂冷场</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">14.上述卡壳或沟通不太顺畅的经历结束后，您最常留下的真实感受是?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.虽然勉强糊弄过去了，但心里很遗憾，没能把真正想说的话传达出来</div>
+                  <div class="wq-opt">○ B.觉得有点尴尬和挫败，下次再遇到类似场合会更不敢主动开口</div>
+                  <div class="wq-opt">○ C.事后很想知道刚才那句话地道该怎么说，但过两天又忘了去查</div>
+                  <div class="wq-opt">○ D.没什么特别感觉，意思差不多过去就行</div>
+                </div>
+              </div>
+
+              <div class="wq-sec-divider" data-wq-sec="3">第三部分 · AI 语言提示与虚拟角色情感回应偏好（Q15–Q19）</div>
+
+              <div class="wq-item">
+                <div class="wq-q">15.如果您正在和AI虚拟角色进行英语对话练习，突然卡壳说不下去时，您更希望系统的语言提示以哪种方式出现?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.我需要时自己点击或开口求助再给，平时不要主动弹出打扰我</div>
+                  <div class="wq-opt">○ B.系统察觉我卡壳后，先轻声问一句“需要提示吗?”，我同意后再显示</div>
+                  <div class="wq-opt">○ C.系统察觉我卡壳后，直接在画面旁边浮现提示，我可看可不看，省得手动去点</div>
+                  <div class="wq-opt">○ D.不太确定，感觉不同情况下想要的方式可能不一样</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">16.当系统在对话中给您提供语言提示时，您更倾向于哪种提示内容?<span class="wq-type">[单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">○ A.只给关键词或常用搭配，让我自己把整句话组织出来</div>
+                  <div class="wq-opt">○ B.直接给一句完整地道的参考例句，方便我立刻说出口</div>
+                  <div class="wq-opt">○ C.不固定，看卡壳程度（只是忘了一两个词时想看关键词，实在说不出来时想直接看整句）</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">17.在AI对话练习给出语言提示时，您对以下几种情况的担心程度如何?<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>完全不担心（1）</th>
+                        <th>不太担心（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较担心（4）</th>
+                        <th>非常担心（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>如果系统在我还没想完时主动弹出提示，我会觉得说话思路被打断、有压迫感。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果全靠我自己主动去点提示，对话时往往忙着想词顾不上操作，或者总觉得自己再想一下就能说出来，结果反而僵在那里。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果系统每次都直接给我完整句子照着念，我担心会产生依赖，关掉提示后还是不会自己说。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果系统只给零星的提示词，在我实在组织不出句子时，反而会让我更着急。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>为确保填写质量，本题请直接选择“比较担心（4）”。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">18.在模拟对话练习中，当您卡壳、说错或没听懂时，对面虚拟角色（如前台、咖啡师、外国朋友）的哪些反应最能让您放松下来、愿意继续聊?（）<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.耐心等待并温和安抚（如“别着急，慢慢说，我在听”）</div>
+                  <div class="wq-opt">□ B.不揪着小错不放，正面肯定我已经把意思表达了出来、鼓励我继续</div>
+                  <div class="wq-opt">□ C.露出友善明朗的微笑、轻松点头，主动化解冷场尴尬</div>
+                  <div class="wq-opt">□ D.露出认真倾听、体谅理解的神态，让我觉得对方懂我现在有点难</div>
+                  <div class="wq-opt">□ E.顺着我的话自然复述或换种简单说法，帮对话顺畅进行下去</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">19.关于和虚拟角色面对面练口语时的互动感受，请评价您的同意程度。<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>非常不同意（1）</th>
+                        <th>比较不同意（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较同意（4）</th>
+                        <th>非常同意（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>如果对话角色在我卡壳时面无表情、冷冰冰地干等，我会感到紧张尴尬，不想再多说。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果对话角色在聊到一半时突然变成“老师”打断我纠错，我会瞬间出戏、破坏聊天兴致。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>对话角色的语气、眼神、表情和点头等反应，会明显影响我愿不愿意多聊几句。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-sec-divider" data-wq-sec="4">第四部分 · 临场感、拓展功能、隐私边界与开放题（Q20–Q23）</div>
+
+              <div class="wq-item">
+                <div class="wq-q">20.回顾您以往用手机或电脑练口语的经历（若较少使用，请结合您的直观感受作答），请评价您对以下说法的同意程度。<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>非常不同意（1）</th>
+                        <th>比较不同意（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较同意（4）</th>
+                        <th>非常同意（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>对着手机屏幕发文字或语音练口语时，总觉得缺少真实生活里那种面对面交流的氛围。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>平时对着手机软件说得顺，和真站在别人（如店员、前台、外国朋友）面前开口完全是两回事，前者很难帮我适应真实沟通时的紧张感。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果模拟练习能尽量还原真实的环境氛围和面对面互动感，我觉得会更有助于克服现实中张嘴的紧张感。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">21.请评价您对以下拓展功能的接受程度（即使您平时没有使用手机或轻巧随身设备记录日常或旅行片段的习惯，也可结合直观感受作答）。<span class="wq-type">[矩阵单选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-matrix-wrap">
+                  <table class="wq-matrix-table">
+                    <thead>
+                      <tr>
+                        <th>题项</th>
+                        <th>非常不接受/不需要（1）</th>
+                        <th>不太接受（2）</th>
+                        <th>一般（3）</th>
+                        <th>比较接受（4）</th>
+                        <th>非常接受/很需要（5）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>系统顺便从我记录的日常或旅行片段中，整理出适合练习英语的生活小场景（如点单、入住、聚会等），供我回家后挑选练习。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>练完一段对话后，系统自动标出刚才卡壳的地方，并整理成个人专属的表达笔记方便回顾。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                      <tr>
+                        <td>如果某款日常随身记录设备自带上述功能（同时也能满足平时的生活/旅行记录需求），我愿意在日常出行时佩戴它。</td>
+                        <td>○</td><td>○</td><td>○</td><td>○</td><td>○</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">22.如果使用随身设备记录生活片段，您最在意哪些隐私与控制保障?（）<span class="wq-type">[多选题]</span><span class="wq-req">*</span></div>
+                <div class="wq-opts">
+                  <div class="wq-opt">□ A.设备上有明确的实体开关和状态灯，可随时一键开启或暂停记录</div>
+                  <div class="wq-opt">□ B.系统只提取文字摘要或场景信息，不长期留存原始录音和视频</div>
+                  <div class="wq-opt">□ C.回家后我可以自己浏览、挑选，或一键彻底删除不想保留的片段</div>
+                  <div class="wq-opt">□ D.严格保密，记录内容仅限我本人查看，不会被泄露或挪作他用</div>
+                  <div class="wq-opt">□ E.自动过滤或模糊周围陌生人的声音与人脸信息</div>
+                  <div class="wq-opt">□ F.其他（请注明）: _________________*</div>
+                </div>
+              </div>
+
+              <div class="wq-item">
+                <div class="wq-q">23.在真实生活中用英语和别人交流时，有没有哪一次“卡壳很尴尬”，或者“虽然说得磕磕绊绊，但聊得挺开心、挺顺利”的难忘经历?另外，您对这类口语练习工具还有什么期待或顾虑?（选填）<span class="wq-type">[填空题]</span></div>
+                <div class="wq-textarea-mock">_________________________________（开放式填写区域）</div>
+              </div>
+
+              <div class="word-running-footer">
+                <span>—— 问卷至此结束，感谢您的参与 ——</span>
+                <span>共 23 题</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="word-statusbar">
+            <span>Word 文档仿真预览模式 · 上下滚动浏览全卷 · 点击右上角或双击纸面可放大全屏阅读</span>
+            <button type="button" onclick="openWordModal()">⤢ 放大全屏精览</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RS-02: 定性半结构化深度访谈提纲 -->
+      <section class="section" id="rs-interview">
+        <div class="section-header">
+          <span class="section-num indigo">02</span>
+          <h2 class="section-title">定性半结构化深度访谈提纲</h2>
+          <span class="section-desc">成年人真实生活场景英语口语交流与练习需求（10～12 人 · Q1–Q12）</span>
+        </div>
+
+        <!-- Card A: 受访者招募与分层建议 -->
+        <div class="card">
+          <div class="sub-head">
+            <h3>一、受访者招募与分层建议（10～12 人）</h3>
+            <span class="pill teal">单场时长：25～35 分钟（全程经知情同意后录音）</span>
+          </div>
+
+          <div class="note-banner" style="margin-top:0;margin-bottom:16px;">
+            <strong>基础筛选标准：</strong>有一定英语基础、近一年或未来一年有真实英语交流需求，但真实开口仍不够顺畅的成年学习者（与定量问卷保持同一标准）。
+          </div>
+
+          <div class="grid-3">
+            <div class="context-card" style="background:#f8fafc;border:1px solid var(--border);border-left:3px solid var(--primary);padding:14px 16px;">
+              <strong>抽样分层 · 身份分布</strong>
+              <span>在校本科生/研究生 5～6 人，职场/自由职业者 5～6 人。</span>
+            </div>
+            <div class="context-card" style="background:#f8fafc;border:1px solid var(--border);border-left:3px solid var(--teal);padding:14px 16px;">
+              <strong>抽样分层 · 开口风格</strong>
+              <span>兼顾“怕说错冷场而回避开口”的高焦虑型，与“愿意开口但常忘词卡壳”的表达受阻型。</span>
+            </div>
+            <div class="context-card" style="background:#f8fafc;border:1px solid var(--border);border-left:3px solid var(--indigo);padding:14px 16px;">
+              <strong>抽样分层 · 练习经历</strong>
+              <span>兼顾重度使用过口语 App/AI 练习软件的用户，与基本不练、临场硬撑的用户。</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card B: 半结构化深度访谈提纲（Q1-Q12） -->
+        <div class="card">
+          <div class="sub-head">
+            <h3>二、半结构化深度访谈提纲（Q1–Q12）</h3>
+            <span class="citation-chip">四阶段递进 · 支撑现状用户体验地图与双实验变量论证</span>
+          </div>
+
+          <div class="rq-filter-bar" style="margin-bottom:14px;">
+            <span style="font-size:12.5px;font-weight:700;color:var(--text-muted);margin-right:4px;">按访谈阶段筛选：</span>
+            <button type="button" class="rq-filter-btn active" onclick="filterInterviewStage('all', this)">全部阶段（Q1–Q12 · 约30分钟）</button>
+            <button type="button" class="rq-filter-btn" onclick="filterInterviewStage('s1', this)">一、开场与背景（约4分钟）</button>
+            <button type="button" class="rq-filter-btn" onclick="filterInterviewStage('s2', this)">二、真实故事复盘（约12分钟 · 核心）</button>
+            <button type="button" class="rq-filter-btn" onclick="filterInterviewStage('s3', this)">三、怎么帮与怎么回应（约8分钟）</button>
+            <button type="button" class="rq-filter-btn" onclick="filterInterviewStage('s4', this)">四、临场感与概念探针（约6分钟）</button>
+          </div>
+
+          <div class="table-wrap" style="margin-top:0;">
+            <table class="interview-table" id="interviewTable">
+              <thead>
+                <tr>
+                  <th style="width:15%;">访谈阶段</th>
+                  <th style="width:33%;">核心问题（口语化提问）</th>
+                  <th style="width:30%;">追问要点 / 探测方向</th>
+                  <th style="width:22%;">记录与论文分析用途</th>
+                </tr>
+              </thead>
+
+              <tbody data-istage="s1">
+                <tr>
+                  <td rowspan="2" class="interview-stage-cell"><strong>一、开场与背景</strong><br><span style="font-weight:500;font-size:12px;color:var(--text-muted);">（约 4 分钟）</span></td>
+                  <td><span class="interview-q-badge">Q1</span>自我介绍，说明研究目的、匿名保密原则并征得录音同意；简单聊聊您平时生活、旅行或工作中，大概在哪些场合会碰到需要说英语的情况？</td>
+                  <td>• 高频触发场合（出行、点单、社交、职场等）<br>• 当时是“不得不说”还是“其实很想聊”？</td>
+                  <td>记录受访者编号、背景与初始交流态度；佐证典型生活场景</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q2</span>您以前有没有专门练过英语口语（比如用口语 App、跟读美剧、找外教等）？现在还在坚持吗，或者当时是因为什么停下来的？</td>
+                  <td>• 用过的工具和最劝退的瞬间<br>• 没坚持是因为没时间、太枯燥，还是觉得练了用不上？</td>
+                  <td>挖清现有练习中断的真实原因；解释定量问卷第二部分的“为什么”</td>
+                </tr>
+              </tbody>
+
+              <tbody data-istage="s2">
+                <tr>
+                  <td rowspan="3" class="interview-stage-cell core-stage"><strong>二、真实故事复盘</strong><br><span style="font-weight:600;font-size:12px;color:var(--teal);">（约 12 分钟 · 核心）</span></td>
+                  <td><span class="interview-q-badge core">Q3</span><strong>【故事 A · 不顺/卡壳经历】</strong> 您能回想一下最近一次，其实挺想用英语和别人聊点什么，但过程不太顺或者有点尴尬的经历吗？能像放电影一样从头讲讲吗？</td>
+                  <td>• <strong>开口前</strong>：没张嘴之前脑子里在担心什么？<br>• <strong>卡住瞬间</strong>：具体在哪卡住了？（突然忘词 / 说出口觉得语法不对 / 没听懂对方 / 对方没听懂自己）<br>• <strong>怎么救场</strong>：用了比划、指实物、查手机、复读关键词反问，还是笑笑带过？<br>• <strong>事后感受</strong>：聊完当下和过后的真实情绪？</td>
+                  <td><strong>核心素材</strong>：用于绘制 3.3 节现状用户体验地图；通过原话编码自下而上归纳困难情境</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge core">Q4</span><strong>【故事 B · 顺畅/开心经历】</strong> 反过来，有没有哪一次虽然自己说得也磕磕绊绊、句子没多完美，但聊完觉得挺顺利、挺开心的经历？</td>
+                  <td>• 那次在聊什么？<br>• 中间您卡壳或说错时，对方具体说了什么话、做了什么表情或动作？<br>• 为什么那次没让您觉得尴尬或丢脸？</td>
+                  <td>提炼现实生活中“舒服的帮助与互动”长什么样，为实验一、二提供真实参照</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge core">Q5</span>回头看刚才讲的这些真实场合，您觉得以前教材或软件里练过的对话，真到这种时候能派上用场吗？</td>
+                  <td>• 差在哪里？（场景太模板、覆盖不了自己想说的细节、临场还是想不起来）</td>
+                  <td>佐证“通用教材与个人真实生活脱节”，支撑“交际场景碎片化”定位</td>
+                </tr>
+              </tbody>
+
+              <tbody data-istage="s3">
+                <tr>
+                  <td rowspan="3" class="interview-stage-cell"><strong>三、深挖“怎么帮”与“怎么回应”</strong><br><span style="font-weight:500;font-size:12px;color:var(--text-muted);">（约 8 分钟）</span></td>
+                  <td><span class="interview-q-badge">Q6</span><strong>【语言提示时机】</strong> 假设现在有一个模拟对话，让您重新练一遍刚才那个卡壳的场景。真说到一半接不下去时，您希望旁边的语言提示怎么出现？</td>
+                  <td>• 全靠自己点求助，会不会忙着想词顾不上点，或总觉得“再憋两秒就能想出来”反而更僵？<br>• 如果系统自己弹出来，什么情况下会觉得被打断思路、很烦？</td>
+                  <td>挖清介入时机背后的心理纠结（主动触发 vs 征询 vs 直接出现），呼应实验一 IV1</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q7</span><strong>【提示内容深浅】</strong> 如果系统给提示，您更希望它只给一两个关键词让您自己接着说，还是直接给一整句照着念？不同卡壳情况下想法会变吗？</td>
+                  <td>• 直接给整句会不会担心产生依赖、下次还是不会说？<br>• 只给关键词时，什么情况下会觉得还是组织不出来、更着急？</td>
+                  <td>挖清提示具体程度的权衡点（线索 vs 示范），呼应实验一 IV2</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q8</span><strong>【角色回应与出戏点】</strong> 在模拟对话里，对面是一个外国朋友、店员或前台，当您卡壳、说错或者没听懂时，对面什么样的反应最容易让您瞬间不想聊了？反过来，什么样的语气、表情或动作会让您放松下来、愿意多聊几句？</td>
+                  <td>• 突然停下来像英语老师一样挑语法错，是什么感觉？<br>• 面无表情干等呢？<br>• 更吃“安安静静、理解地等您慢慢说”还是“轻松笑一笑、鼓励您说得不错”？在不同尴尬瞬间有区别吗？</td>
+                  <td>验证“语言提示与角色情感解耦”的必要性；摸清用户对安抚/鼓励及非语言回应的敏感点，呼应实验二</td>
+                </tr>
+              </tbody>
+
+              <tbody data-istage="s4">
+                <tr>
+                  <td rowspan="4" class="interview-stage-cell"><strong>四、临场感与概念探针</strong><br><span style="font-weight:500;font-size:12px;color:var(--text-muted);">（约 6 分钟）</span></td>
+                  <td><span class="interview-q-badge">Q9</span><strong>【临场感痛点】</strong> 您觉得平时对着手机屏幕练口语，和真站在人面前开口，最大的区别在哪？如果模拟练习能把真实环境和面对面交流的氛围还原得更像一点，对您克服紧张会有帮助吗？</td>
+                  <td>• 手机里敢说、真人面前照样紧张的原因（眼神注视、现场节奏、空间压迫感等）</td>
+                  <td>为第 5 章采用空间计算（Vision Pro）提供非诱导的体验依据</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q10</span><strong>【概念反馈】</strong> <em>（可口头描述或展示 1 张极简流程示意图）</em> 假如您平时出门、旅行本来就有用手机或一个小巧的随身设备记录生活片段的习惯，回家后系统能顺便把您经历过的生活小场景（如点单、入住、聊天）整理出来，让您在安静空闲时挑一两个练几分钟，顺便把卡壳的表达整理成笔记。听完您第一反应是什么？</td>
+                  <td>• 哪些地方觉得有意思、真的想试试？<br>• 哪些地方觉得鸡肋、麻烦，或者现实里用不起来？</td>
+                  <td>收集对“生活流采集 → 回家自主选景演练 → 复盘卡片”全流程的真实反馈，支撑 3.4 节功能转化</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q11</span><strong>【隐私与边界】</strong> 如果真用这种日常随身记录设备，您在哪些场合是绝对不愿意开的？它必须具备什么设计或保障，您才会觉得放心？</td>
+                  <td>• 物理开关/指示灯、不存原始音视频、回家自主删选、保护路人隐私等</td>
+                  <td>精准落到第 5 章硬件交互与隐私控制规范</td>
+                </tr>
+                <tr>
+                  <td><span class="interview-q-badge">Q12</span><strong>【收尾总结】</strong> 最后，如果让您只说一个最能打动您坚持用下去的理由，和一个最可能让您直接放弃的雷点，分别是什么？还有什么想补充的吗？</td>
+                  <td>• 确认核心动机与核心障碍<br>• 致谢并结束录音</td>
+                  <td>提炼核心需求优先级，查漏补缺</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- VIEW 1: 实验一完整方案（保留全部细节，优化为交互式切换）      -->
+    <!-- ========================================================= -->
+    <div class="view-panel" id="view-exp1">
+      <header class="hero">
+        <div class="hero-badge">实验一方案 · 信息支持层（语言支架）</div>
+        <h1>不同口语表达困难情境下 AI 语言帮助介入策略研究</h1>
+        <p class="hero-subtitle">3（AI 帮助介入方式）× 2（语言帮助具体程度）析因实验设计</p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <div class="label">核心理论</div>
+            <div class="value">Cody et al. (2020) & 帮助两难困境</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">自变量一（IV1）</div>
+            <div class="value">AI 帮助介入方式（3 水平）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">自变量二（IV2）</div>
+            <div class="value">语言帮助具体程度（2 水平）</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">核心评估</div>
+            <div class="value">2 客观（含无帮助迁移）+ 2 主观</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- E1-1 场景 -->
+      <section class="section" id="e1-scenario">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <h2 class="section-title">典型用户场景：出国前的酒店入住练习</h2>
+          <span class="section-desc">2–5 分钟 Vision Pro 碎片化对话情境</span>
+        </div>
+        <div class="card">
+          <div class="flow-steps">
+            <div class="flow-step">
+              <span class="step-tag">STEP 01 · 生活经历提取</span>
+              <h4>锚定个人真实需求</h4>
+              <p>用户过去在酒店入住时，曾提出过“想要采光好的房间、无烟楼层”等个性化要求。系统从用户的生活记录中自动提取这一真实经历。</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-tag">STEP 02 · 沉浸情境生成</span>
+              <h4>2–5 分钟空间对话任务</h4>
+              <p>系统基于该经历自动生成一个 2–5 分钟的英语酒店入住情境，用户在 Vision Pro 中面对虚拟 NPC 前台，围绕自己的真实需求展开口语交流。</p>
+            </div>
+            <div class="flow-step">
+              <span class="step-tag">STEP 03 · 困难时刻触发帮助</span>
+              <h4>表达困难与 AI 支架介入</h4>
+              <p>交流过程中，用户可能忘记某些英文表达（如“采光好”“无烟楼层”）或出现用词偏差。此时 AI 该<strong>何时介入</strong>、<strong>给多少提示</strong>，即构成实验一的核心问题。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E1-2 自变量与理论（使用交互式 Tab 切换，避免平铺） -->
+      <section class="section" id="e1-iv">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2 class="section-title">自变量设计与理论支撑（点击切换维度）</h2>
+          <span class="section-desc">两条正交理论轴线：介入自主权 × 帮助两难困境</span>
+        </div>
+
+        <div class="card">
+          <div class="seg-tabs">
+            <button type="button" class="seg-btn active" onclick="switchSegTab('e1-iv-group', 'e1-iv1-panel', this)">自变量一：AI 帮助介入方式（3 水平）</button>
+            <button type="button" class="seg-btn" onclick="switchSegTab('e1-iv-group', 'e1-iv2-panel', this)">自变量二：语言帮助具体程度（2 水平）</button>
+          </div>
+
+          <!-- E1 IV1 Panel -->
+          <div class="seg-panel active" data-group="e1-iv-group" id="e1-iv1-panel">
+            <div class="sub-head">
+              <h3>自变量一（IV1）：AI 帮助介入方式</h3>
+              <span class="citation-chip">理论支撑：Cody et al. (2020) · 教育数据挖掘顶会 EDM 2020</span>
+            </div>
+            <div class="iv-levels">
+              <div class="level-box">
+                <div class="en">Reactive · 最高自主权</div>
+                <div class="zh">用户主动触发</div>
+                <div class="desc">系统不主动干预，完全由学习者在感到困难时主动请求帮助，完全掌控交互节奏。</div>
+              </div>
+              <div class="level-box">
+                <div class="en">Proactive-Permission · 中等自主权</div>
+                <div class="zh">AI 主动征询</div>
+                <div class="desc">系统在检测到困难节点时弹出轻询问（如“需要提示吗？”），仅在用户确认接受后给出提示。</div>
+              </div>
+              <div class="level-box">
+                <div class="en">Proactive-Direct · 最低自主权</div>
+                <div class="zh">AI 主动直接介入</div>
+                <div class="desc">系统无需征求同意，直接在视野/工作区呈现帮助内容供学习者参考（可采纳也可忽略）。</div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:20%;">本实验介入模式分类</th>
+                    <th style="width:24%;">Cody et al. (2020) 对应术语</th>
+                    <th style="width:34%;">原论文中的具体交互形式</th>
+                    <th style="width:22%;">学习者自主权层级</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Reactive：用户主动触发</strong></td>
+                    <td>Control<br><span style="color:var(--text-muted);font-size:12px;">On-demand hints / 按需提示</span></td>
+                    <td>系统不主动干预，完全由学习者在需要时主动点击请求提示。</td>
+                    <td><span class="pill">最高自主权</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Proactive：AI 主动征询</strong></td>
+                    <td>Choice<br><span style="color:var(--text-muted);font-size:12px;">Periodic choice prompts / 周期性征询</span></td>
+                    <td>系统在关键节点弹出询问（“Would you like a suggestion?”），仅当用户选择“是”时给出提示。</td>
+                    <td><span class="pill amber">中等自主权</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Proactive：AI 主动直接介入</strong></td>
+                    <td>Assertions<br><span style="color:var(--text-muted);font-size:12px;">Unsolicited hints / 无征询直接提示</span></td>
+                    <td>系统无需征求同意，直接将提示内容呈现在当前工作区供参考（可采纳也可忽略）。</td>
+                    <td><span class="pill rose">最低自主权</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note-banner">
+              <strong>原论文关键实证启发：</strong>完全自主（Control）易引发“求助回避（Help Avoidance）”；主动直接提示（Assertions）显著减少求助缺口且未损害成绩；周期性征询（Choice）组在无帮助后测中的表现反而显著慢于直接提示组，可能源于不良元认知决策或弹窗分心。
+            </div>
+          </div>
+
+          <!-- E1 IV2 Panel -->
+          <div class="seg-panel" data-group="e1-iv-group" id="e1-iv2-panel">
+            <div class="sub-head">
+              <h3>自变量二（IV2）：语言帮助具体程度</h3>
+              <span class="citation-chip">脚手架理论（Wood et al., 1976; Tharp & Gallimore, 1988）& 帮助两难困境（Koedinger & Aleven, 2007）</span>
+            </div>
+            <div class="iv-levels two-col">
+              <div class="level-box" style="border-left:4px solid var(--teal);">
+                <div class="en">Cue · 信息保留极点（高认知责任）</div>
+                <div class="zh">线索提示</div>
+                <div class="desc">提供启发性的关键词、语义或句式线索推动学习者继续表达，刻意不提供完整句子，由学习者自主完成语言组装。</div>
+              </div>
+              <div class="level-box" style="border-left:4px solid var(--amber);">
+                <div class="en">Model · 信息给予极点（低认知责任）</div>
+                <div class="zh">完整表达示范</div>
+                <div class="desc">直接给出可供模仿或复现的完整目标英文表达范例，大幅降低当下编码负荷，帮助学习者快速完成当前表达。</div>
+              </div>
+            </div>
+
+            <div class="sub-head" style="margin-top:16px;margin-bottom:8px;">
+              <h4 style="font-size:15px;font-weight:800;">理论支柱 A：脚手架 6 种辅助手段操作性定义</h4>
+              <button type="button" class="toggle-btn" id="toggleScaffoldingBtn" onclick="toggleScaffoldingRows()">仅看本实验选取的两极（Hints & Modeling）</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:6%;">序号</th>
+                    <th style="width:16%;">原文术语</th>
+                    <th style="width:12%;">中文译名</th>
+                    <th style="width:42%;">原文核心定义与行为特征</th>
+                    <th style="width:24%;">认知责任要求</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="non-selected-row"><td>1</td><td>Feeding back</td><td>反馈</td><td>直接向学习者提供关于其当前表现的信息，但不必然包含下一步指导。</td><td>中等</td></tr>
+                  <tr class="highlight-row"><td><strong>2</strong></td><td><strong>Hints</strong> <span class="pill teal">Cue</span></td><td><strong>线索 / 暗示</strong></td><td>提供启发性线索推动继续前进，但<strong>刻意不提供完整解决方案</strong>。</td><td><strong>高</strong>（自主组装语言）</td></tr>
+                  <tr class="non-selected-row"><td>3</td><td>Instructing</td><td>指令 / 指导</td><td>明确告诉学习者下一步具体做什么，带有明确行动指令性。</td><td>较低</td></tr>
+                  <tr class="non-selected-row"><td>4</td><td>Explaining</td><td>解释 / 阐述</td><td>提供概念剖析或原因阐明，帮助理解规则背后的逻辑。</td><td>中低</td></tr>
+                  <tr class="highlight-row-amber"><td><strong>5</strong></td><td><strong>Modeling</strong> <span class="pill amber">Model</span></td><td><strong>示范 / 建模</strong></td><td>提供可供模仿的范例，包括<strong>直接给出完整的目标语言表达</strong>。</td><td><strong>低</strong>（可直接模仿复现）</td></tr>
+                  <tr class="non-selected-row"><td>6</td><td>Questioning</td><td>提问</td><td>提出需调动语言和认知加工才能作答的问题引导产出。</td><td>高</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 style="font-size:15px;font-weight:800;margin-top:20px;margin-bottom:6px;">理论支柱 B：“帮助两难困境”（Koedinger & Aleven, 2007）</h4>
+            <div class="dilemma-grid">
+              <div class="dilemma-col withhold">
+                <h4><span>信息保留（Information Withholding）</span><span class="pill teal">对应 Cue</span></h4>
+                <ul class="dilemma-list">
+                  <li><strong>优势：</strong>触发<strong>生成效应</strong>与<strong>合意困难</strong>，深度加工使长期记忆留存率更高。</li>
+                  <li><strong>风险：</strong>能力不足或时间受限时易陷入<strong>无效卡死（Unproductive floundering）</strong>与高焦虑。</li>
+                </ul>
+              </div>
+              <div class="dilemma-col give">
+                <h4><span>信息给予（Information Giving）</span><span class="pill amber">对应 Model</span></h4>
+                <ul class="dilemma-list">
+                  <li><strong>优势：</strong>降低<strong>外在认知负荷</strong>，防止盲目试错、缓解当下挫败感。</li>
+                  <li><strong>风险：</strong>诱发<strong>浅层加工</strong>与过度依赖（照搬或刷提示）。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E1-3 RQ & H -->
+      <section class="section" id="e1-rq">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2 class="section-title">研究问题（RQ）与研究假设（H）</h2>
+          <span class="section-desc">按表达学习效果、心理体验与困难情境适配递进展开</span>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div class="rq-item"><div class="badge-code badge-rq">RQ1</div><div class="rq-body"><h4>表达与学习效果</h4><p>AI 帮助的介入方式与语言帮助的具体程度，会对学习者的<strong>即时口语表达表现</strong>以及<strong>无帮助条件下的独立表达效果</strong>产生什么样的影响？</p></div></div>
+            <div class="rq-item"><div class="badge-code badge-rq">RQ2</div><div class="rq-body"><h4>心理感受与使用体验</h4><p>不同的 AI 帮助介入方式与语言帮助具体程度，是否会影响学习者在口语练习中的<strong>表达压力、打断感、自主感</strong>以及<strong>整体使用体验</strong>？</p></div></div>
+            <div class="rq-item"><div class="badge-code badge-rq">RQ3</div><div class="rq-body"><h4>困难情境适配</h4><p>在<strong>表达受阻、表达错误与沟通受阻</strong>三种不同困难情境下，学习者对 AI 介入方式与帮助具体程度的适配效果及最优组合是否存在差异？</p></div></div>
+          </div>
+          <div>
+            <div class="h-item"><div class="badge-code badge-h">H1</div><div class="h-body"><h4>介入方式主效应</h4><p>相比用户主动触发，AI 主动直接介入能更快帮助学习者恢复表达，但会带来更高的打断感与更低的自主感；AI 主动征询居中，但额外确认决策可能分散注意力，不利于无帮助迁移。</p></div></div>
+            <div class="h-item"><div class="badge-code badge-h">H2</div><div class="h-body"><h4>具体程度主效应</h4><p>相比线索提示，完整示范能更明显地降低当下表达压力、提升即时流畅度；但在撤去帮助的独立表达测试中，线索提示组的迁移表现更好。</p></div></div>
+            <div class="h-item"><div class="badge-code badge-h">H3</div><div class="h-body"><h4>交互与情境调节</h4><p>AI 介入方式与帮助具体程度之间存在显著交互作用，且最优帮助策略会随困难情境（表达受阻、表达错误、沟通受阻）的不同而变化。</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E1-4 DV -->
+      <section class="section" id="e1-dv">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <h2 class="section-title">因变量与测量方式（2 客观 + 2 主观）</h2>
+        </div>
+        <div class="card">
+          <div class="table-wrap" style="margin-top:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:9%;">对应 RQ</th>
+                  <th style="width:18%;">因变量（DV）</th>
+                  <th style="width:11%;">类型</th>
+                  <th style="width:40%;">具体测量方式</th>
+                  <th style="width:22%;">方法对标</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="pill">RQ1</span></td><td><strong>1. 即时表达表现</strong></td><td><span class="pill teal">客观行为</span></td><td>① 表达恢复时间（困难至重新开口耗时）；② 本轮表达完成情况。</td><td>同门论文（陈星微）恢复时间范式</td></tr>
+                <tr><td><span class="pill">RQ1</span></td><td><strong>2. 无帮助迁移表现</strong></td><td><span class="pill teal">客观测试</span></td><td>撤掉提示后在相似语境独立口头表达，统计独立表达准确率。</td><td>同门论文（梁楚晗）保持率 & Cody (2020) 后测</td></tr>
+                <tr><td><span class="pill indigo">RQ2</span></td><td><strong>3. 口语心理体验</strong></td><td><span class="pill amber">主观量表</span></td><td>表达压力（0–10 单题 Stress NRS-11）；打断感（2 题）；自主感（2–3 题）。</td><td>梁楚晗压力单题 + SDT 核心维度</td></tr>
+                <tr><td><span class="pill indigo">RQ2</span></td><td><strong>4. 产品使用体验</strong></td><td><span class="pill amber">主观量表</span></td><td>UEQ-S 短版量表（8 题，实用性 UE_1 与享乐性 UE_2）。</td><td>复用同门论文（梁楚晗）标准量表</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- VIEW 2: 实验二完整方案（深度交互式呈现）                     -->
+    <!-- ========================================================= -->
+    <div class="view-panel" id="view-exp2">
+      <header class="hero hero-exp2">
+        <div class="hero-badge">实验二方案 · 情感与具身支持层（承接实验一最优语言 UI）</div>
+        <h1>不同口语表达困难情境下数字人 NPC 多模态情感支持策略研究</h1>
+        <p class="hero-subtitle">2（言语支持方式）× 2（非语言共情方式）混合设计 + 1 个冷静事务型基线对照组（G0）</p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <div class="label">固定控制变量</div>
+            <div class="value">实验一最优空间 UI 语言帮助</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">自变量一（IV1 · 怎么说）</div>
+            <div class="value">情感支持 vs. 尊重支持 (+ G0)</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">自变量二（IV2 · 怎么表达）</div>
+            <div class="value">平行共情 vs. 回应式共情</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">补齐的 SDT 闭环</div>
+            <div class="value">关系感 · 感知共情 · 行为层 WTC</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="note-banner teal" style="margin-top:0;margin-bottom:24px;">
+        <strong>双实验串联与载体解耦原则：</strong>实验二锁死实验一测出的最优<strong>空间悬浮 UI 语言帮助策略</strong>作为固定控制变量，仅在其基础上叠加 <strong>3D 数字人 NPC 本体</strong>的多模态情感支持（言语支持 × 非语言共情），既保持角色扮演沉浸感不“出戏”，又能清晰隔离语言支架与情感支持的独立及交互效应。
+      </div>
+
+      <!-- E2-1: 自变量与理论支撑（交互式双 Tab + 卡片探索 + 文献抽屉） -->
+      <section class="section" id="e2-iv">
+        <div class="section-header">
+          <span class="section-num teal">01</span>
+          <h2 class="section-title">实验二自变量与理论支撑（交互探索）</h2>
+          <span class="section-desc">言语通道（社会支持理论）× 非语言具身通道（共情虚拟人二分类）</span>
+        </div>
+
+        <div class="card">
+          <div class="seg-tabs">
+            <button type="button" class="seg-btn active" onclick="switchSegTab('e2-iv-group', 'e2-iv1-panel', this)">自变量一（IV1）：言语支持方式 & 社会支持理论</button>
+            <button type="button" class="seg-btn" onclick="switchSegTab('e2-iv-group', 'e2-iv2-panel', this)">自变量二（IV2）：非语言共情方式 & 共情虚拟人理论</button>
+          </div>
+
+          <!-- E2 IV1 Panel -->
+          <div class="seg-panel active" data-group="e2-iv-group" id="e2-iv1-panel">
+            <div class="sub-head">
+              <h3>自变量一（IV1）：NPC 言语支持方式（2 实验水平 + 1 独立基线 G0）</h3>
+              <span class="citation-chip">SSBC 社会支持行为编码体系（Cutrona & Suhr, 1992）& 最优匹配模型（Cutrona & Russell, 1990）</span>
+            </div>
+
+            <div class="iv-levels">
+              <div class="level-box" style="border-top:3px solid var(--teal);">
+                <div class="en">Emotional Support · 情绪降压</div>
+                <div class="zh">情感支持型（情感安抚）</div>
+                <div class="desc"><strong>操作子维度：</strong>专注倾听 + 理解共情 + 情绪降压。<br>接纳停顿与失误，缓解当下的紧张与社交尴尬。</div>
+                <div class="quote">“Take your time, I'm right here listening.”</div>
+              </div>
+
+              <div class="level-box" style="border-top:3px solid var(--amber);">
+                <div class="en">Esteem Support · 提振自信</div>
+                <div class="zh">尊重支持型（评价/能力鼓励）</div>
+                <div class="desc"><strong>操作子维度：</strong>能力肯定（Compliment）+ 观点/努力认同（Validation）。<br>正面肯定已完成的表达与沟通努力，提振开口自信。</div>
+                <div class="quote">“Good effort! You got your point across.”</div>
+              </div>
+
+              <div class="level-box" style="border-top:3px solid var(--text-muted);background:#f8fafc;">
+                <div class="en">G0 Control · 独立基线组</div>
+                <div class="zh">冷静事务型（Neutral）</div>
+                <div class="desc"><strong>设置目的：</strong>礼貌但公事公办地推进对话，不附加额外安抚或鼓励，用于第一步检验“加入情感支持本身是否显著有效”。</div>
+                <div class="quote">“Whenever you're ready, go ahead.”</div>
+              </div>
+            </div>
+
+            <!-- Interactive Social Support 4-Dimension Explorer -->
+            <div style="margin-top:20px;">
+              <div class="sub-head" style="margin-bottom:6px;">
+                <h4 style="font-size:15px;font-weight:800;color:var(--text-main);">理论溯源：社会支持理论（Social Support Theory）四大维度交互映射</h4>
+                <span style="font-size:12px;color:var(--text-muted);">点击下方卡片查看定义、生活示例与本课题实验映射</span>
+              </div>
+              <p style="font-size:13.5px;color:var(--text-secondary);">
+                社会支持理论起源于 20 世纪 70 年代，核心观点是：个体通过社会关系网络获得的资源性帮助，能够有效缓冲压力并提升心理福祉。Cutrona &amp; Suhr (1992) 与 Cutrona &amp; Russell (1990) 进一步将其编码操作化，并指出<strong>不同压力情境需要匹配特定类型的支持（最优匹配模型）</strong>：
+              </p>
+
+              <div class="ss-grid">
+                <button type="button" class="ss-card active" data-ss="emotional" onclick="selectSS('emotional')">
+                  <span class="pill teal ss-tag">→ 实验二 IV1 水平 1</span>
+                  <h4>情感支持</h4>
+                  <small>Emotional Support</small>
+                </button>
+                <button type="button" class="ss-card" data-ss="esteem" onclick="selectSS('esteem')">
+                  <span class="pill amber ss-tag">→ 实验二 IV1 水平 2</span>
+                  <h4>评价 / 尊重支持</h4>
+                  <small>Esteem / Appraisal</small>
+                </button>
+                <button type="button" class="ss-card" data-ss="info" onclick="selectSS('info')">
+                  <span class="pill ss-tag">→ 实验一（已锁定）</span>
+                  <h4>信息支持</h4>
+                  <small>Informational Support</small>
+                </button>
+                <button type="button" class="ss-card" data-ss="tangible" onclick="selectSS('tangible')">
+                  <span class="pill gray ss-tag">非本课题语音范畴</span>
+                  <h4>工具性支持</h4>
+                  <small>Tangible / Instrumental</small>
+                </button>
+              </div>
+
+              <div class="ss-detail" id="ssDetailBox">
+                <strong>情感支持（Emotional Support）：</strong>指关心、理解、倾听和共情。<em>生活示例：</em>在你难过时，朋友给你一个拥抱，安静听你倾诉。<br>
+                <strong>本课题映射（实验二 IV1 水平 1）：</strong>聚焦口语困难当下的情绪状态，以“专注倾听 + 理解共情 + 情绪降压”接住卡壳与出错时的紧张尴尬。
+              </div>
+            </div>
+          </div>
+
+          <!-- E2 IV2 Panel -->
+          <div class="seg-panel" data-group="e2-iv-group" id="e2-iv2-panel">
+            <div class="sub-head">
+              <h3>自变量二（IV2）：NPC 非语言共情方式（2 水平）</h3>
+              <span class="citation-chip">Stephan & Finlay (1999) · McQuiggan et al. (2008) · Robison et al. (2009) · Lisetti et al. (2013)</span>
+            </div>
+
+            <div class="iv-levels two-col">
+              <div class="level-box" style="border-left:4px solid var(--indigo);">
+                <div class="en">Parallel Empathy · 情绪镜像 / 同频体谅</div>
+                <div class="zh">平行共情型</div>
+                <div class="desc">数字人通过面部表情与身体姿态，<strong>同步、镜像</strong>用户当下的情绪感受，传达“我感同身受，我懂你现在不容易”。<br><br><strong>典型表现：</strong>用户卡壳、尴尬、紧张时，NPC 收敛大笑，露出<strong>关切理解的神态</strong>（微微蹙眉/柔和关切眼神、轻微歪头、认真倾听的沉静姿态）。</div>
+              </div>
+
+              <div class="level-box" style="border-left:4px solid var(--teal);">
+                <div class="en">Reactive Empathy · 积极调节 / 氛围拉升</div>
+                <div class="zh">回应式共情型</div>
+                <div class="desc">数字人不跟着用户一起焦虑，而是用<strong>互补的积极表情与姿态</strong>主动拉升、改变用户当下的负面情绪状态。<br><br><strong>典型表现：</strong>用户卡壳、说错时，NPC 立刻给出<strong>明朗轻松的微笑</strong>、舒展开放的姿态和轻快点头，用正向情绪感染力打破冷场、提振信心。</div>
+              </div>
+            </div>
+
+            <!-- Interactive Scenario-specific Expression Table -->
+            <div style="margin-top:16px;margin-bottom:20px;">
+              <div class="sub-head" style="margin-bottom:8px;">
+                <h4 style="font-size:15px;font-weight:800;color:var(--text-main);">三类困难情境下的非语言表情与姿态对照</h4>
+                <span style="font-size:12px;color:var(--text-muted);">肉眼清晰可辨的宏观状态设计（不依赖脆弱微参数）</span>
+              </div>
+              <div class="table-wrap" style="margin-top:0;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:18%;">困难情境</th>
+                      <th style="width:41%;">平行共情型（关切理解 · 同频体谅）</th>
+                      <th style="width:41%;">回应式共情型（明朗微笑 · 积极破冰）</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>① 表达受阻</strong><br><span style="font-size:12px;color:var(--text-muted);">卡壳 / 停顿</span></td>
+                      <td>收敛大笑，柔和关切眼神与微松神态，沉稳微倾并缓慢轻点头，传递“我知道想词不容易，耐心等你”。</td>
+                      <td>展开明朗轻松的微笑、眉眼舒展，姿态开放并配合轻快点头与柔和引导手势，快速冲淡冷场尴尬。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>② 表达错误</strong><br><span style="font-size:12px;color:var(--text-muted);">语法 / 用词偏差</span></td>
+                      <td>露出真诚体谅的浅笑与轻微歪头倾听，听懂大意后给予沉稳诚恳的确认点头，避免居高临下。</td>
+                      <td>保持阳光肯定的微笑，听懂大意后立刻给予轻快干脆的肯定点头与开放舒展姿态，淡化失误、强化自信。</td>
+                    </tr>
+                    <tr>
+                      <td><strong>③ 沟通受阻</strong><br><span style="font-size:12px;color:var(--text-muted);">未听清 / 中断</span></td>
+                      <td>流露关切与体谅神态，上半身自然微前倾、微微侧耳或歪头专注确认，修复后温和点头收尾。</td>
+                      <td>保持轻松愉悦的微笑，像日常闲聊小插曲般一笑了之，手势自然舒展配合复述，迅速消解尴尬。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Accordion Literature Chain -->
+            <h4 style="font-size:15px;font-weight:800;color:var(--text-main);margin-bottom:10px;">核心理论文献演进链（点击展开精读）</h4>
+
+            <div class="accordion-item open">
+              <button type="button" class="accordion-head" onclick="toggleAccordion(this)">
+                <div class="accordion-title-wrap">
+                  <span class="pill indigo">理论源头</span>
+                  <strong>Stephan &amp; Finlay (1999) · Journal of Social Issues</strong>
+                  <span style="font-size:12.5px;color:var(--text-muted);">正式提出“平行共情 vs. 回应式共情”二分类</span>
+                </div>
+                <span class="accordion-arrow">▼</span>
+              </button>
+              <div class="accordion-body">
+                <strong>完整出处：</strong>Stephan, W. G., &amp; Finlay, K. (1999). <em>The role of empathy in improving intergroup relations.</em> Journal of Social Issues, 55(4), 729–743.<br><br>
+                <strong>核心分类框架：</strong>社会心理学高被引经典，将共情正式拆解为三大类：<br>
+                1. <strong>认知共情（Cognitive Empathy）：</strong>换位思考（Perspective Taking），在认知上理解对方处境与想法。<br>
+                2. <strong>情感共情 — 平行共情（Parallel Empathy）：</strong>体验并表现出与对方相同或相似的情绪（情绪匹配/同步），如对方紧张沮丧时，流露出相似的关切、体谅或愁容。<br>
+                3. <strong>情感共情 — 回应式共情（Reactive Empathy）：</strong>针对对方状态产生不同于其当下情绪的、以对方为中心的回应情绪（如温和包容、安抚或明朗鼓励），意图缓和或改变对方的负面状态。
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-head" onclick="toggleAccordion(this)">
+                <div class="accordion-title-wrap">
+                  <span class="pill teal">虚拟人落地实证</span>
+                  <strong>McQuiggan et al. (2008, AAMAS) &amp; Robison et al. (2009, ACII)</strong>
+                  <span style="font-size:12.5px;color:var(--text-muted);">3D 虚拟学习环境 Crystal Island 平行 vs. 回应式共情建模</span>
+                </div>
+                <span class="accordion-arrow">▼</span>
+              </button>
+              <div class="accordion-body">
+                <strong>代表论文：</strong>McQuiggan, S. W., Robison, J. L., Phillips, R., &amp; Lester, J. C. (2008). <em>Modeling Parallel and Reactive Empathy in Virtual Agents: An Inductive Approach.</em> AAMAS 2008.<br><br>
+                <strong>核心贡献：</strong>在交互式 3D 虚拟学习环境 <em>Crystal Island</em> 中明确指出——设计共情虚拟人的核心难题之一，就是判断在特定学习情境下该用<strong>平行共情</strong>（表现出与学习者相似的理解/关切神态）还是<strong>回应式共情</strong>（表现出更积极、镇定或鼓励的状态以改善负面情绪）。团队通过人机互动数据训练出 <strong>CARE 归纳模型</strong>来预测两种共情模式的触发时机；随后 <strong>Robison et al. (2009, ACII)</strong> 进一步通过对照实验追踪了两种共情反馈对学习者情绪状态转移的差异化影响。
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button type="button" class="accordion-head" onclick="toggleAccordion(this)">
+                <div class="accordion-title-wrap">
+                  <span class="pill amber">共情 ECA 奠基与工程范式</span>
+                  <strong>Paiva et al. (2004, AAMAS) &amp; Lisetti et al. (2013, ACM TMIS)</strong>
+                  <span style="font-size:12.5px;color:var(--text-muted);">共情虚拟角色可信度原则与 FACS 表情/头部动作实现参考</span>
+                </div>
+                <span class="accordion-arrow">▼</span>
+              </button>
+              <div class="accordion-body">
+                <strong>文献精准定位（防盲审误引）：</strong>这两篇是共情虚拟人领域的奠基文献，虽未直接做“平行 vs. 回应式”对比，但为本研究的具身实现提供重要工程依据：<br>
+                • <strong>Paiva et al. (2004, FearNot!)：</strong>提出“会共情的虚拟人（Agents that care）”设计准则——角色情绪状态必须清晰可辨，且切实外显在面部与身体行为上，才能建立角色可信度。<br>
+                • <strong>Lisetti et al. (2013, ODVIC)：</strong>通过 51 人对照实验证明，基于 FACS 面部表情编码与动态头部动作（注视、点头、共情神态）的共情虚拟人，在用户接受度上显著优于非共情虚拟人与纯文本系统。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E2-2: RQ · H · DV 联动视图 -->
+      <section class="section" id="e2-rq-dv">
+        <div class="section-header">
+          <span class="section-num teal">02</span>
+          <h2 class="section-title">研究问题（RQ）、假设（H）与因变量（DV）联动对照</h2>
+          <span class="section-desc">点击下方筛选按钮，高亮查看 RQ → H → DV 的严密对应闭环</span>
+        </div>
+
+        <!-- Interactive Linked Filter Bar -->
+        <div class="rq-filter-bar">
+          <span style="font-size:12.5px;font-weight:700;color:var(--text-muted);margin-right:4px;">联动高亮筛选：</span>
+          <button type="button" class="rq-filter-btn active" onclick="filterE2Links('all', this)">显示全部闭环</button>
+          <button type="button" class="rq-filter-btn" onclick="filterE2Links('rq1', this)">只聚焦 RQ1 · 情绪与开口表现</button>
+          <button type="button" class="rq-filter-btn" onclick="filterE2Links('rq2', this)">只聚焦 RQ2 · 共情关系与使用体验</button>
+          <button type="button" class="rq-filter-btn" onclick="filterE2Links('rq3', this)">只聚焦 RQ3 · 交互与困难情境适配</button>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:20px;">
+          <!-- RQs -->
+          <div>
+            <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">一、核心研究问题（RQ1–RQ3）</h3>
+            <div class="rq-item" data-link="rq1">
+              <div class="badge-code badge-rq">RQ1</div>
+              <div class="rq-body">
+                <h4>情绪与开口表现</h4>
+                <p>NPC 的言语支持方式（情感支持 / 尊重支持）与非语言共情方式（平行共情 / 回应式共情），会对学习者的<strong>表达压力、开口意愿及实际开口表现</strong>产生什么样的影响？</p>
+              </div>
+            </div>
+            <div class="rq-item" data-link="rq2">
+              <div class="badge-code badge-rq">RQ2</div>
+              <div class="rq-body">
+                <h4>共情关系与使用体验</h4>
+                <p>不同的言语支持方式与非语言共情方式，是否会影响学习者在口语练习中的<strong>感知共情、关系感、整体使用体验及持续使用意愿</strong>？</p>
+              </div>
+            </div>
+            <div class="rq-item" data-link="rq3">
+              <div class="badge-code badge-rq">RQ3</div>
+              <div class="rq-body">
+                <h4>困难情境适配</h4>
+                <p>在<strong>表达受阻、表达错误与沟通受阻</strong>三种不同困难情境下，学习者对 NPC 言语支持与非语言共情的<strong>适配效果及最优组合</strong>是否存在差异？</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hypotheses -->
+          <div>
+            <h3 style="font-size:15.5px;font-weight:800;color:var(--teal);margin-bottom:10px;">二、研究假设（H1–H3）</h3>
+            <div class="h-item" data-link="rq1">
+              <div class="badge-code badge-h">H1</div>
+              <div class="h-body">
+                <h4>言语支持方式主效应</h4>
+                <p>相比尊重支持，<strong>情感支持</strong>更能缓解学习者的即时表达压力；而<strong>尊重支持</strong>在提升开口意愿与实际口语产出方面更具优势。（若对比 G0 基线，两类言语支持均优于冷静事务基线）</p>
+              </div>
+            </div>
+            <div class="h-item" data-link="rq2">
+              <div class="badge-code badge-h">H2</div>
+              <div class="h-body">
+                <h4>非语言共情方式主效应</h4>
+                <p>相比回应式共情，<strong>平行共情</strong>更能让学习者感到被体谅与理解，带来更高的感知共情与关系感；而<strong>回应式共情</strong>更能活跃对话氛围，在提升整体使用体验与持续使用意愿上更具优势。</p>
+              </div>
+            </div>
+            <div class="h-item" data-link="rq3">
+              <div class="badge-code badge-h">H3</div>
+              <div class="h-body">
+                <h4>交互与情境差异</h4>
+                <p>言语支持方式与非语言共情方式之间存在显著交互作用（<strong>两者情绪基调一致时体验更优</strong>），且最优的情感支持组合会随困难情境（表达受阻、表达错误、沟通受阻）的不同而变化。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 DV Cards -->
+        <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">三、因变量测量体系（1 组客观行为 + 3 组标准主观量表）</h3>
+        <div class="dv-grid">
+          <div class="dv-card" data-link="rq1 rq3">
+            <div class="dv-card-top">
+              <h4>1. 客观口语行为：表达恢复与行为层开口意愿</h4>
+              <span class="pill teal">客观录音 · RQ1</span>
+            </div>
+            <ul class="dv-list">
+              <li><strong>① 表达恢复时间：</strong>后台录音自动提取从收到 NPC 情感回应到用户重新开口的停顿秒数。</li>
+              <li><strong>② 自发口语产出长度：</strong>收到情感回应后的平均话轮词数（Mean Turn Length），或在对话末尾开放延伸句里的自由发言词数。</li>
+            </ul>
+            <div class="dv-ref">对标：延续实验一及同门论文恢复计时范式；补齐 Ayedoun (2019) 缺乏真实行为层 WTC 的研究局限。</div>
+          </div>
+
+          <div class="dv-card" data-link="rq1 rq3">
+            <div class="dv-card-top">
+              <h4>2. 核心口语心理：即时表达焦虑与情境性开口意愿</h4>
+              <span class="pill amber">主观快评 · RQ1</span>
+            </div>
+            <ul class="dv-list">
+              <li><strong>① 即时表达压力/焦虑（Stress NRS-11）：</strong>0–10 分压力单题（0=完全放松，10=非常紧张尴尬）。</li>
+              <li><strong>② 情境性开口意愿（State WTC）：</strong>精简 3 题（7 级量表），测量“此时此刻”的表达自信（Confidence）、继续交谈渴望（Desire）与敢于尝试开口意愿。</li>
+            </ul>
+            <div class="dv-ref">对标：Stress NRS-11 复用同门论文（梁楚晗）及实验一口径；State WTC 源于 MacIntyre (1998) &amp; Ayedoun (2019/2020)。</div>
+          </div>
+
+          <div class="dv-card" data-link="rq2 rq3">
+            <div class="dv-card-top">
+              <h4>3. 共情与关系体验：感知共情与关系感</h4>
+              <span class="pill indigo">主观量表 · RQ2</span>
+            </div>
+            <ul class="dv-list">
+              <li><strong>① 感知共情（PETS-ER）：</strong>采用 CHI 2024 科技感知共情量表（PETS）的情绪回应性核心题项（如“NPC 考虑了我的情绪状态 / 帮助我应对了尴尬情境”），同时兼作 IV1×IV2 操纵检验。</li>
+              <li><strong>② 关系感（IMI-Relatedness）：</strong>采用内在动机量表 IMI 的 Relatedness 子量表精简 3–4 题（如“觉得和 NPC 交流亲近、被理解接纳”）。</li>
+            </ul>
+            <div class="dv-ref">对标：Schmidmaier et al. (CHI 2024) PETS；Ryan (1982) IMI，精准补齐 SDT 的关系感闭环。</div>
+          </div>
+
+          <div class="dv-card" data-link="rq2 rq3">
+            <div class="dv-card-top">
+              <h4>4. 产品整体体验：使用体验与持续使用意愿</h4>
+              <span class="pill violet">主观量表 · RQ2</span>
+            </div>
+            <ul class="dv-list">
+              <li><strong>① UEQ-S 短版量表：</strong>共 8 题（-3 到 +3 语义差异），拆分为实用性体验（UE_1）与享乐性体验（UE_2）分别统计。</li>
+              <li><strong>② 持续使用意愿：</strong>精简 2–3 题（7 级量表，如“今后练英语口语时，我愿意继续和这样的 NPC 对话”）。</li>
+            </ul>
+            <div class="dv-ref">对标：UEQ-S（Schrepp et al., 2023）与持续使用意愿均直接对齐同门论文（梁楚晗）实验二评估范式。</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      《基于自我决定理论的英语碎片化学习系统设计研究》 · 前期调研、实验一与实验二整合设计方案导师汇报稿
+    </footer>
+  </main>
+
+  <!-- Fullscreen Word Preview Lightbox Modal -->
+  <div class="word-modal" id="wordPreviewModal" role="dialog" aria-modal="true" aria-label="定量调查问卷放大全屏预览" onclick="if(event.target === this || event.target.id === 'wordModalViewport') closeWordModal()">
+    <div class="word-modal-bar">
+      <div class="word-doc-meta">
+        <div class="word-icon">W</div>
+        <span class="word-filename" style="max-width:360px;">成年人真实生活场景英语口语交流与练习需求调研问卷.docx</span>
+        <span class="word-meta-tag">全屏放大预览</span>
+      </div>
+
+      <div class="word-jump-group">
+        <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordModalViewport', '1')">Q1–5 背景筛选</button>
+        <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordModalViewport', '2')">Q6–14 场景与痛点</button>
+        <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordModalViewport', '3')">Q15–19 AI与NPC</button>
+        <button type="button" class="word-jump-btn" onclick="jumpWordSection('wordModalViewport', '4')">Q20–23 临场与隐私</button>
+      </div>
+
+      <div class="word-controls">
+        <div class="word-zoom-group" aria-label="全屏文档缩放">
+          <button type="button" class="word-zoom-btn" onclick="zoomModalDoc(-0.1)" title="缩小">−</button>
+          <span class="word-zoom-val" id="wordModalZoomVal">115%</span>
+          <button type="button" class="word-zoom-btn" onclick="zoomModalDoc(0.1)" title="放大">+</button>
+          <button type="button" class="word-zoom-btn" onclick="resetModalZoom()" title="重置缩放" style="font-size:11.5px;border-left:1px solid rgba(255,255,255,0.12);">重置</button>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="closeWordModal()">✕ 关闭 (ESC)</button>
+      </div>
+    </div>
+
+    <div class="word-modal-viewport" id="wordModalViewport">
+      <div id="wordModalPaperHost"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ========================
+       1. Master View Switcher
+       ======================== */
+    function switchMasterView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.toggle('active', p.id === viewId));
+      document.querySelectorAll('.master-tab').forEach(t => t.classList.toggle('active', t.dataset.view === viewId));
+
+      document.getElementById('subNavOverview').style.display = (viewId === 'view-overview') ? 'flex' : 'none';
+      document.getElementById('subNavResearch').style.display = (viewId === 'view-research') ? 'flex' : 'none';
+      document.getElementById('subNavExp1').style.display = (viewId === 'view-exp1') ? 'flex' : 'none';
+      document.getElementById('subNavExp2').style.display = (viewId === 'view-exp2') ? 'flex' : 'none';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function jumpToResearchSection(sectionId) {
+      switchMasterView('view-research');
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
+    }
+
+    /* Reading progress bar */
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    /* ========================
+       2. Overview Pipeline Interactive
+       ======================== */
+    const pipeData = {
+      p1: {
+        title: '实验一（信息支持层）：解决「怎么帮你说」的认知脚手架与自主权博弈',
+        desc: '通过 Cody et al. (2020) 的三类介入方式（Reactive / Proactive-Permission / Proactive-Direct）与 Koedinger & Aleven (2007) 帮助两难困境下的两类帮助具体程度（Cue / Model），在 3 类困难情境下测出最优空间 UI 语言帮助策略，既保障当场表达流畅，又保护自主感与无帮助迁移留存。',
+        btn: '进入实验一完整方案 →',
+        target: 'view-exp1'
+      },
+      p2: {
+        title: '实验二（情感与具身层）：解决「怎么接住情绪、让你敢继续说」的共情交互',
+        desc: '锁死实验一测出的最优空间 UI 语言帮助作为控制变量，在数字人 NPC 本体上正交操纵「言语支持方式（情感支持 vs. 尊重支持 + G0 基线）」与「非语言共情方式（平行共情 vs. 回应式共情）」，检验其对表达压力、行为层 WTC、感知共情、关系感及持续使用意愿的影响。',
+        btn: '进入实验二完整方案 →',
+        target: 'view-exp2'
+      },
+      p3: {
+        title: '双通道解耦架构：空间 UI 管语言支持，3D NPC 管情感共情',
+        desc: '将“信息支持”剥离到独立的 Vision Pro 空间悬浮 UI，让“情感与尊重支持”由咖啡师/酒店前台等 3D NPC 自然流露，彻底避免角色突然变成外教而“出戏”，最终合并实验一与实验二结论形成分情境整体设计策略。',
+        btn: '进入实验二完整方案 →',
+        target: 'view-exp2'
+      }
+    };
+
+    function selectPipe(key) {
+      document.querySelectorAll('.pipe-card').forEach(c => c.classList.toggle('active', c.dataset.pipe === key));
+      const d = pipeData[key];
+      document.getElementById('pipeTitle').textContent = d.title;
+      document.getElementById('pipeDesc').textContent = d.desc;
+      const btn = document.getElementById('pipeJumpBtn');
+      btn.textContent = d.btn;
+      btn.onclick = () => switchMasterView(d.target);
+    }
+
+    /* ========================
+       3. Reusable Segmented Tabs & Accordions
+       ======================== */
+    function switchSegTab(groupName, panelId, btnEl) {
+      btnEl.parentElement.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      document.querySelectorAll(`.seg-panel[data-group="${groupName}"]`).forEach(p => {
+        p.classList.toggle('active', p.id === panelId);
+      });
+    }
+
+    function toggleAccordion(btnEl) {
+      btnEl.parentElement.classList.toggle('open');
+    }
+
+    /* Exp 1 Scaffolding Table Toggle */
+    let scaffoldingCollapsed = false;
+    function toggleScaffoldingRows() {
+      scaffoldingCollapsed = !scaffoldingCollapsed;
+      document.querySelectorAll('.non-selected-row').forEach(r => r.classList.toggle('collapsed', scaffoldingCollapsed));
+      document.getElementById('toggleScaffoldingBtn').textContent = scaffoldingCollapsed
+        ? '展开全部 6 种脚手架手段'
+        : '仅看本实验选取的两极（Hints & Modeling）';
+    }
+
+    /* ========================
+       4. Exp 2 Social Support 4-Dimension Explorer
+       ======================== */
+    const ssData = {
+      emotional: '<strong>情感支持（Emotional Support）：</strong>指关心、理解、倾听和共情。<em>生活示例：</em>在你难过时，朋友给你一个拥抱，安静听你倾诉。<br><strong>本课题映射（实验二 IV1 水平 1）：</strong>聚焦口语困难当下的情绪状态，以“专注倾听 + 理解共情 + 情绪降压”接住卡壳与出错时的紧张尴尬。',
+      esteem: '<strong>评价 / 尊重支持（Esteem / Appraisal Support）：</strong>指提供肯定与正向反馈，帮助你进行积极的自我评估。<em>生活示例：</em>在你犹豫不决时，朋友鼓励你并告诉你“你做得很好”。<br><strong>本课题映射（实验二 IV1 水平 2）：</strong>聚焦能力肯定（Compliment）与努力认同（Validation），肯定用户已完成的表达，提振开口自信与继续交谈意愿。',
+      info: '<strong>信息支持（Informational Support）：</strong>指提供建议、知识或具体指导。<em>生活示例：</em>帮朋友查康复经验并分享，或解读一项新政策。<br><strong>本课题映射（实验一核心变量）：</strong>对应实验一中的空间悬浮 UI 语言帮助（Cue 线索提示 / Model 完整示范），在实验二中锁死最优策略作为固定控制变量。',
+      tangible: '<strong>工具性 / 物质支持（Tangible / Instrumental Support）：</strong>指提供实际的、有形的物质或行动代劳帮助。<em>生活示例：</em>家人帮你照顾孩子，或邻居在你生病时帮你买菜送药。<br><strong>本课题说明：</strong>属于现实生活物质代劳维度，在纯口语对话练习系统中不作为独立操纵变量。'
+    };
+
+    function selectSS(key) {
+      document.querySelectorAll('.ss-card').forEach(c => c.classList.toggle('active', c.dataset.ss === key));
+      document.getElementById('ssDetailBox').innerHTML = ssData[key];
+    }
+
+    /* ========================
+       6. Exp 2 RQ-H-DV Linked Highlighter
+       ======================== */
+    function filterE2Links(filterKey, btnEl) {
+      document.querySelectorAll('.rq-filter-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+
+      const items = document.querySelectorAll('#e2-rq-dv [data-link]');
+      items.forEach(el => {
+        const links = el.dataset.link.split(' ');
+        if (filterKey === 'all') {
+          el.classList.remove('linked-active', 'linked-dim');
+        } else if (links.includes(filterKey)) {
+          el.classList.add('linked-active');
+          el.classList.remove('linked-dim');
+        } else {
+          el.classList.remove('linked-active');
+          el.classList.add('linked-dim');
+        }
+      });
+    }
+
+    /* ========================
+       6. Word Survey Previewer & Fullscreen Zoom Modal + Interview Stage Filter
+       ======================== */
+    let inlineDocScale = 1.0;
+    let modalDocScale = 1.15;
+
+    function zoomInlineDoc(delta) {
+      inlineDocScale = Math.min(1.30, Math.max(0.75, +(inlineDocScale + delta).toFixed(2)));
+      const paper = document.getElementById('wordInlinePaper');
+      if (paper) paper.style.setProperty('--doc-scale', inlineDocScale);
+      const valEl = document.getElementById('wordInlineZoomVal');
+      if (valEl) valEl.textContent = Math.round(inlineDocScale * 100) + '%';
+    }
+
+    function jumpWordSection(viewportId, secNum) {
+      const viewport = document.getElementById(viewportId);
+      if (!viewport) return;
+      const target = viewport.querySelector(`[data-wq-sec="${secNum}"]`);
+      if (!target) return;
+      const vpRect = viewport.getBoundingClientRect();
+      const tRect = target.getBoundingClientRect();
+      const offsetTop = viewport.scrollTop + (tRect.top - vpRect.top) - 20;
+      viewport.scrollTo({ top: Math.max(0, offsetTop), behavior: 'smooth' });
+    }
+
+    function applyModalZoom() {
+      const host = document.getElementById('wordModalPaperHost');
+      const paper = host ? host.querySelector('.word-paper') : null;
+      if (paper) paper.style.setProperty('--doc-scale', modalDocScale);
+      const valEl = document.getElementById('wordModalZoomVal');
+      if (valEl) valEl.textContent = Math.round(modalDocScale * 100) + '%';
+    }
+
+    function zoomModalDoc(delta) {
+      modalDocScale = Math.min(1.60, Math.max(0.80, +(modalDocScale + delta).toFixed(2)));
+      applyModalZoom();
+    }
+
+    function resetModalZoom() {
+      modalDocScale = window.innerWidth >= 1024 ? 1.15 : 1.0;
+      applyModalZoom();
+    }
+
+    function openWordModal() {
+      const modal = document.getElementById('wordPreviewModal');
+      const source = document.getElementById('wordInlinePaper');
+      const host = document.getElementById('wordModalPaperHost');
+      if (!modal || !source || !host) return;
+
+      const clone = source.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.removeAttribute('ondblclick');
+      clone.removeAttribute('title');
+      host.innerHTML = '';
+      host.appendChild(clone);
+
+      modalDocScale = window.innerWidth >= 1024 ? 1.15 : 1.0;
+      applyModalZoom();
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      const vp = document.getElementById('wordModalViewport');
+      if (vp) vp.scrollTop = 0;
+    }
+
+    function closeWordModal() {
+      const modal = document.getElementById('wordPreviewModal');
+      if (!modal || !modal.classList.contains('open')) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      const host = document.getElementById('wordModalPaperHost');
+      if (host) host.innerHTML = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWordModal();
+    });
+
+    function filterInterviewStage(stageKey, btnEl) {
+      btnEl.parentElement.querySelectorAll('.rq-filter-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      document.querySelectorAll('#interviewTable tbody[data-istage]').forEach(tb => {
+        tb.style.display = (stageKey === 'all' || tb.dataset.istage === stageKey) ? '' : 'none';
+      });
+    }
+
+  </script>
+</body>
+</html>
