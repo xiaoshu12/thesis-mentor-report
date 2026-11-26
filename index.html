@@ -2434,6 +2434,19 @@
       box-shadow: 0 2px 8px rgba(15, 118, 110, 0.2);
     }
 
+    .btn-wtc-drawer.indigo {
+      border-color: #c7d2fe;
+      background: var(--indigo-soft);
+      color: var(--indigo);
+    }
+
+    .btn-wtc-drawer.indigo:hover {
+      background: var(--indigo);
+      border-color: var(--indigo);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(67, 56, 202, 0.2);
+    }
+
     .wtc-drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -2748,6 +2761,7 @@
         <div class="section-header">
           <span class="section-num">02</span>
           <h2 class="section-title">双实验分层解耦与递进关系</h2>
+          <button type="button" class="btn-wtc-drawer indigo" style="margin-left:auto;" onclick="openCompetenceDrawer()">胜任感双通道理论支撑（自我效能感 + 脚手架）</button>
         </div>
 
         <div class="pipeline-grid">
@@ -2766,7 +2780,7 @@
             <h3>实验二：NPC 多模态情感支持策略</h3>
             <p>锁死实验一最优 UI 策略，采用 <strong>2 × 2 + G0 设计</strong>，探究数字人「言语支持 × 非语言共情」效应。</p>
             <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="pill teal">关系感 & WTC</span>
+              <span class="pill teal">胜任感 · 关系感 &amp; WTC</span>
               <span class="pill gray">情感 & 尊重支持</span>
             </div>
           </button>
@@ -4403,6 +4417,151 @@
     </div>
   </aside>
 
+  <!-- Supplementary Competence Theory Side Drawer: Self-Efficacy (Bandura) + Scaffolding (Wood et al.) -->
+  <div class="wtc-drawer-backdrop" id="competenceDrawerBackdrop" onclick="closeCompetenceDrawer()"></div>
+  <aside class="wtc-drawer" id="competenceTheoryDrawer" role="dialog" aria-modal="true" aria-label="SDT 胜任感双通道理论支撑">
+    <div class="wtc-drawer-header">
+      <div>
+        <span style="font-size:11px;font-weight:700;color:#c7d2fe;letter-spacing:0.04em;">SDT 胜任感 · 双通道理论支撑</span>
+        <h3>为什么从「信息支持 + 情感支持」双通道提升胜任感？</h3>
+      </div>
+      <button type="button" class="wtc-drawer-close" onclick="closeCompetenceDrawer()">✕ 关闭</button>
+    </div>
+
+    <div class="wtc-drawer-body">
+      <div class="note-banner" style="margin-top:0;">
+        <strong>与本课题双实验的对应关系：</strong>自我决定理论（SDT）中的<strong>胜任感（Competence）</strong>既需要认知层面的“真的说得出、能独立完成”（对应<strong>实验一 · 信息支持 / 语言支架</strong>），也需要心理层面的“敢相信自己、不被挫败击垮”（对应<strong>实验二 · 情感支持 / NPC 共情</strong>）。下面两项奠基理论从机制上证明了双通道并进的必要性。
+      </div>
+
+      <div class="table-wrap" style="margin-top:0;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:28%;">奠基理论</th>
+              <th style="width:36%;">实验一 · 信息支持（语言支架）</th>
+              <th style="width:36%;">实验二 · 情感支持（NPC 共情）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>自我效能感理论</strong><br><span style="font-size:11.5px;color:var(--text-muted);">Bandura (1977 / 1997)</span></td>
+              <td>提供<strong>亲历掌握经验</strong>（用恰当支架帮助用户成功说出原本卡壳的句子，并保留无帮助迁移能力）</td>
+              <td>对应<strong>言语说服</strong>（尊重支持下的能力肯定）与<strong>生理/情绪状态调节</strong>（情感支持降低焦虑唤醒）</td>
+            </tr>
+            <tr>
+              <td><strong>脚手架理论</strong><br><span style="font-size:11.5px;color:var(--text-muted);">Wood, Bruner, &amp; Ross (1976)</span></td>
+              <td>发挥<strong>认知支架功能</strong>（降低自由度、标记关键特征、示范），帮助完成超出当前独立能力范围的表达</td>
+              <td>发挥<strong>情感与动机调节功能</strong>（挫败感控制、保住面子、方向维持、招募注意力），防止受挫放弃</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="seg-tabs" style="margin-bottom:4px;">
+        <button type="button" class="seg-btn active" onclick="switchSegTab('comp-theory-group', 'comp-bandura-panel', this)">自我效能感理论（Bandura, 1977 / 1997）</button>
+        <button type="button" class="seg-btn" onclick="switchSegTab('comp-theory-group', 'comp-wood-panel', this)">脚手架理论（Wood et al., 1976）</button>
+      </div>
+
+      <!-- Tab 1: Bandura Self-Efficacy Theory -->
+      <div class="seg-panel active" data-group="comp-theory-group" id="comp-bandura-panel">
+        <p style="margin-bottom:12px;">
+          自我效能感理论（Self-Efficacy Theory）由美国心理学家阿尔伯特·班杜拉（Albert Bandura）在 1977 年提出，并在 1997 年专著《自我效能：控制的实施》（<em>Self-Efficacy: The Exercise of Control</em>）中系统成型，是社会认知理论（Social Cognitive Theory）的核心支柱。
+        </p>
+        <div class="wtc-quote-block" style="border-left-color:var(--indigo);">
+          <div class="wtc-quote-zh">它本质上是在回答一个问题：<strong>为什么客观能力差不多的人，面对同一件事时，有的人敢上且能做成，有的人却直接退缩或临场崩盘？</strong></div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="wtc-sec-title">一、核心定义：它到底是什么？</div>
+          <p>自我效能感是指<strong>个体对自己能否完成特定任务的能力的主观信念</strong>。理解这个概念，需要抓住两个关键区分：</p>
+          <ul class="wtc-list">
+            <li><strong>主观信念 ≠ 客观能力：</strong>它衡量的不是你“实际拥有多少技能”，而是你“相信自己能用已有技能搞定眼前这件事”的程度。</li>
+            <li><strong>效能预期 ≠ 结果预期：</strong>班杜拉把人对行为的预期拆成两步——<strong>结果预期</strong>是“我知道做 A 就能得到 B”（比如“坚持锻炼能瘦”），<strong>效能预期</strong>是“我相信自己能做到 A”（比如“我相信自己能坚持每天跑五公里”）。现实中，决定人行不行动的关键往往是后者。</li>
+          </ul>
+          <p>从适用范围来看，自我效能感分为跨情境的<strong>一般自我效能感（GSE）</strong>（面对各种挑战的整体自信）和针对具体领域的<strong>情境特异性自我效能感（SSE）</strong>（只针对某一特定任务的信心）。此外，班杜拉指出它具备三个维度：<strong>水平</strong>（敢挑战多高难度的任务）、<strong>广度</strong>（信心能否迁移到其他领域）和<strong>强度</strong>（遇到打击时信念有多稳固）。</p>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">二、四大来源：自我效能感从哪来？</div>
+          <p>班杜拉认为，个体对自身能力的判断不是凭空产生的，而是来自四类信息源的综合加工：</p>
+          <ol class="wtc-list">
+            <li><strong>亲历掌握经验（Mastery Experiences / 成功经验）：</strong>影响力最强、最直接。自己亲手把事情做成，效能感就会大幅提升；反复遭遇失败，尤其是在信心尚未稳固时失败，效能感会迅速受损。只有克服了一定难度的成功，才能建立真正抗挫的信念。</li>
+            <li><strong>替代性经验（Vicarious Experiences）：</strong>通过观察他人（尤其是与自己水平、背景相似的榜样）成功完成任务，产生“他能做到，我大概也可以”的推断；反之，看到与自己相似的人竭尽全力仍失败，也会打击自身信心。</li>
+            <li><strong>言语说服（Verbal Persuasion）：</strong>来自可信他人的鼓励、肯定与具体反馈，能说服个体相信自己具备所需能力。它的作用相对有限——如果缺乏真实依据或只是空洞夸奖，一旦实际受挫，信心会立刻瓦解。</li>
+            <li><strong>生理与情绪状态（Physiological and Affective States）：</strong>人在面对任务时会产生心跳加速、出汗、紧张、焦虑或疲劳等身心反应，个体常把这些负面唤醒直接解读为“我能力不行、我要搞砸了”，从而拉低效能感；相反，平静、积极的情绪状态有助于维持更高的能力判断。</li>
+          </ol>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">三、四大作用机制：它如何影响人的行为？</div>
+          <p>自我效能感确立后，主要通过四个心理过程左右人的表现：</p>
+          <ul class="wtc-list">
+            <li><strong>选择过程：</strong>决定人愿意踏入什么环境、选择什么任务。人们通常会回避自认为超出能力范围的活动，而主动投入自认为能掌控的挑战，这长期下来直接塑造了个人发展的轨迹。</li>
+            <li><strong>动机过程：</strong>影响目标设定、努力程度与受挫后的坚持性。高效能感的人往往设定更高目标、把失败归因于努力或策略不足，因此越挫越勇；低效能感的人遇到阻碍容易归因于“我天生不行”，从而迅速放弃。</li>
+            <li><strong>认知过程：</strong>高效能感的人在脑中更倾向于预演成功场景，专注分析问题和寻找策略；低效能感的人容易反复想象失败后果，占用认知资源，反而降低实际执行质量。</li>
+            <li><strong>情感过程：</strong>决定个体在面对压力、风险或不确定性时体验到多少焦虑与抑郁。相信自己能控制局面的人，面对威胁时情绪更稳；觉得自己无力应对的人，更容易陷入恐慌和无助。</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">四、理论地位与应用</div>
+          <p>班杜拉的这一理论打破了传统心理学“只要教给技能、或者给够奖励，人就会行动”的单一假设，证明了“自我信念”本身就是驱动行为改变的核心中介变量。正因如此，它被广泛用于预测和干预人类在教育、职业发展、健康管理与创新活动中的行为表现。</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Wood, Bruner, & Ross Scaffolding Theory -->
+      <div class="seg-panel" data-group="comp-theory-group" id="comp-wood-panel">
+        <p style="margin-bottom:12px;">
+          脚手架理论（Scaffolding Theory）的开山之作，是心理学家大卫·伍德（David Wood）、杰罗姆·布鲁纳（Jerome Bruner）和盖尔·罗斯（Gail Ross）于 1976 年发表在《儿童心理学与精神病学杂志》（<em>Journal of Child Psychology and Psychiatry</em>）上的经典论文《辅导在问题解决中的作用》（<em>The Role of Tutoring in Problem Solving</em>）。
+        </p>
+        <div class="wtc-quote-block">
+          <div class="wtc-quote-zh">这篇论文首次把建筑学中的“脚手架（Scaffolding）”隐喻引入心理学与教育学，试图回答一个根本问题：<strong>在“高手带新手”的互动中，有效的指导者究竟做了什么，才能让学习者完成原本独自做不到的任务，并最终学会自己独立完成？</strong></div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="wtc-sec-title">一、理论源头：经典的“木块金字塔”实验</div>
+          <p>这篇文章并不是纯理论推演，而是基于一项细致的行为观察实验：</p>
+          <ul class="wtc-list">
+            <li><strong>实验对象：</strong>30 名 3 岁、4 岁和 5 岁的儿童。</li>
+            <li><strong>实验任务：</strong>用 21 块带有凹凸榫卯结构的木块，拼搭出一座 6 层高的立体金字塔。这个任务被刻意设计得<strong>超出所有年龄段孩子独自完成的能力</strong>，但又有足够的趣味性。</li>
+            <li><strong>实验过程：</strong>由一名成年辅导者一对一引导每个孩子完成拼搭，研究者全程录像，逐条编码分析辅导者在不同节点采取的干预动作以及孩子的即时反应。</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">二、核心定义与底层前提</div>
+          <p>基于观察，作者给出了“脚手架”的经典界定：</p>
+          <ul class="wtc-list">
+            <li><strong>核心定义：</strong>脚手架是一种互动过程，它使儿童或新手能够解决超出其独自能力范围的问题、完成任务或达成目标。其运作本质在于——<strong>由指导者暂时“接管/控制”任务中超出学习者当前能力的那部分要素，从而让学习者得以集中精力，去完成自己能力范围内的部分</strong>。</li>
+            <li><strong>认知前提（理解先于产出）：</strong>论文提出一条非常关键的法则——<strong>“对解决方案的理解必须先于产出”（comprehension of the solution must precede production）</strong>。也就是说，在学习者还无法自己做出正确步骤之前，他们至少要先能“认得出什么是对的结果”。如果学习者连最终目标或对错标准都完全看不懂，外部辅导和反馈就无法真正转化为学习。</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">三、最核心的理论贡献：脚手架的 6 项功能</div>
+          <p>作者将有效辅导者在互动中发挥的作用，系统提炼为 6 项具体功能：</p>
+          <ol class="wtc-list">
+            <li><strong>招募注意力（Recruitment）：</strong>首要任务是唤起学习者对任务的兴趣，把注意力吸引过来，并使其愿意遵循任务的基本要求。</li>
+            <li><strong>降低自由度（Reduction in degrees of freedom）：</strong>通过减少达成目标所需的步骤数量或操作选项来简化任务（例如帮学习者排除干扰项或先固定基础部分），把任务复杂度压缩到学习者能看懂反馈、判断自己是否做对的程度。</li>
+            <li><strong>方向维持（Direction maintenance）：</strong>让学习者始终朝着特定目标前进而不跑偏。一方面防止其分心或停滞，另一方面在学习者刚完成一个简单子目标就想停下来时，激励其承担一点风险、继续攻克下一步。</li>
+            <li><strong>标记关键特征（Marking critical features）：</strong>以各种方式突出任务中真正相关的核心线索，向学习者提供信息，帮其看清“自己当前做出的结果”与“正确标准”之间的差距在哪里。</li>
+            <li><strong>挫败感控制（Frustration control）：</strong>通过辅导者的陪伴与缓冲，让解题过程变得不那么充满压力和心理风险（包括帮学习者“保住面子”、缓解做错时的焦虑与挫败感），避免其因受挫而直接放弃。作者也专门指出了这一项的潜在风险：<strong>不能过度兜底，否则会导致学习者对指导者产生过度依赖</strong>。</li>
+            <li><strong>示范（Demonstration）：</strong>演示任务的解决方式。论文特别强调，示范不是机械地“替学习者做完”，而常常是对学习者已经尝试了一半的动作进行理想化呈现（idealization）或补充说明，目的是让学习者看懂后再用更恰当的方式模仿出来。</li>
+          </ol>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="wtc-sec-title">四、动态本质与学术定位</div>
+          <ul class="wtc-list">
+            <li><strong>不是固定脚本，而是动态匹配：</strong>实验数据显示，辅导者面对不同年龄的孩子采取的策略完全不同——对 3 岁儿童，辅导者花大量精力在<strong>招募注意、控制挫败感和直接示范</strong>上；对 4 岁儿童，更多转向<strong>言语提示与标记关键特征</strong>；到了 5 岁儿童，辅导者只需偶尔确认和维持方向，把绝大部分操作权交由孩子自己掌控。就像造房子一样，脚手架的意义在于<strong>根据建造进度动态调整，并在主体结构稳固后逐步拆除</strong>。</li>
+            <li><strong>天然包含“认知 + 情感/动机”双重属性：</strong>从这篇开山之作诞生起，脚手架就不只是单纯的“教知识、降难度”（降低自由度、标记特征、示范），还天生包含对<strong>兴趣、坚持度与情绪的调节</strong>（招募注意、维持方向、控制挫败感）。</li>
+            <li><strong>一个常见的学术误解：</strong>后世教材常把“脚手架”和苏联心理学家维果茨基（Vygotsky）的“最近发展区（ZPD）”绑定在一起，但实际上 <strong>Wood 等人 1976 年的这篇原著中并没有直接引用维果茨基</strong>；二者的正式理论嫁接，是由布鲁纳及其他教育心理学家在 1980 年代之后完成的。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <script>
     /* ========================
        1. Master View Switcher
@@ -4607,11 +4766,18 @@
       if (vp) vp.scrollTop = 0;
     }
 
+    function syncBodyScrollLock() {
+      const modalOpen = document.getElementById('wordPreviewModal')?.classList.contains('open');
+      const wtcOpen = document.getElementById('wtcEvidenceDrawer')?.classList.contains('open');
+      const compOpen = document.getElementById('competenceTheoryDrawer')?.classList.contains('open');
+      document.body.style.overflow = (modalOpen || wtcOpen || compOpen) ? 'hidden' : '';
+    }
+
     function closeWordModal() {
       const modal = document.getElementById('wordPreviewModal');
       if (!modal || !modal.classList.contains('open')) return;
       modal.classList.remove('open');
-      document.body.style.overflow = '';
+      syncBodyScrollLock();
       const host = document.getElementById('wordModalPaperHost');
       if (host) host.innerHTML = '';
     }
@@ -4621,7 +4787,7 @@
       const drawer = document.getElementById('wtcEvidenceDrawer');
       if (backdrop) backdrop.classList.add('open');
       if (drawer) drawer.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      syncBodyScrollLock();
     }
 
     function closeWtcDrawer() {
@@ -4629,16 +4795,30 @@
       const drawer = document.getElementById('wtcEvidenceDrawer');
       if (backdrop) backdrop.classList.remove('open');
       if (drawer) drawer.classList.remove('open');
-      const modal = document.getElementById('wordPreviewModal');
-      if (!modal || !modal.classList.contains('open')) {
-        document.body.style.overflow = '';
-      }
+      syncBodyScrollLock();
+    }
+
+    function openCompetenceDrawer() {
+      const backdrop = document.getElementById('competenceDrawerBackdrop');
+      const drawer = document.getElementById('competenceTheoryDrawer');
+      if (backdrop) backdrop.classList.add('open');
+      if (drawer) drawer.classList.add('open');
+      syncBodyScrollLock();
+    }
+
+    function closeCompetenceDrawer() {
+      const backdrop = document.getElementById('competenceDrawerBackdrop');
+      const drawer = document.getElementById('competenceTheoryDrawer');
+      if (backdrop) backdrop.classList.remove('open');
+      if (drawer) drawer.classList.remove('open');
+      syncBodyScrollLock();
     }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeWordModal();
         closeWtcDrawer();
+        closeCompetenceDrawer();
       }
     });
 
