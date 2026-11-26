@@ -105,9 +105,9 @@
       border: none;
       background: transparent;
       color: var(--text-secondary);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      padding: 7px 16px;
+      padding: 6px 13px;
       border-radius: 999px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -126,6 +126,10 @@
       background: var(--primary);
       color: #ffffff;
       box-shadow: 0 2px 8px rgba(30, 58, 95, 0.22);
+    }
+
+    .master-tab.active.scenarios-tab {
+      background: linear-gradient(135deg, #1e3a5f, #0f766e);
     }
 
     .master-tab.active.exp2-tab {
@@ -1697,6 +1701,713 @@
       background: var(--teal);
     }
 
+    /* =========================================================
+       Scenario Derivation Module (sc-*)
+       ========================================================= */
+    .hero.hero-scenarios {
+      background: linear-gradient(135deg, #162c47 0%, #1e3a5f 48%, #0f4c5c 100%);
+    }
+
+    .sc-sub-panel { display: none; animation: fadeSlide 0.22s ease; }
+    .sc-sub-panel.active { display: block; }
+
+    .sc-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sc-filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .sc-filter-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-right: 4px;
+    }
+
+    .sc-paper-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sc-paper-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .sc-paper-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(30, 58, 95, 0.2);
+    }
+
+    .sc-paper-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .sc-legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .sc-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sc-line-solid {
+      width: 20px;
+      height: 2px;
+      background: var(--text-main);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .sc-line-dashed {
+      width: 20px;
+      height: 0;
+      border-top: 2px dashed #94a3b8;
+      display: inline-block;
+    }
+
+    .sc-overview-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .sc-graph-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sc-graph-scroll {
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .sc-graph-inner {
+      min-width: 670px;
+    }
+
+    .sc-col-headers {
+      display: grid;
+      grid-template-columns: 0.96fr 1.24fr 1.04fr;
+      gap: 28px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sc-step-label {
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .sc-col-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .sc-stage {
+      position: relative;
+    }
+
+    #sc-graph-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+
+    .sc-svg-edge {
+      fill: none;
+      transition: stroke 0.22s ease, stroke-opacity 0.22s ease, stroke-width 0.22s ease;
+    }
+
+    .sc-graph-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 0.96fr 1.24fr 1.04fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .sc-col-stack {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sc-col-stack.scenarios { gap: 8px; }
+    .sc-col-stack.focus { justify-content: space-around; gap: 16px; padding: 6px 0; }
+
+    .sc-node-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 11px 13px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sc-node-card:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary-light);
+    }
+
+    .sc-node-card.sc-node-dimmed {
+      opacity: 0.26;
+      filter: grayscale(40%);
+    }
+
+    .sc-node-card.sc-node-selected {
+      box-shadow: 0 0 0 2px var(--primary), 0 6px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .sc-node-card.sc-node-dashed {
+      border-style: dashed;
+    }
+
+    .sc-dim-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .sc-dim-code {
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
+
+    .sc-dim-count {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .sc-dim-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 7px;
+    }
+
+    .sc-dim-sub {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      line-height: 1.45;
+    }
+
+    .sc-dim-q {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      line-height: 1.45;
+    }
+
+    .sc-sc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .sc-sc-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sc-sc-bar {
+      width: 4px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .sc-sc-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sc-sc-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    .sc-sc-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 7px;
+    }
+
+    .sc-badge-pri {
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .sc-badge-aux {
+      font-size: 10px;
+      font-weight: 600;
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .sc-focus-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .sc-focus-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .sc-focus-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 8px;
+    }
+
+    .sc-focus-cond {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .sc-focus-bi {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .sc-focus-mech {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .sc-graph-footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .sc-reset-btn {
+      border: none;
+      background: transparent;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Sticky Inspector */
+    .sc-inspector {
+      position: sticky;
+      top: 114px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .sc-inspector-head {
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sc-inspector-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .sc-inspector-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .sc-inspector-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .sc-inspector-body {
+      padding: 16px;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 12.5px;
+    }
+
+    .sc-ins-block-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 5px;
+    }
+
+    .sc-ins-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .sc-paper-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sc-quote-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sc-quote-text {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 13px;
+      color: #1e293b;
+      line-height: 1.45;
+    }
+
+    .sc-jump-btn {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      padding: 8px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.18s;
+      text-align: left;
+    }
+
+    .sc-jump-btn:hover {
+      border-color: var(--primary-light);
+      background: var(--primary-soft);
+    }
+
+    /* 5x8 Matrix View */
+    .sc-matrix-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.75fr) minmax(290px, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .sc-matrix-table {
+      min-width: 660px;
+      font-size: 12px;
+    }
+
+    .sc-matrix-table th {
+      font-size: 11.5px;
+      padding: 10px 9px;
+      white-space: normal;
+    }
+
+    .sc-matrix-table td {
+      padding: 8px;
+      border-right: 1px solid var(--border);
+    }
+    .sc-matrix-table td:last-child { border-right: none; }
+
+    .sc-mcell-btn {
+      width: 100%;
+      text-align: left;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-size: 11px;
+    }
+
+    .sc-mcell-btn:hover {
+      border-color: var(--primary-light);
+      background: #f8fafc;
+    }
+
+    .sc-mcell-btn.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.16);
+      background: var(--primary-soft);
+    }
+
+    .sc-matrix-detail {
+      position: sticky;
+      top: 114px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 5-Paper Dictionary View */
+    .sc-dict-layout {
+      display: grid;
+      grid-template-columns: 235px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .sc-dict-sidebar {
+      position: sticky;
+      top: 114px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sc-dict-nav-btn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 8px;
+      padding: 9px 10px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .sc-dict-nav-btn:hover {
+      background: var(--surface-soft);
+      border-color: var(--border);
+    }
+
+    .sc-dict-nav-btn.active {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .sc-fw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 12px 0 16px;
+    }
+
+    .sc-fw-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      background: #ffffff;
+    }
+
+    .sc-term-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sc-term-card + .sc-term-card { margin-top: 10px; }
+
+    .sc-copy-btn {
+      border: 1px solid var(--border-strong);
+      background: var(--surface-soft);
+      color: var(--text-secondary);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .sc-copy-btn:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .sc-ref-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .sc-ref-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #f8fafc;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #sc-toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1100;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: all 0.22s ease;
+    }
+
+    #sc-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -1707,6 +2418,12 @@
     }
 
     /* Responsive */
+    @media (max-width: 1040px) {
+      .sc-overview-layout, .sc-matrix-layout, .sc-dict-layout, .sc-fw-grid { grid-template-columns: 1fr; }
+      .sc-inspector, .sc-matrix-detail, .sc-dict-sidebar { position: static; }
+      .sc-inspector-body { max-height: none; }
+    }
+
     @media (max-width: 960px) {
       .hero { padding: 26px 22px; }
       .hero-meta-grid, .grid-4, .ss-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1719,15 +2436,15 @@
 
     /* Print All Views cleanly */
     @media print {
-      .top-nav, .btn-print, .toggle-btn, .seg-tabs, .rq-filter-bar, .scene-switcher, .btn-jump, .word-toolbar, .word-statusbar, #wordPreviewModal, .btn-research-go { display: none !important; }
+      .top-nav, .btn-print, .toggle-btn, .seg-tabs, .rq-filter-bar, .scene-switcher, .btn-jump, .word-toolbar, .word-statusbar, #wordPreviewModal, .btn-research-go, .sc-filter-bar, .sc-copy-btn, #sc-toast, #sc-btn-reset-graph { display: none !important; }
       body { background: #fff; font-size: 12.5px; }
       .container { max-width: 100%; padding: 0; }
-      .view-panel, .seg-panel, .accordion-body { display: block !important; opacity: 1 !important; }
+      .view-panel, .seg-panel, .accordion-body, .sc-sub-panel { display: block !important; opacity: 1 !important; }
       .non-selected-row.collapsed { display: table-row !important; }
       .word-viewer-shell { border: none !important; box-shadow: none !important; background: #fff !important; }
       .word-viewport { height: auto !important; overflow: visible !important; background: #fff !important; padding: 0 !important; }
       .word-paper { --doc-scale: 1 !important; width: 100% !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
-      .card, .overview-card, .rq-item, .h-item, .dv-card { box-shadow: none !important; break-inside: avoid; }
+      .card, .overview-card, .rq-item, .h-item, .dv-card, .sc-graph-card, .sc-inspector { box-shadow: none !important; break-inside: avoid; }
       .hero { color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-before: auto; }
     }
   </style>
@@ -1748,7 +2465,10 @@
           总览与双实验架构
         </button>
         <button class="master-tab research-tab" data-view="view-research" onclick="switchMasterView('view-research')">
-          前期调研：问卷与访谈 <span class="tab-pill-badge">定量+定性</span>
+          前期调研 <span class="tab-pill-badge">定量+定性</span>
+        </button>
+        <button class="master-tab scenarios-tab" data-view="view-scenarios" onclick="switchMasterView('view-scenarios')">
+          场景推导 <span class="tab-pill-badge">4→8→3</span>
         </button>
         <button class="master-tab" data-view="view-exp1" onclick="switchMasterView('view-exp1')">
           实验一：语言帮助 <span class="tab-pill-badge">3×2</span>
@@ -1776,6 +2496,12 @@
         <span class="sub-nav-label">前期调研导览：</span>
         <a href="#rs-survey">定量调查问卷（Word预览）</a>
         <a href="#rs-interview">定性深度访谈提纲（Q1–Q12）</a>
+      </div>
+      <div class="sub-nav-inner" id="subNavScenarios" style="display:none;">
+        <span class="sub-nav-label">场景推导导览：</span>
+        <a href="javascript:void(0)" onclick="switchScenarioSubTab('overview')">01 理论推演全景图</a>
+        <a href="javascript:void(0)" onclick="switchScenarioSubTab('matrix')">02 5×8 文献交叉矩阵</a>
+        <a href="javascript:void(0)" onclick="switchScenarioSubTab('dictionary')">03 奠基文献与原话词典</a>
       </div>
       <div class="sub-nav-inner" id="subNavExp1" style="display:none;">
         <span class="sub-nav-label">实验一导览：</span>
@@ -1908,6 +2634,7 @@
         <div class="section-header">
           <span class="section-num">03</span>
           <h2 class="section-title">贯通两个实验的三类口语表达困难情境</h2>
+          <button type="button" class="toggle-btn" style="margin-left:auto;" onclick="jumpToScenarioDerivation('overview')">查看理论推导图谱（4 维度 → 8 情景 → 3 场景）→</button>
         </div>
         <div class="grid-3">
           <div class="context-card" style="background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);padding:16px 18px;">
@@ -2597,6 +3324,183 @@
 
 
     <!-- ========================================================= -->
+    <!-- VIEW S: 三类场景理论推导图谱（4 维度 → 8 情景 → 3 场景）    -->
+    <!-- ========================================================= -->
+    <div class="view-panel" id="view-scenarios">
+      <header class="hero hero-scenarios">
+        <div class="hero-badge">SLA × HCI Taxonomy · 场景来源与理论映射</div>
+        <h1>AI数字人二语口语对练：核心交互情景与理论映射图谱</h1>
+        <p class="hero-subtitle">基于 5 篇奠基性文献的自上而下推演：4 底层维度 → 8 微观情景 → 3 核心干预场景</p>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-item">
+            <div class="label">推演架构</div>
+            <div class="value">4 维度 → 8 情景 → 3 场景</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">理论基础</div>
+            <div class="value">5 篇奠基性核心文献</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">核心聚焦</div>
+            <div class="value">表达受阻 / 表达错误 / 沟通受阻</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="label">规范引文</div>
+            <div class="value">APA 7th / GB/T 7714（7 条）</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="seg-tabs" id="sc-sub-tabs">
+        <button type="button" class="seg-btn active" data-sc-tab="overview" onclick="switchScenarioSubTab('overview')">01 理论推演全景图</button>
+        <button type="button" class="seg-btn" data-sc-tab="matrix" onclick="switchScenarioSubTab('matrix')">02 5×8 文献交叉矩阵</button>
+        <button type="button" class="seg-btn" data-sc-tab="dictionary" onclick="switchScenarioSubTab('dictionary')">03 奠基文献与原话词典</button>
+      </div>
+
+      <!-- Sub-panel 1: 理论推演全景图 -->
+      <div class="sc-sub-panel active" id="sc-sub-overview">
+        <div class="sc-filter-bar">
+          <div class="sc-filter-pills" id="sc-paper-filter-bar"></div>
+          <div class="sc-legend">
+            <span class="sc-legend-item"><span class="sc-line-solid"></span><span>主对应 / 核心推演</span></span>
+            <span class="sc-legend-item"><span class="sc-line-dashed"></span><span>交叉对应 / 辅助收敛</span></span>
+            <span class="sc-legend-item">
+              <span class="sc-paper-dot" style="background:#3730A3;"></span>
+              <span class="sc-paper-dot" style="background:#0F766E;"></span>
+              <span class="sc-paper-dot" style="background:#B45309;"></span>
+              <span class="sc-paper-dot" style="background:#334155;"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="sc-overview-layout">
+          <div class="sc-graph-card">
+            <div class="sc-graph-scroll">
+              <div class="sc-graph-inner">
+                <div class="sc-col-headers">
+                  <div>
+                    <div class="sc-step-label">Step 01</div>
+                    <div class="sc-col-title">4 大底层维度</div>
+                  </div>
+                  <div>
+                    <div class="sc-step-label">Step 02</div>
+                    <div class="sc-col-title">8 种核心微观情景</div>
+                  </div>
+                  <div>
+                    <div class="sc-step-label">Step 03</div>
+                    <div class="sc-col-title">3 类核心干预场景</div>
+                  </div>
+                </div>
+
+                <div class="sc-stage" id="sc-graph-stage">
+                  <svg id="sc-graph-svg"></svg>
+                  <div class="sc-graph-grid">
+                    <div id="sc-col-dimensions" class="sc-col-stack"></div>
+                    <div id="sc-col-scenarios" class="sc-col-stack scenarios"></div>
+                    <div id="sc-col-focus" class="sc-col-stack focus"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sc-graph-footer">
+              <p>
+                <strong style="color:var(--text-main);">逻辑闭环：</strong>
+                正向基准（①）→ 产出三类受阻（②③④）→ 理解两类断层（⑤⑥）→ 人机机制摩擦（⑦）→ 心理情绪崩溃（⑧），最终收敛至频次最高且具身干预价值最大的三类受阻边界。
+              </p>
+              <button type="button" id="sc-btn-reset-graph" class="sc-reset-btn">重置视角</button>
+            </div>
+          </div>
+
+          <aside class="sc-inspector">
+            <div class="sc-inspector-head">
+              <div class="sc-inspector-title">
+                <span class="sc-inspector-dot" id="sc-inspector-dot"></span>
+                <span>精读检查器</span>
+              </div>
+              <span class="sc-inspector-badge" id="sc-inspector-type-badge">微观情景</span>
+            </div>
+            <div class="sc-inspector-body" id="sc-inspector-body"></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Sub-panel 2: 5×8 文献交叉矩阵 -->
+      <div class="sc-sub-panel" id="sc-sub-matrix">
+        <div class="card">
+          <div class="sub-head" style="border-bottom:1px solid var(--border);padding-bottom:12px;">
+            <h3>5 篇核心文献 × 8 种微观情景 精准交叉矩阵</h3>
+            <div class="sc-legend">
+              <span class="sc-legend-item"><span class="sc-paper-dot" style="background:var(--primary);"></span><span>主对应（必引核心定性）</span></span>
+              <span class="sc-legend-item"><span class="sc-paper-dot" style="border:2px solid #94a3b8;background:#fff;"></span><span>交叉对应（补充视角）</span></span>
+            </div>
+          </div>
+
+          <div class="sc-matrix-layout">
+            <div class="table-wrap" style="margin-top:0;">
+              <table class="sc-matrix-table">
+                <thead>
+                  <tr>
+                    <th style="width:185px;">维度与微观情景</th>
+                    <th>Dörnyei &amp; Scott<br><span style="font-weight:500;font-size:11px;color:var(--text-muted);">(1997)</span></th>
+                    <th>Lyster &amp; Ranta<br><span style="font-weight:500;font-size:11px;color:var(--text-muted);">(1997)</span></th>
+                    <th>Varonis &amp; Gass<br><span style="font-weight:500;font-size:11px;color:var(--text-muted);">(1985)</span></th>
+                    <th>Skantze<br><span style="font-weight:500;font-size:11px;color:var(--text-muted);">(2021 / 1974)</span></th>
+                    <th>MacIntyre &amp; Legatto<br><span style="font-weight:500;font-size:11px;color:var(--text-muted);">(2011 / 1998)</span></th>
+                  </tr>
+                </thead>
+                <tbody id="sc-matrix-tbody"></tbody>
+              </table>
+            </div>
+
+            <div class="sc-matrix-detail">
+              <div class="sc-ins-block-label" style="margin-bottom:0;">交叉证据检视</div>
+              <div id="sc-matrix-detail-panel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-panel 3: 5 篇奠基文献与原话词典 -->
+      <div class="sc-sub-panel" id="sc-sub-dictionary">
+        <div class="sc-dict-layout">
+          <aside class="sc-dict-sidebar">
+            <div class="sc-ins-block-label" style="padding:4px 8px;">5 篇核心奠基文献</div>
+            <div id="sc-dict-paper-nav" style="display:flex;flex-direction:column;gap:4px;"></div>
+            <div style="border-top:1px solid var(--border);margin-top:6px;padding-top:8px;">
+              <a href="#sc-references-section" style="display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;color:var(--primary);text-decoration:none;padding:4px 8px;">
+                <span>跳转至规范参考文献</span>
+                <span>↓</span>
+              </a>
+            </div>
+          </aside>
+
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="card" id="sc-dict-paper-content"></div>
+
+            <div class="card" id="sc-references-section">
+              <div class="sub-head" style="border-bottom:1px solid var(--border);padding-bottom:12px;">
+                <div>
+                  <h3>规范参考文献格式（全 7 条完整引用）</h3>
+                  <p style="font-size:12px;color:var(--text-muted);margin-top:2px;">含 5 篇主干文献及 2 篇关键奠基前作（Sacks et al., 1974; MacIntyre et al., 1998）</p>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <div class="seg-tabs" style="margin-bottom:0;">
+                    <button type="button" id="sc-ref-btn-apa" class="seg-btn active" style="padding:5px 11px;font-size:12px;">APA 7th</button>
+                    <button type="button" id="sc-ref-btn-gb" class="seg-btn" style="padding:5px 11px;font-size:12px;">GB/T 7714-2015</button>
+                  </div>
+                  <button type="button" id="sc-btn-copy-all-refs" class="sc-copy-btn" style="background:var(--primary);color:#fff;border-color:var(--primary);padding:6px 12px;">一键复制全部</button>
+                </div>
+              </div>
+              <ol class="sc-ref-list" id="sc-references-list"></ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================= -->
     <!-- VIEW 1: 实验一完整方案（保留全部细节，优化为交互式切换）      -->
     <!-- ========================================================= -->
     <div class="view-panel" id="view-exp1">
@@ -3225,6 +4129,8 @@
     </div>
   </div>
 
+  <div id="sc-toast">已复制到剪贴板</div>
+
   <script>
     /* ========================
        1. Master View Switcher
@@ -3235,10 +4141,22 @@
 
       document.getElementById('subNavOverview').style.display = (viewId === 'view-overview') ? 'flex' : 'none';
       document.getElementById('subNavResearch').style.display = (viewId === 'view-research') ? 'flex' : 'none';
+      document.getElementById('subNavScenarios').style.display = (viewId === 'view-scenarios') ? 'flex' : 'none';
       document.getElementById('subNavExp1').style.display = (viewId === 'view-exp1') ? 'flex' : 'none';
       document.getElementById('subNavExp2').style.display = (viewId === 'view-exp2') ? 'flex' : 'none';
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (viewId === 'view-scenarios' && typeof window.drawScenarioGraphEdges === 'function') {
+        requestAnimationFrame(() => window.drawScenarioGraphEdges());
+        setTimeout(() => window.drawScenarioGraphEdges(), 60);
+      }
+    }
+
+    function jumpToScenarioDerivation(subTab) {
+      switchMasterView('view-scenarios');
+      if (typeof window.switchScenarioSubTab === 'function') {
+        window.switchScenarioSubTab(subTab || 'overview');
+      }
     }
 
     function jumpToResearchSection(sectionId) {
@@ -3437,6 +4355,1218 @@
         tb.style.display = (stageKey === 'all' || tb.dataset.istage === stageKey) ? '' : 'none';
       });
     }
+
+    /* ========================
+       9. Scenario Derivation Module (4 Dimensions -> 8 Micro-scenarios -> 3 Core Scenarios)
+       ======================== */
+    (function () {
+      const SC_DIMENSIONS = [
+        {
+          id: 'sc-dim-psych',
+          code: 'D1',
+          name: '心理维度',
+          subtitle: '动态交际意愿与情绪阈值',
+          question: '当下敢不敢说、心态稳不稳？',
+          color: '#3730A3',
+          bg: '#EEF2FF',
+          border: '#C7D2FE',
+          papers: ['macintyre2011'],
+          scenariosPrimary: ['sc-1', 'sc-8'],
+          scenariosAux: [],
+          rationale: '二语开口意愿（WTC）并非静态人格特质，而是逐秒波动的动态系统（MacIntyre & Legatto, 2011）。心理维度的正负两极分别衍生出顺畅进入话语的基准态【① 顺利表达】与跨过焦虑阈值后的崩溃态【⑧ 焦虑爆发与退缩】。',
+          designImplication: 'AI 数字人不能只做语言纠错机器，必须在秒级时间窗内监测情绪起伏，高意愿时顺势推进，低谷瞬间优先共情托底。'
+        },
+        {
+          id: 'sc-dim-prod',
+          code: 'D2',
+          name: '产出维度',
+          subtitle: '学习者二语编码与输出质量',
+          question: '说得出吗？说得对吗？说得充分吗？',
+          color: '#0F766E',
+          bg: '#F0FDFA',
+          border: '#99F6E4',
+          papers: ['dornyei1997', 'lyster1997'],
+          scenariosPrimary: ['sc-2', 'sc-3', 'sc-4'],
+          scenariosAux: [],
+          rationale: '依据 Dörnyei & Scott (1997) 的交际问题域与 Lyster & Ranta (1997) 的错误反馈模型，学习者尝试产出二语时，逻辑上仅存在三种非顺畅输出：根本编码不出【② 卡壳搜词】、输出但形式有偏【③ 明显说错】、以及为避险而主动缩水/绕路【④ 词不达意与回避】。',
+          designImplication: '三种产出受阻对应截然不同的脚手架策略：卡壳需等待与渐进提示，局部错误需保面子重铸，回避需先肯定意义再无痛升级表达。'
+        },
+        {
+          id: 'sc-dim-comp',
+          code: 'D3',
+          name: '理解维度',
+          subtitle: '双边输入理解与意义对齐',
+          question: '听懂了吗？双方频道对上了吗？',
+          color: '#B45309',
+          bg: '#FFFBEB',
+          border: '#FDE68A',
+          papers: ['varonis1985', 'dornyei1997', 'lyster1997'],
+          scenariosPrimary: ['sc-5', 'sc-6'],
+          scenariosAux: [],
+          rationale: '结合 Varonis & Gass (1985) 的非理解修复序列与 Dörnyei & Scott (1997) 的对方产出问题，当共同理解（Common Ground）断裂时，存在“隐性掩盖”与“显性中断”两类状态：没听懂却出于礼貌硬撑即【⑤ 听不懂与“假装听懂”】；显性暴露未理解或误解导致对话暂停修复即【⑥ 误解与沟通中断】。',
+          designImplication: '数字人既需识别“假装听懂”的微弱线索并主动揽责降维，也需在 ASR 翻车或双向误解时用精准猜想替代冰冷报错。'
+        },
+        {
+          id: 'sc-dim-turn',
+          code: 'D4',
+          name: '话轮维度',
+          subtitle: '人机具身交互与节奏同步',
+          question: '话轮交接与非语言节奏接得上吗？',
+          color: '#334155',
+          bg: '#F1F5F9',
+          border: '#CBD5E1',
+          papers: ['skantze2021'],
+          scenariosPrimary: ['sc-7'],
+          scenariosAux: ['sc-1', 'sc-2'],
+          rationale: '纯二语课堂研究较少触及人机工程瓶颈。引入 Sacks et al. (1974) 与 Skantze (2021) 后，二语者较长的句内构思停顿（Pause）与对话系统固定静音阈值（Silence threshold）的碰撞，必然催生人机对练特有的【⑦ 话轮冲突与社交冷场】；同时该维度也赋能①中的倾听附和与②中的协同补全。',
+          designImplication: '需结合句法完整度、韵律与眼神偏移区分“构思停顿”与“说完交棒”，并用多模态视觉附和消解机械面试感。'
+        }
+      ];
+
+      const SC_PAPERS = [
+        {
+          id: 'dornyei1997',
+          shortName: 'Dörnyei & Scott (1997)',
+          tag: '交际问题与策略',
+          fullTitle: 'Communication Strategies in a Second Language: Definitions and Taxonomies',
+          journal: 'Language Learning, 47(1), 173–210',
+          color: '#0F766E',
+          roleSummary: '管辖“学习者遇到语言困难时的全部表现与应对”，包圆状态 ②、④、⑤，并交叉解释 ③ 的自我修复、⑥ 的表达未理解与 ⑧ 的母语语码切换。',
+          frameworkDetail: [
+            { title: '核心界定标准', text: '系统整合 1970–1990 年代各学派，确立“问题导向性（Problem-orientedness）”与“意识性（Consciousness）”两大基石，将孤立心理认知视角与双边对话交互视角融为一体。' },
+            { title: '四大二语交际问题域（纵轴）', text: '突破早期仅关注词汇量不足的局限，完整划定：① 资源不足（Resource deficits）、② 加工时间压力（Processing time pressure）、③ 自身产出问题（Own-performance problems）、④ 对方产出问题（Other-performance problems）。' },
+            { title: '三维策略路径分类（横轴）', text: '按解决方式划分为直接策略（Direct：提供替代/可管理表达，如迂回、自我修复）、间接策略（Indirect：创造条件维系渠道，如填充词拖延、假装听懂）与交互策略（Interactional：拉上对话者协作，如求助、澄清请求），共整合 30 余种具体策略。' }
+          ],
+          diagramType: 'dornyei',
+          terms: [
+            { term: 'Resource deficits', cn: '资源不足', cite: 'Dörnyei & Scott (1997, p. 183)', quote: 'gaps in speakers\' knowledge preventing them from verbalizing messages', explanation: '说话者脑中有表达意图，但目标语词汇、短语或句法知识本身存在缺口，导致无法编码为二语话语。', scenarios: ['sc-2', 'sc-4'] },
+            { term: 'Processing time pressure', cn: '加工时间压力', cite: 'Dörnyei & Scott (1997, p. 183)', quote: 'the L2 speaker\'s frequent need for more time to process and plan L2 speech than would be naturally available in fluent communication', explanation: '并非完全不会，而是二语实时提取与句法规划速度慢于自然对话节奏，需借助填充词或停顿争取加工时间。', scenarios: ['sc-2'] },
+            { term: 'Own-performance problems', cn: '自身产出问题', cite: 'Dörnyei & Scott (1997, p. 183)', quote: 'the realization that something one has said is incorrect or only partly correct', explanation: '话已出口或正在出口时，学习者意识到自己表达有误或不够准确，常伴随自我修复（Self-repair）或自我改述。', scenarios: ['sc-3'] },
+            { term: 'Other-performance problems', cn: '对方产出问题', cite: 'Dörnyei & Scott (1997, p. 183)', quote: 'something perceived as problematic in the interlocutor\'s speech', explanation: '问题出现在对话伙伴（如 AI 数字人）的输入端，包含对方语速快、有生词、表意模糊或自身未听懂。', scenarios: ['sc-5', 'sc-6'] },
+            { term: 'Appeal for help', cn: '直接或间接求助', cite: 'Dörnyei & Scott (1997, p. 191)', quote: 'turning to the conversation partner for help either directly (e.g. What do you call...?) or indirectly (e.g., rising intonation, pause, eye contact, puzzled expression).', explanation: '卡壳时通过显性发问，或通过升调、停顿、眼神注视与困惑表情向数字人发出非语言求助信号。', scenarios: ['sc-2'] },
+            { term: 'Topic avoidance', cn: '话题回避', cite: 'Dörnyei & Scott (1997, p. 188)', quote: 'avoiding topic areas or concepts which pose linguistic difficulties.', explanation: '为了不出错，刻意绕开会引发词汇或句法困难的话题与抽象概念，停留在语言安全区。', scenarios: ['sc-4'] },
+            { term: 'Message abandonment', cn: '信息放弃', cite: 'Dörnyei & Scott (1997, p. 188)', quote: 'leaving a message unfinished because of linguistic difficulties.', explanation: '说到一半遭遇语言障碍，直接放弃剩余想表达的意思，草草收尾。', scenarios: ['sc-4', 'sc-8'] },
+            { term: 'Circumlocution', cn: '迂回表达', cite: 'Dörnyei & Scott (1997, p. 188)', quote: 'describing or exemplifying the target object or action.', explanation: '找不到精确目标词时，通过描述外观特征、功能或举例子绕圈子解释。', scenarios: ['sc-4'] },
+            { term: 'Feigning understanding', cn: '假装听懂', cite: 'Dörnyei & Scott (1997, p. 197)', quote: 'Making an attempt to carry on the conversation in spite of not understanding something by pretending to understand.', explanation: '出于礼貌或顾及面子，在没听懂对方话语时仍以“yeah / right”等回应假装听懂以硬撑对话。', scenarios: ['sc-5'] },
+            { term: 'Expressing non-understanding', cn: '显性表达未理解', cite: 'Dörnyei & Scott (1997, p. 191)', quote: 'Expressing that one did not understand something properly.', explanation: '明确向对方表露自己没有准确听懂，从而触发双边澄清与意义协商。', scenarios: ['sc-6'] },
+            { term: 'Code switching', cn: '语码/母语切换', cite: 'Dörnyei & Scott (1997, p. 189)', quote: 'using a L1 word with L1 pronunciation.', explanation: '表达受阻或情绪压力升高时，直接在二语句流中以母语发音切入母语词句。', scenarios: ['sc-8'] }
+          ]
+        },
+        {
+          id: 'lyster1997',
+          shortName: 'Lyster & Ranta (1997)',
+          tag: '纠错反馈与吸收',
+          fullTitle: 'Corrective Feedback and Learner Uptake: Negotiation of Form in Communicative Classrooms',
+          journal: 'Studies in Second Language Acquisition, 19(1), 37–66',
+          color: '#0D6E5B',
+          roleSummary: '管辖“说错之后的纠错策略与习得吸收效果”，核心定性状态 ③（局部偏差），并通过澄清请求交叉支撑状态 ⑥。',
+          frameworkDetail: [
+            { title: '错误治疗序列（Error Treatment Sequence）', text: '构建经典的口语纠错闭环：学习者产出错误（Error）→ 教师/对话者纠错反馈（Corrective Feedback）→ 学习者吸收（Uptake，分为“成功修复 Repair”与“仍需修复 Needs-repair”）→ 话题延续。' },
+            { title: '6 类口语纠错反馈体系', text: '系统界定显性纠错（Explicit correction）、隐性重铸（Recasts）、澄清请求（Clarification requests）、元语言反馈（Metalinguistic feedback）、引导（Elicitation）与重复（Repetition）。' },
+            { title: '核心实证张力', text: '隐性重铸使用频率最高且最不打断对话流，但触发学习者主动修复（Uptake）的比例最低（易被误以为仅是内容附和）；相反，引导、元语言提示与澄清请求更能促成形式协商（Negotiation of Form）。' }
+          ],
+          diagramType: 'lyster',
+          terms: [
+            { term: 'Explicit correction', cn: '显性纠错', cite: 'Lyster & Ranta (1997, p. 46)', quote: 'Explicit correction refers to the explicit provision of the correct form. As the teacher provides the correct form, he or she clearly indicates that what the student had said was incorrect.', explanation: '直接给出正确形式并明示刚才说错了；清晰度高但面子威胁度大，易打断口语心流。', scenarios: ['sc-3'] },
+            { term: 'Recasts', cn: '隐性重铸', cite: 'Lyster & Ranta (1997, p. 46)', quote: 'Recasts involve the teacher\'s reformulation of all or part of a student\'s utterance, minus the error.', explanation: '顺着用户原意，在不显性指责的前提下，用正确形式自然复述用户话语的全部或部分，兼顾面子与心流。', scenarios: ['sc-3'] },
+            { term: 'Clarification requests', cn: '澄清请求', cite: 'Lyster & Ranta (1997, p. 47)', quote: 'indicate to students either that their utterance has been misunderstood by the teacher or that the utterance is ill-formed in some way and that a repetition or a reformulation is required.', explanation: '向学习者表明其话语未被听懂或形式有严重缺陷，促使其重复或换一种方式重新表述。', scenarios: ['sc-6', 'sc-3'] },
+            { term: 'Metalinguistic feedback', cn: '元语言反馈', cite: 'Lyster & Ranta (1997, p. 47)', quote: 'contains either comments, information, or questions related to the well-formedness of the student\'s utterance, without explicitly providing the correct form.', explanation: '不直接吐出正确答案，而是给出与语法/语用规则相关的轻量线索或提问，诱导学习者自我发现。', scenarios: ['sc-3'] },
+            { term: 'Elicitation', cn: '引导自我产出', cite: 'Lyster & Ranta (1997, p. 48)', quote: 'strategically pausing to allow students to \'fill in the blank\'', explanation: '通过战略性停顿留白（如重复前半句后停顿）、启发式提问或要求重述，引导学习者自己说出正确形式。', scenarios: ['sc-3'] },
+            { term: 'Repetition', cn: '语调凸显重复', cite: 'Lyster & Ranta (1997, p. 48)', quote: 'refers to the teacher\'s repetition, in isolation, of the student\'s erroneous utterance. In most cases, teachers adjust their intonation so as to highlight the error.', explanation: '单独复述学习者的错误片段，并借助升调等韵律重音提示错误所在位置。', scenarios: ['sc-3'] },
+            { term: 'Uptake', cn: '学习者吸收', cite: 'Lyster & Ranta (1997, p. 49)', quote: 'a student\'s utterance that immediately follows the teacher\'s feedback and that constitutes a reaction in some way to the teacher\'s intention to draw attention to some aspect of the student\'s initial utterance', explanation: '紧随纠错反馈之后的学习者回应话语，是衡量 AI 纠错是否真正被注意到并内化的核心行为指标。', scenarios: ['sc-3'] }
+          ]
+        },
+        {
+          id: 'varonis1985',
+          shortName: 'Varonis & Gass (1985)',
+          tag: '非理解修复模型',
+          fullTitle: 'Non-native/Non-native Conversations: A Model for Negotiation of Meaning',
+          journal: 'Applied Linguistics, 6(1), 71–90',
+          color: '#B45309',
+          roleSummary: '管辖“没听懂或理解错位时的中断与修复结构”，核心定性状态 ⑥（双向交际中断），并揭示状态 ⑤ 忽略触发源的潜伏后果。',
+          frameworkDetail: [
+            { title: '四阶段非理解修复模型（T → I → R → RR）', text: '将模糊的“沟通卡死”抽象为可嵌套的状态机：触发源 Trigger (T) → 中断信号 Indicator (I) → 修复回应 Response (R) → 恢复确认 Reaction to the Response (RR)。' },
+            { title: '“下压修复再弹回”机制（Push Down / Pop Back Up）', text: '一旦听者发出中断信号 I，对话的水平主线推进即刻暂停，向下压入一个或多个嵌入式澄清子序列，直至完成意义协商后再弹回原对话主线。' },
+            { title: '忽略触发源的隐性风险', text: '指出听者面对触发源 T 时可选择直接忽略（装懂）；此时虽然表面维持了流利度，但理解断层并未消除，往往在后续话轮引发更严重的答非所问。' }
+          ],
+          diagramType: 'varonis',
+          terms: [
+            { term: 'Non-understanding routines', cn: '非理解修复常规序列', cite: 'Varonis & Gass (1985, p. 73)', quote: 'Non-understanding routines are operationally defined as: those exchanges in which there is some overt indication that understanding between participants has not been complete. The sine qua non of a non-understanding routine is that within the exchange there are embeddings of one or more clarifications.', explanation: '当双方理解不完整并出现显性迹象时，对话中嵌入一个或多个澄清回合以重建共同理解的交互序列。', scenarios: ['sc-6'] },
+            { term: 'Trigger (T)', cn: '理解障碍触发源', cite: 'Varonis & Gass (1985, p. 74)', quote: 'Simply put, the trigger is that utterance or portion of an utterance on the part of the speaker which results in some indication of non-understanding on the part of the hearer.', explanation: '说话者话语中引发听者出现未理解、理解不全或误解的具体语音、词汇或句法片段。', scenarios: ['sc-6', 'sc-5'] },
+            { term: 'Indicator (I)', cn: '中断指示信号（下压修复）', cite: 'Varonis & Gass (1985, p. 75)', quote: 'This is an utterance on the part of the hearer that essentially halts the horizontal progression of the conversation and begins the downward progression, having the effect of \'pushing down\' the conversation rather than impelling it forward.', explanation: '听者表露未理解的回应，使对话停止水平推进并“下压”进入修复子序列，是启动意义协商的开关。', scenarios: ['sc-6'] },
+            { term: 'Ignoring the trigger', cn: '忽略触发源（装懂潜伏）', cite: 'Varonis & Gass (1985, p. 74)', quote: 'The hearer has essentially two immediate choices—to ignore the trigger or to react to it in some way. ... When a trigger is ignored, there is often no way for the investigator to recognize that there was a breakdown in comprehension, although something later in the discourse may indicate that in fact the listener had not understood.', explanation: '听者选择不回应理解障碍而直接略过，短期内掩盖了理解断层，但在后续话轮中往往暴露出彻底跑偏。', scenarios: ['sc-5'] }
+          ]
+        },
+        {
+          id: 'skantze2021',
+          shortName: 'Skantze (2021)',
+          tag: '人机话轮机制',
+          fullTitle: 'Turn-taking in Conversational Systems and Human-Robot Interaction: A Review (承接 Sacks, Schegloff, & Jefferson, 1974)',
+          journal: 'Computer Speech & Language, 67, 101178',
+          color: '#334155',
+          roleSummary: '管辖“人机/数字人交互中的话轮节奏、抢断与非语言配合”，核心定性状态 ⑦，并交叉支撑状态 ① 的视觉附和与状态 ② 的协同补全。',
+          frameworkDetail: [
+            { title: '语言学话轮基底（Sacks et al., 1974）', text: '对话由话轮构建单位（TCU）组成，结尾形成转换相关位置（TRP）；将静默严格划分为句内构思停顿（Pause）、交棒间隙（Gap）与无人接话导致的冷场停滞（Lapse）。' },
+            { title: '语音系统的静音阈值悖论', text: '直指传统 AI 对话系统依赖固定静音时长切分发言的工程顽疾：阈值太短会把二语构思停顿误判为说完而频繁抢断；盲目调高阈值又会导致系统反应迟钝、制造冷场。' },
+            { title: '具身多模态协调模块', text: '系统整合句法完整度、韵律语调、视线偏移与点头表情，涵盖话轮结束预测、不占话轮的视觉/语音附和（Backchannels）以及听者协同补全（Conditional access to turn）。' }
+          ],
+          diagramType: 'skantze',
+          terms: [
+            { term: 'Silence threshold', cn: '静音阈值悖论', cite: 'Skantze (2021, Section 4.1)', quote: 'When not using explicit cues, spoken dialogue systems have traditionally detected the end of the user\'s turn by a certain amount of silence. Silence, however, is not a very good indicator of turn-endings, since users might pause within a turn and thereby unintentionally trigger a response. This can be mitigated by increasing the silence threshold, but this will then lead to more sluggish responses.', explanation: '仅靠固定静音时长判断说完必然陷入两难：二语者句内构思停顿极易误触发 AI 抢话，而拉长阈值又会造成对话迟钝。', scenarios: ['sc-7'] },
+            { term: 'Pauses vs. Gaps ( & Lapse)', cn: '句内停顿 vs. 话轮间隙与冷场', cite: 'Skantze (2021); Sacks et al. (1974, p. 715)', quote: 'Silence between two IPUs within the same speaker are often referred to as pauses, whereas silence between IPUs from different speakers are called gaps.', explanation: '同一说话者发声间的构思沉默称 Pause，换人交棒间隙称 Gap；承接 Sacks et al. (1974)，无人接话的结构性沉默则称 Lapse（冷场停滞），转换节点称 TRP（Transition-Relevance Place）。', scenarios: ['sc-7'] },
+            { term: 'Backchannels', cn: '多模态倾听附和信号', cite: 'Skantze (2021, Section 2.4)', quote: 'Brief, relatively soft vocalisations, such as \'mm hm\', \'uh huh\', or \'yeah\', produced by the listener to show continued attention... In a face-to-face setting, backchannels can also be produced in the visual channel, for example by nodding or making facial expressions. / Backchannels hold a special status when it comes to turn-taking, since they are fairly frequent but still not typically considered to constitute a \'turn\'.', explanation: '倾听者通过轻声附和、点头与微表情表明持续关注，但不构成抢夺话语权的新话轮，是维系顺畅表达流的关键。', scenarios: ['sc-1'] },
+            { term: 'Conditional access to turn', cn: '条件性话轮介入 / 协同补全', cite: 'Skantze (2021, Section 2.5)', quote: 'Cases where the listener helps the speaker to construct the turn and possibly bring it to completion. This might be to just fill in a name that the speaker has forgotten, or a longer sequence that is produced jointly.', explanation: '当说话者卡壳搜词时，听者顺势递出忘掉的词或协助接完半句话，在不剥夺主导权的前提下完成协同建构。', scenarios: ['sc-2'] }
+          ]
+        },
+        {
+          id: 'macintyre2011',
+          shortName: 'MacIntyre & Legatto (2011)',
+          tag: '动态WTC波动',
+          fullTitle: 'A Dynamic System Approach to Willingness to Communicate (承接 MacIntyre et al., 1998)',
+          journal: 'Applied Linguistics, 32(2), 149–171',
+          color: '#3730A3',
+          roleSummary: '管辖“从顺畅开口到情绪崩盘的秒级心理波动”，核心定性状态 ①（高状态 WTC）与状态 ⑧（非线性骤降退缩），并交叉解释状态 ② 的卡壳诱因。',
+          frameworkDetail: [
+            { title: '六层启发式 WTC 金字塔（MacIntyre et al., 1998）', text: '将二语交际意愿拓展为情境变量：底层为稳定人格与社会语境，紧邻开口行为的顶层前因是“特定对象交际欲望”与“状态自信（能力自评 + 瞬时焦虑）”，WTC 是开口前的最后一道心理门槛。' },
+            { title: '复杂动态系统与非线性阈值效应（2011）', text: '提出 WTC 具备随时间秒级变化、认知/语言/情绪高度耦合以及非线性蝴蝶效应——一次突发的关键词提取失败就可能跨越阈值，瞬间击垮整场对话信心。' },
+            { title: '个体动态法实证（Idiodynamic Method）', text: '通过录像回看+逐秒打分+刺激回忆访谈，实证捕捉到二语学习者在短短几秒内因词汇搜寻受阻导致 WTC 断崖式“崩盘（crashed）”的微观轨迹。' }
+          ],
+          diagramType: 'macintyre',
+          terms: [
+            { term: 'Willingness to Communicate (WTC)', cn: '二语交际意愿', cite: 'MacIntyre et al. (1998, p. 547)', quote: 'a readiness to enter into discourse at a particular moment with a specific person or persons, using a L2', explanation: '学习者在特定时刻、面对特定交流对象时，使用第二语言进入话语交际的瞬时心理准备状态。', scenarios: ['sc-1'] },
+            { term: 'Moment-to-moment fluctuations in WTC', cn: '交际意愿的秒级动态波动', cite: 'MacIntyre & Legatto (2011, p. 149)', quote: 'Willingness to communicate (WTC) can be conceptualized as changing from moment to moment, as opportunities for second-language communication arise.', explanation: '交际意愿绝非整场对练恒定不变，而是随着语言加工顺畅度与对话机会在秒级时间尺度上剧烈起伏。', scenarios: ['sc-8', 'sc-1'] },
+            { term: 'Non-linearity / Threshold effects', cn: '非线性与阈值效应（蝴蝶效应）', cite: 'MacIntyre & Legatto (2011, p. 151)', quote: 'Fourth, the systems possess non-linearity or threshold effects (sometimes called the butterfly effect). Small changes in one part of the system may have large effects in the overall system, or large disturbances may produce only small effects in the overall system.', explanation: '看似微小的局部语言受挫（如嘴边突然忘了一个词）可能跨过心理阈值，触发自我效能感与开口意愿的链式崩塌。', scenarios: ['sc-8', 'sc-2'] }
+          ]
+        }
+      ];
+
+      const SC_SCENARIOS = [
+        {
+          id: 'sc-1', num: '①', name: '顺利表达', tag: '基准顺畅态', dimId: 'sc-dim-psych', focusLinks: [],
+          signals: '语速连贯、完整输出观点、语义推进自然、处于高状态交际意愿心流。',
+          primaryPapers: [{ paperId: 'macintyre2011', terms: ['Willingness to Communicate (WTC)', 'Moment-to-moment fluctuations in WTC'], note: '界定学习者具备高度心理准备并顺畅进入二语话语的基准态。' }],
+          auxPapers: [{ paperId: 'skantze2021', terms: ['Backchannels'], note: '界定 AI 数字人此时应通过点头、眼神与轻声附和维系流利度，而非抢话或机械打分。' }],
+          designOpportunity: '用基于观点本身的“内容共鸣 + 细微视觉点头附和”替代机械教师表扬（如 "Great job!"），趁心流未断顺势做 i+1 话题递进。'
+        },
+        {
+          id: 'sc-2', num: '②', name: '卡壳搜词', tag: '产出受阻', dimId: 'sc-dim-prod', focusLinks: [{ focusId: 'sc-focus-1', type: 'primary' }],
+          signals: '句中长停顿、频繁填充词（um / uh）、重复前词、视线移开思考或转回眼神求助。',
+          primaryPapers: [{ paperId: 'dornyei1997', terms: ['Resource deficits', 'Processing time pressure', 'Appeal for help'], note: '精准区分“缺词（资源不足）”与“来不及组织（加工时间压力）”，并刻画直接/间接求助信号。' }],
+          auxPapers: [
+            { paperId: 'skantze2021', terms: ['Conditional access to turn'], note: '界定听者顺势递出忘掉的词、协助补完半句话的协同补全机制。' },
+            { paperId: 'macintyre2011', terms: ['Non-linearity / Threshold effects'], note: '揭示突发性词汇提取受阻正是触发状态 WTC 断崖下跌的首要导火索。' }
+          ],
+          designOpportunity: '识别“自主思考（移开视线）”与“求助信号（转回视线/超时）”；从耐心等待 → 极简语义线索 → 试探性帮接半句话（"You mean...?"）渐进施援。'
+        },
+        {
+          id: 'sc-3', num: '③', name: '明显说错', tag: '局部偏差', dimId: 'sc-dim-prod', focusLinks: [{ focusId: 'sc-focus-2', type: 'primary' }],
+          signals: '顺利说完且 AI 能听懂核心意图，但存在语法漏项、局部用词偏差、轻微发音失准或语用生硬。',
+          primaryPapers: [{ paperId: 'lyster1997', terms: ['Explicit correction', 'Recasts', 'Metalinguistic feedback', 'Elicitation', 'Repetition', 'Uptake'], note: '提供 6 类口语纠错策略谱系及衡量吸收效果的 Uptake 核心模型。' }],
+          auxPapers: [{ paperId: 'dornyei1997', terms: ['Own-performance problems'], note: '解释学习者意识到自己说错后的自我监控与自我修复倾向。' }],
+          designOpportunity: '实行“对话中隐性重铸（保面子与心流）+ 对话后显性复盘”双轨策略；针对中式直译引发的语用生硬，利用数字人微表情与语境化示范补齐纯文本纠错盲区。'
+        },
+        {
+          id: 'sc-4', num: '④', name: '词不达意 / 安全区回避', tag: '策略降级', dimId: 'sc-dim-prod', focusLinks: [{ focusId: 'sc-focus-1', type: 'aux' }],
+          signals: '未明显报错也未彻底沉默，但反复使用低阶安全词（good/nice）、绕圈子迂回、只回短句或半途缩水原意。',
+          primaryPapers: [{ paperId: 'dornyei1997', terms: ['Topic avoidance', 'Message abandonment', 'Circumlocution'], note: '独立完整覆盖话题回避、信息放弃与迂回描述三大典型交际降级策略。' }],
+          auxPapers: [],
+          designOpportunity: '采用“先精准复述肯定意图 + 再自然用母语地道表达浓缩升级”的无痛示范；以数字人适度自我暴露打破“审讯式连环追问”，向语境自然投喂高阶词汇。'
+        },
+        {
+          id: 'sc-5', num: '⑤', name: '听不懂与“假装听懂”', tag: '隐性理解断层', dimId: 'sc-dim-comp', focusLinks: [{ focusId: 'sc-focus-3', type: 'primary' }],
+          signals: '因语速快或生词没听懂，却出于礼貌/面子敷衍附和（yeah / ok）、回复异常简短、反应滞后或微皱眉放空。',
+          primaryPapers: [
+            { paperId: 'dornyei1997', terms: ['Other-performance problems', 'Feigning understanding'], note: '将输入端障碍归入对方产出问题，并正式界定“假装听懂”这一高频保面子策略。' },
+            { paperId: 'varonis1985', terms: ['Ignoring the trigger', 'Trigger (T)'], note: '从对话结构上揭示“忽略触发源”会让理解断层潜伏，直至后续彻底跑偏。' }
+          ],
+          auxPapers: [],
+          designOpportunity: '捕捉敷衍短答、长延迟与困惑微表情等弱信号，绝不戳穿用户尴尬，而是由数字人主动“揽责”自然降维改写（"I said that too fast—what I meant was..."）。'
+        },
+        {
+          id: 'sc-6', num: '⑥', name: '误解与沟通中断', tag: '显性交际中断', dimId: 'sc-dim-comp', focusLinks: [{ focusId: 'sc-focus-3', type: 'primary' }],
+          signals: '用户显性表示没听懂，或因口音/全局语序错/ASR 识别翻车导致 AI 答非所问，双方共同理解断裂、对话无法推进。',
+          primaryPapers: [{ paperId: 'varonis1985', terms: ['Non-understanding routines', 'Trigger (T)', 'Indicator (I)'], note: '给出 T→I→R→RR 下压修复再弹回的结构化状态机，阐明意义协商机制。' }],
+          auxPapers: [
+            { paperId: 'lyster1997', terms: ['Clarification requests'], note: '提供理解受阻时发起澄清请求并引导重述的反馈话术。' },
+            { paperId: 'dornyei1997', terms: ['Expressing non-understanding', 'Other-performance problems'], note: '对应学习者显性表达未理解的交互策略。' }
+          ],
+          designOpportunity: '禁止冰冷通用报错（"Sorry, I didn\'t understand"）；当 ASR 置信度低或语义突变时，结合上下文发起“具体二选一猜想确认”，将技术故障转化为真实意义协商。'
+        },
+        {
+          id: 'sc-7', num: '⑦', name: '话轮冲突与社交冷场', tag: '人机节奏摩擦', dimId: 'sc-dim-turn', focusLinks: [{ focusId: 'sc-focus-1', type: 'aux' }],
+          signals: '句中构思停顿 1–2 秒即被 AI 误判说完强行抢断；想插话插不进；或话题闭合后陷入令人窒息的面对面沉默冷场。',
+          primaryPapers: [{ paperId: 'skantze2021', terms: ['Silence threshold', 'Pauses vs. Gaps ( & Lapse)'], note: '深刻揭示固定静音阈值导致的抢话与迟钝悖论，严格区分句内构思停顿（Pause）、交棒间隙（Gap）与冷场（Lapse）。' }],
+          auxPapers: [],
+          designOpportunity: '构建二语专属防抢断机制：当句法未闭合或尾音微升时容忍更长句内停顿，数字人仅用柔和倾听姿态等待；当句法闭合出现真实冷场（Lapse）时 3–4 秒内轻松搭桥接盘。'
+        },
+        {
+          id: 'sc-8', num: '⑧', name: '焦虑爆发、母语切换与退缩', tag: '心理崩溃态', dimId: 'sc-dim-psych', focusLinks: [{ focusId: 'sc-focus-1', type: 'aux' }],
+          signals: '连续受挫后叹气、尬笑、突然飙出中文（“哎呀不会说”）、自我否定甚至试图关闭对话。',
+          primaryPapers: [{ paperId: 'macintyre2011', terms: ['Moment-to-moment fluctuations in WTC', 'Non-linearity / Threshold effects'], note: '揭示单次卡壳如何在几秒内通过蝴蝶效应导致状态交际意愿断崖崩溃。' }],
+          auxPapers: [{ paperId: 'dornyei1997', terms: ['Code switching', 'Message abandonment'], note: '界定崩溃或受阻瞬间直接切回母语词汇（Code switching）与放弃表达的行为表现。' }],
+          designOpportunity: '合法化“中英混说”作为心理安全网，直接用英文温和承接情绪并自然带出目标词；一旦检测到退缩信号，瞬间暂停一切纠错与升难，优先通过平行/回应式共情稳住状态 WTC。'
+        }
+      ];
+
+      const SC_FOCUS_SCENARIOS = [
+        {
+          id: 'sc-focus-1', num: '①', name: '表达受阻（产出卡壳）', color: '#1E3A5F', bg: '#EFF4FA', border: '#B8CCE4',
+          coreCondition: '听懂了对方意思，心里有想法，但卡在输出端说不出来',
+          primaryUpstream: ['sc-2'], auxUpstream: ['sc-4', 'sc-7', 'sc-8'],
+          mechanismTitle: '动态脚手架（Dynamic Scaffolding）',
+          mechanismItems: [
+            '防抢断耐心等待（区分 Pause 与 Gap，Skantze, 2021）',
+            '由隐到显的渐进提示（避免高负荷长文本视觉竞争）',
+            '拟人化协同补全（试探性帮接半句话，Conditional access to turn）',
+            '合法化中英混说与瞬时共情托底（防止触发 WTC 蝴蝶效应崩盘）'
+          ],
+          convergenceLogic: '以【② 卡壳搜词】为核心主干，同步收拢因表达困难衍生的【④ 安全区回避】、构思停顿引发的【⑦ 误抢断摩擦】以及卡壳诱发的【⑧ 焦虑骤降与母语切换】。'
+        },
+        {
+          id: 'sc-focus-2', num: '②', name: '表达错误（局部偏差）', color: '#0D6E5B', bg: '#ECFDF5', border: '#A7F3D0',
+          coreCondition: '听懂了也说出来了，且 AI 听懂了核心意思，仅形式存在局部偏差',
+          primaryUpstream: ['sc-3'], auxUpstream: [],
+          mechanismTitle: '支持性纠错（Supportive Corrective Feedback）',
+          mechanismItems: [
+            '严格区分局部错误与全局错误：未阻断理解时绝不生硬打断',
+            '对话中优先使用隐性重铸（Recasts，Lyster & Ranta, 1997）保面子与心流',
+            '按焦虑水位动态调节纠错粒度，搭配对话后微切片复盘促进 Uptake',
+            '借助数字人表情与语境提示，补齐纯文本缺失的语用礼貌度纠偏'
+          ],
+          convergenceLogic: '精准锚定【③ 明显说错（局部偏差）】，直击二语口语纠错中“保流利度/面子”与“防错误石化/促吸收”的经典张力。'
+        },
+        {
+          id: 'sc-focus-3', num: '③', name: '沟通受阻（交际中断）', color: '#B45309', bg: '#FFFBEB', border: '#FDE68A',
+          coreCondition: '双向共同理解（Common Ground）断裂，对话无法自然延续',
+          bidirectional: [
+            { code: '③-A 输入端中断', desc: 'AI 说的用户没听懂（含显性困惑与隐性“假装听懂”）' },
+            { code: '③-B 理解端中断', desc: '用户说出来了，但因全局错误或 ASR 翻车导致 AI 没听懂/理解跑偏' }
+          ],
+          primaryUpstream: ['sc-5', 'sc-6'], auxUpstream: [],
+          mechanismTitle: '意义协商与对话修复（Negotiation & Repair）',
+          mechanismItems: [
+            '输入端（③-A）：捕捉假装听懂的弱信号，主动揽责降维复述与具身手势消歧',
+            '理解端（③-B）：严禁冰冷通用报错，用结合语境的“具体二选一猜想”发起澄清',
+            '遵循 Varonis & Gass (1985) 下压修复（T→I→R→RR）再优雅弹回主线',
+            '技术归因外化，避免学习者将 ASR 识别误差内化为自我语言否定'
+          ],
+          convergenceLogic: '统一整合理解维度的【⑤ 听不懂与“假装听懂”】与【⑥ 误解与沟通中断】，形成完整的双向交际修复闭环。'
+        }
+      ];
+
+      const SC_REFERENCES = {
+        apa: [
+          'Dörnyei, Z., & Scott, M. L. (1997). Communication strategies in a second language: Definitions and taxonomies. Language Learning, 47(1), 173–210. https://doi.org/10.1111/0023-8333.51997005',
+          'Lyster, R., & Ranta, L. (1997). Corrective feedback and learner uptake: Negotiation of form in communicative classrooms. Studies in Second Language Acquisition, 19(1), 37–66. https://doi.org/10.1017/S0272263197001034',
+          'MacIntyre, P. D., Clément, R., Dörnyei, Z., & Noels, K. A. (1998). Conceptualizing willingness to communicate in a L2: A situational model of L2 confidence and affiliation. The Modern Language Journal, 82(4), 545–562. https://doi.org/10.1111/j.1540-4781.1998.tb05543.x',
+          'MacIntyre, P. D., & Legatto, J. J. (2011). A dynamic system approach to willingness to communicate: Developing an idiodynamic method to capture rapidly changing affect. Applied Linguistics, 32(2), 149–171. https://doi.org/10.1093/applin/amq037',
+          'Sacks, H., Schegloff, E. A., & Jefferson, G. (1974). A simplest systematics for the organization of turn-taking for conversation. Language, 50(4), 696–735. https://doi.org/10.2307/412243',
+          'Skantze, G. (2021). Turn-taking in conversational systems and human-robot interaction: A review. Computer Speech & Language, 67, 101178. https://doi.org/10.1016/j.csl.2020.101178',
+          'Varonis, E. M., & Gass, S. (1985). Non-native/non-native conversations: A model for negotiation of meaning. Applied Linguistics, 6(1), 71–90. https://doi.org/10.1093/applin/6.1.71'
+        ],
+        gb: [
+          'DÖRNYEI Z, SCOTT M L. Communication strategies in a second language: definitions and taxonomies[J]. Language Learning, 1997, 47(1): 173-210.',
+          'LYSTER R, RANTA L. Corrective feedback and learner uptake: negotiation of form in communicative classrooms[J]. Studies in Second Language Acquisition, 1997, 19(1): 37-66.',
+          'MACINTYRE P D, CLÉMENT R, DÖRNYEI Z, et al. Conceptualizing willingness to communicate in a L2: a situational model of L2 confidence and affiliation[J]. The Modern Language Journal, 1998, 82(4): 545-562.',
+          'MACINTYRE P D, LEGATTO J J. A dynamic system approach to willingness to communicate: developing an idiodynamic method to capture rapidly changing affect[J]. Applied Linguistics, 2011, 32(2): 149-171.',
+          'SACKS H, SCHEGLOFF E A, JEFFERSON G. A simplest systematics for the organization of turn-taking for conversation[J]. Language, 1974, 50(4): 696-735.',
+          'SKANTZE G. Turn-taking in conversational systems and human-robot interaction: a review[J]. Computer Speech & Language, 2021, 67: 101178.',
+          'VARONIS E M, GASS S. Non-native/non-native conversations: a model for negotiation of meaning[J]. Applied Linguistics, 1985, 6(1): 71-90.'
+        ]
+      };
+
+      const scState = {
+        activeSubTab: 'overview',
+        activePaperFilter: 'all',
+        selectedNode: { type: 'scenario', id: 'sc-2' },
+        hoveredNode: null,
+        selectedMatrixCell: { scenarioId: 'sc-2', paperId: 'dornyei1997' },
+        activeDictPaper: 'dornyei1997',
+        refStyle: 'apa'
+      };
+
+      const getDim = (id) => SC_DIMENSIONS.find(d => d.id === id);
+      const getPaper = (id) => SC_PAPERS.find(p => p.id === id);
+      const getScenario = (id) => SC_SCENARIOS.find(s => s.id === id);
+      const getFocus = (id) => SC_FOCUS_SCENARIOS.find(f => f.id === id);
+      const getTermObjects = (paperId, termNames) => {
+        const paper = getPaper(paperId);
+        return paper ? termNames.map(n => paper.terms.find(t => t.term === n)).filter(Boolean) : [];
+      };
+
+      let scToastTimer = null;
+      function showScToast(msg) {
+        const el = document.getElementById('sc-toast');
+        if (!el) return;
+        el.textContent = msg;
+        el.classList.add('show');
+        clearTimeout(scToastTimer);
+        scToastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+      }
+
+      function copyScText(text, msg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showScToast(msg)).catch(() => fallbackCopy(text, msg));
+        } else {
+          fallbackCopy(text, msg);
+        }
+      }
+
+      function fallbackCopy(text, msg) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          showScToast(ok ? msg : '复制失败，请手动复制');
+        } catch (e) {
+          showScToast('复制失败，请手动复制');
+        }
+      }
+
+      window.switchScenarioSubTab = function (tabKey) {
+        scState.activeSubTab = tabKey;
+        document.querySelectorAll('#sc-sub-tabs .seg-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.scTab === tabKey);
+        });
+        document.querySelectorAll('#view-scenarios .sc-sub-panel').forEach(p => {
+          p.classList.toggle('active', p.id === `sc-sub-${tabKey}`);
+        });
+        if (tabKey === 'overview') {
+          requestAnimationFrame(() => drawScenarioGraphEdges());
+          setTimeout(drawScenarioGraphEdges, 50);
+        }
+      };
+
+      function renderPaperFilterBar() {
+        const bar = document.getElementById('sc-paper-filter-bar');
+        if (!bar) return;
+        const allActive = scState.activePaperFilter === 'all';
+        let html = `<span class="sc-filter-label">文献分工筛选</span>
+          <button type="button" data-sc-paper="all" class="sc-paper-btn ${allActive ? 'active' : ''}">全部显示</button>`;
+        SC_PAPERS.forEach(p => {
+          const active = scState.activePaperFilter === p.id;
+          html += `<button type="button" data-sc-paper="${p.id}" class="sc-paper-btn ${active ? 'active' : ''}" style="${active ? `background:${p.color};border-color:${p.color};` : ''}">
+            <span class="sc-paper-dot" style="background:${active ? '#fff' : p.color};"></span>
+            <span>${p.shortName}</span>
+            <span style="opacity:0.78;">· ${p.tag}</span>
+          </button>`;
+        });
+        bar.innerHTML = html;
+        bar.querySelectorAll('[data-sc-paper]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const pid = btn.dataset.scPaper;
+            scState.activePaperFilter = (scState.activePaperFilter === pid && pid !== 'all') ? 'all' : pid;
+            renderPaperFilterBar();
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+          });
+        });
+      }
+
+      function renderGraphColumns() {
+        const colDim = document.getElementById('sc-col-dimensions');
+        const colSc = document.getElementById('sc-col-scenarios');
+        const colFocus = document.getElementById('sc-col-focus');
+        if (!colDim || !colSc || !colFocus) return;
+
+        colDim.innerHTML = SC_DIMENSIONS.map(d => `
+          <div id="${d.id}" data-sc-node-type="dim" data-sc-node-id="${d.id}" class="sc-node-card" style="border-left:4px solid ${d.color};">
+            <div class="sc-dim-top">
+              <span class="sc-dim-code" style="color:${d.color};background:${d.bg};">${d.code}</span>
+              <span class="sc-dim-count">${d.scenariosPrimary.length} 项主推演</span>
+            </div>
+            <div class="sc-dim-name">${d.name}</div>
+            <div class="sc-dim-sub">${d.subtitle}</div>
+            <div class="sc-dim-q">“${d.question}”</div>
+          </div>
+        `).join('');
+
+        colSc.innerHTML = SC_SCENARIOS.map(sc => {
+          const dim = getDim(sc.dimId);
+          const badges = [
+            ...sc.primaryPapers.map(pp => {
+              const p = getPaper(pp.paperId);
+              return `<span class="sc-badge-pri" style="background:${p.color};">主 · ${p.shortName.split(' ')[0]}</span>`;
+            }),
+            ...sc.auxPapers.map(ap => {
+              const p = getPaper(ap.paperId);
+              return `<span class="sc-badge-aux" style="border-color:${p.color}66;color:${p.color};">交叉 · ${p.shortName.split(' ')[0]}</span>`;
+            })
+          ].join('');
+          return `
+            <div id="${sc.id}" data-sc-node-type="scenario" data-sc-node-id="${sc.id}" class="sc-node-card">
+              <div class="sc-sc-head">
+                <div class="sc-sc-title-wrap">
+                  <span class="sc-sc-bar" style="background:${dim.color};"></span>
+                  <span class="sc-sc-name">${sc.num} ${sc.name}</span>
+                </div>
+                <span class="sc-sc-tag" style="color:${dim.color};background:${dim.bg};">${sc.tag}</span>
+              </div>
+              <div class="sc-sc-badges">${badges}</div>
+            </div>
+          `;
+        }).join('');
+
+        colFocus.innerHTML = SC_FOCUS_SCENARIOS.map(f => `
+          <div id="${f.id}" data-sc-node-type="focus" data-sc-node-id="${f.id}" class="sc-node-card" style="border-top:3px solid ${f.color};">
+            <div class="sc-focus-top">
+              <span class="sc-focus-badge" style="color:${f.color};background:${f.bg};">核心干预 ${f.num}</span>
+            </div>
+            <div class="sc-focus-name">${f.name}</div>
+            <div class="sc-focus-cond">${f.coreCondition}</div>
+            ${f.bidirectional ? `<div class="sc-focus-bi">${f.bidirectional.map(b => `<div><strong style="color:var(--text-main);">${b.code}：</strong>${b.desc.split('（')[0]}</div>`).join('')}</div>` : ''}
+            <div class="sc-focus-mech" style="color:${f.color};">机制：${f.mechanismTitle.split('（')[0]}</div>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('#sc-graph-stage .sc-node-card').forEach(el => {
+          el.addEventListener('click', () => {
+            scState.selectedNode = { type: el.dataset.scNodeType, id: el.dataset.scNodeId };
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+            renderInspector();
+          });
+          el.addEventListener('mouseenter', () => {
+            scState.hoveredNode = { type: el.dataset.scNodeType, id: el.dataset.scNodeId };
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+          });
+          el.addEventListener('mouseleave', () => {
+            scState.hoveredNode = null;
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+          });
+        });
+      }
+
+      function getAllEdges() {
+        const edges = [];
+        SC_DIMENSIONS.forEach(d => {
+          d.scenariosPrimary.forEach(scId => edges.push({ from: d.id, to: scId, kind: 'primary', stage: 1, color: d.color }));
+          d.scenariosAux.forEach(scId => edges.push({ from: d.id, to: scId, kind: 'aux', stage: 1, color: d.color }));
+        });
+        SC_SCENARIOS.forEach(sc => {
+          sc.focusLinks.forEach(fl => {
+            const f = getFocus(fl.focusId);
+            edges.push({ from: sc.id, to: fl.focusId, kind: fl.type, stage: 2, color: f.color });
+          });
+        });
+        return edges;
+      }
+
+      function computeHighlightSets() {
+        const highlightNodes = new Map();
+        const activeTarget = scState.hoveredNode || scState.selectedNode;
+
+        if (scState.activePaperFilter !== 'all') {
+          const pid = scState.activePaperFilter;
+          SC_SCENARIOS.forEach(sc => {
+            const isPrimary = sc.primaryPapers.some(pp => pp.paperId === pid);
+            const isAux = sc.auxPapers.some(ap => ap.paperId === pid);
+            if (isPrimary) {
+              highlightNodes.set(sc.id, 'primary');
+              highlightNodes.set(sc.dimId, 'primary');
+              sc.focusLinks.forEach(fl => {
+                if (!highlightNodes.has(fl.focusId) || fl.type === 'primary') {
+                  highlightNodes.set(fl.focusId, fl.type === 'primary' ? 'primary' : 'aux');
+                }
+              });
+            } else if (isAux) {
+              highlightNodes.set(sc.id, 'aux');
+              if (!highlightNodes.has(sc.dimId)) highlightNodes.set(sc.dimId, 'aux');
+              if (pid === 'skantze2021') highlightNodes.set('sc-dim-turn', 'primary');
+              sc.focusLinks.forEach(fl => {
+                if (!highlightNodes.has(fl.focusId)) highlightNodes.set(fl.focusId, 'aux');
+              });
+            }
+          });
+          SC_DIMENSIONS.forEach(d => {
+            if (d.papers.includes(pid) && !highlightNodes.has(d.id)) highlightNodes.set(d.id, 'primary');
+          });
+          return { mode: 'paper', pid, highlightNodes };
+        }
+
+        if (activeTarget) {
+          const { type, id } = activeTarget;
+          highlightNodes.set(id, 'selected');
+          if (type === 'dim') {
+            const d = getDim(id);
+            d.scenariosPrimary.forEach(scId => {
+              highlightNodes.set(scId, 'primary');
+              getScenario(scId).focusLinks.forEach(fl => {
+                highlightNodes.set(fl.focusId, fl.type === 'primary' ? 'primary' : 'aux');
+              });
+            });
+            d.scenariosAux.forEach(scId => {
+              if (!highlightNodes.has(scId)) highlightNodes.set(scId, 'aux');
+            });
+          } else if (type === 'scenario') {
+            const sc = getScenario(id);
+            highlightNodes.set(sc.dimId, 'primary');
+            SC_DIMENSIONS.forEach(d => {
+              if (d.scenariosAux.includes(id)) highlightNodes.set(d.id, 'aux');
+            });
+            sc.focusLinks.forEach(fl => highlightNodes.set(fl.focusId, fl.type === 'primary' ? 'primary' : 'aux'));
+          } else if (type === 'focus') {
+            const f = getFocus(id);
+            f.primaryUpstream.forEach(scId => {
+              highlightNodes.set(scId, 'primary');
+              highlightNodes.set(getScenario(scId).dimId, 'primary');
+            });
+            f.auxUpstream.forEach(scId => {
+              highlightNodes.set(scId, 'aux');
+              const scDim = getScenario(scId).dimId;
+              if (!highlightNodes.has(scDim)) highlightNodes.set(scDim, 'aux');
+            });
+          }
+          return { mode: 'node', activeTarget, highlightNodes };
+        }
+        return { mode: 'none', highlightNodes };
+      }
+
+      function applyGraphHighlightState() {
+        const { mode, pid, highlightNodes } = computeHighlightSets();
+        const paperColor = mode === 'paper' ? getPaper(pid).color : null;
+        document.querySelectorAll('#sc-graph-stage .sc-node-card').forEach(el => {
+          const id = el.dataset.scNodeId;
+          const isSelected = scState.selectedNode && scState.selectedNode.id === id;
+          const status = highlightNodes.get(id);
+          el.classList.remove('sc-node-dimmed', 'sc-node-selected', 'sc-node-dashed');
+          el.style.boxShadow = '';
+          if (mode !== 'none' && !status) {
+            el.classList.add('sc-node-dimmed');
+          } else if (status === 'aux' && mode === 'paper') {
+            el.classList.add('sc-node-dashed');
+            el.style.boxShadow = `0 0 0 1px ${paperColor}66`;
+          } else if (status === 'primary' && mode === 'paper') {
+            el.style.boxShadow = `0 0 0 2px ${paperColor}, 0 4px 12px rgba(15,23,42,0.08)`;
+          }
+          if (isSelected) el.classList.add('sc-node-selected');
+        });
+      }
+
+      function drawScenarioGraphEdges() {
+        const stage = document.getElementById('sc-graph-stage');
+        const svg = document.getElementById('sc-graph-svg');
+        if (!stage || !svg || stage.offsetWidth === 0) return;
+
+        const stageRect = stage.getBoundingClientRect();
+        const edges = getAllEdges();
+        const { mode, pid, highlightNodes } = computeHighlightSets();
+        const paperColor = mode === 'paper' ? getPaper(pid).color : null;
+
+        svg.setAttribute('width', stageRect.width);
+        svg.setAttribute('height', stageRect.height);
+
+        let pathsHtml = '';
+        edges.forEach(edge => {
+          const fromEl = document.getElementById(edge.from);
+          const toEl = document.getElementById(edge.to);
+          if (!fromEl || !toEl) return;
+
+          const r1 = fromEl.getBoundingClientRect();
+          const r2 = toEl.getBoundingClientRect();
+          const x1 = r1.right - stageRect.left;
+          const y1 = r1.top + r1.height / 2 - stageRect.top;
+          const x2 = r2.left - stageRect.left;
+          const y2 = r2.top + r2.height / 2 - stageRect.top;
+          const dx = Math.abs(x2 - x1) * 0.52;
+          const dPath = `M ${x1.toFixed(1)} ${y1.toFixed(1)} C ${(x1 + dx).toFixed(1)} ${y1.toFixed(1)}, ${(x2 - dx).toFixed(1)} ${y2.toFixed(1)}, ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+
+          let isEdgeHighlighted = false;
+          let edgeIsDashed = edge.kind === 'aux';
+          let strokeColor = edge.color;
+          let strokeWidth = edge.kind === 'primary' ? 1.8 : 1.3;
+          let strokeOpacity = 0.22;
+
+          if (mode === 'paper') {
+            const fromStatus = highlightNodes.get(edge.from);
+            const toStatus = highlightNodes.get(edge.to);
+            if (fromStatus && toStatus) {
+              if (edge.stage === 1) {
+                const sc = getScenario(edge.to);
+                const scHit = sc.primaryPapers.some(p => p.paperId === pid) || sc.auxPapers.some(p => p.paperId === pid);
+                if (scHit && (edge.from === sc.dimId || (pid === 'skantze2021' && edge.from === 'sc-dim-turn'))) isEdgeHighlighted = true;
+              } else {
+                const sc = getScenario(edge.from);
+                if (sc.primaryPapers.some(p => p.paperId === pid) || sc.auxPapers.some(p => p.paperId === pid)) isEdgeHighlighted = true;
+              }
+            }
+            if (isEdgeHighlighted) {
+              strokeColor = paperColor;
+              strokeWidth = (fromStatus === 'primary' && toStatus === 'primary' && !edgeIsDashed) ? 2.4 : 1.6;
+              strokeOpacity = 0.88;
+              if (fromStatus === 'aux' || toStatus === 'aux') edgeIsDashed = true;
+            } else {
+              strokeOpacity = 0.07;
+            }
+          } else if (mode === 'node') {
+            const fromStatus = highlightNodes.get(edge.from);
+            const toStatus = highlightNodes.get(edge.to);
+            const active = scState.hoveredNode || scState.selectedNode;
+            if (fromStatus && toStatus) {
+              if (active.type === 'scenario') isEdgeHighlighted = (edge.from === active.id || edge.to === active.id);
+              else if (active.type === 'dim') isEdgeHighlighted = (edge.from === active.id) || (edge.stage === 2 && highlightNodes.get(edge.from) === 'primary');
+              else if (active.type === 'focus') isEdgeHighlighted = (edge.to === active.id) || (edge.stage === 1 && highlightNodes.has(edge.to) && edge.from === getScenario(edge.to).dimId);
+            }
+            if (isEdgeHighlighted) {
+              strokeWidth = edgeIsDashed ? 1.7 : 2.4;
+              strokeOpacity = 0.9;
+            } else {
+              strokeOpacity = 0.08;
+            }
+          }
+
+          const dashAttr = edgeIsDashed ? 'stroke-dasharray="5 4"' : '';
+          pathsHtml += `<path d="${dPath}" class="sc-svg-edge" stroke="${strokeColor}" stroke-width="${strokeWidth}" stroke-opacity="${strokeOpacity}" ${dashAttr} />`;
+        });
+        svg.innerHTML = pathsHtml;
+      }
+      window.drawScenarioGraphEdges = drawScenarioGraphEdges;
+
+      function renderInspector() {
+        const body = document.getElementById('sc-inspector-body');
+        const dot = document.getElementById('sc-inspector-dot');
+        const badge = document.getElementById('sc-inspector-type-badge');
+        if (!body || !dot || !badge) return;
+
+        const { type, id } = scState.selectedNode;
+        if (type === 'dim') {
+          const d = getDim(id);
+          dot.style.background = d.color;
+          badge.textContent = '底层推导维度';
+          const linked = [...d.scenariosPrimary, ...d.scenariosAux].map(scId => {
+            const sc = getScenario(scId);
+            const isAux = d.scenariosAux.includes(scId);
+            return `<button type="button" data-sc-jump="${sc.id}" class="sc-jump-btn">
+              <span style="font-weight:700;color:var(--text-main);">${sc.num} ${sc.name}</span>
+              <span style="font-size:10.5px;padding:1px 7px;border-radius:4px;${isAux ? 'background:var(--surface-soft);color:var(--text-muted);' : `background:${d.color};color:#fff;`}">${isAux ? '辅助赋能' : '直接推导'}</span>
+            </button>`;
+          }).join('');
+          body.innerHTML = `
+            <div>
+              <span class="sc-dim-code" style="color:${d.color};background:${d.bg};">${d.code} · ${d.subtitle}</span>
+              <h3 style="font-size:16.5px;font-weight:800;color:var(--text-main);margin-top:6px;">${d.name}</h3>
+              <p style="font-size:12px;color:var(--text-muted);margin-top:2px;">核心追问：“${d.question}”</p>
+            </div>
+            <div>
+              <div class="sc-ins-block-label">为什么由此推导</div>
+              <p style="color:var(--text-secondary);line-height:1.65;">${d.rationale}</p>
+            </div>
+            <div>
+              <div class="sc-ins-block-label">推导出的微观情景</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">${linked}</div>
+            </div>
+            <div class="sc-ins-box">
+              <div style="font-weight:700;color:var(--text-main);margin-bottom:3px;">AI 数字人设计启示</div>
+              <p>${d.designImplication}</p>
+            </div>
+          `;
+        } else if (type === 'scenario') {
+          const sc = getScenario(id);
+          const dim = getDim(sc.dimId);
+          dot.style.background = dim.color;
+          badge.textContent = `微观情景 ${sc.num}`;
+          const renderPaperBlock = (items, isPrimary) => items.map(item => {
+            const paper = getPaper(item.paperId);
+            const termObjs = getTermObjects(item.paperId, item.terms);
+            return `<div class="sc-paper-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                <strong style="font-size:12.5px;color:var(--text-main);">${paper.shortName}</strong>
+                <span style="font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:4px;${isPrimary ? `background:${paper.color};color:#fff;` : `border:1px solid ${paper.color}66;color:${paper.color};`}">${isPrimary ? '主对应文献' : '交叉对应'}</span>
+              </div>
+              <p style="color:var(--text-secondary);line-height:1.55;">${item.note}</p>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:2px;">
+                ${termObjs.map(t => `
+                  <div class="sc-quote-item" style="border-color:${paper.color};">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex-wrap:wrap;">
+                      <strong style="font-size:12px;color:var(--text-main);">${t.term} <span style="font-weight:500;color:var(--text-muted);">（${t.cn}）</span></strong>
+                      <span style="font-size:10.5px;font-family:monospace;color:var(--text-muted);">${t.cite}</span>
+                    </div>
+                    <div class="sc-quote-text">“${t.quote}”</div>
+                    <p style="font-size:11.5px;color:var(--text-secondary);line-height:1.5;">${t.explanation}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>`;
+          }).join('');
+
+          body.innerHTML = `
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span class="sc-sc-tag" style="color:${dim.color};background:${dim.bg};">${dim.name}</span>
+                <span style="font-size:11.5px;color:var(--text-muted);">${sc.tag}</span>
+              </div>
+              <h3 style="font-size:16.5px;font-weight:800;color:var(--text-main);">${sc.num} ${sc.name}</h3>
+            </div>
+            <div class="sc-ins-box">
+              <div class="sc-ins-block-label">学习者典型行为信号</div>
+              <p>${sc.signals}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div class="sc-ins-block-label" style="margin-bottom:0;">学术文献锚定与官方英文原话</div>
+              ${renderPaperBlock(sc.primaryPapers, true)}
+              ${renderPaperBlock(sc.auxPapers, false)}
+            </div>
+            <div class="sc-ins-box" style="border-color:${dim.border};background:${dim.bg}80;">
+              <div style="font-weight:700;color:${dim.color};margin-bottom:3px;">AI 数字人核心设计机会点</div>
+              <p style="color:var(--text-main);">${sc.designOpportunity}</p>
+            </div>
+          `;
+        } else if (type === 'focus') {
+          const f = getFocus(id);
+          dot.style.background = f.color;
+          badge.textContent = `收敛干预场景 ${f.num}`;
+          const upstreamBtns = [
+            ...f.primaryUpstream.map(scId => ({ sc: getScenario(scId), primary: true })),
+            ...f.auxUpstream.map(scId => ({ sc: getScenario(scId), primary: false }))
+          ].map(item => `<button type="button" data-sc-jump="${item.sc.id}" class="sc-jump-btn">
+            <span style="font-weight:700;color:var(--text-main);">${item.sc.num} ${item.sc.name}</span>
+            <span style="font-size:10.5px;padding:1px 7px;border-radius:4px;${item.primary ? `background:${f.color};color:#fff;` : 'background:var(--surface-soft);color:var(--text-muted);'}">${item.primary ? '主收敛来源' : '关联延伸'}</span>
+          </button>`).join('');
+
+          body.innerHTML = `
+            <div>
+              <span class="sc-focus-badge" style="color:${f.color};background:${f.bg};">论文聚焦干预场景</span>
+              <h3 style="font-size:16.5px;font-weight:800;color:var(--text-main);margin-top:6px;">${f.name}</h3>
+              <p style="color:var(--text-secondary);margin-top:4px;">${f.coreCondition}</p>
+            </div>
+            ${f.bidirectional ? `<div>
+              <div class="sc-ins-block-label">双向中断细分结构</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                ${f.bidirectional.map(b => `<div class="sc-ins-box"><strong style="color:var(--text-main);display:block;">${b.code}</strong><span>${b.desc}</span></div>`).join('')}
+              </div>
+            </div>` : ''}
+            <div>
+              <div class="sc-ins-block-label">从 8 情景收敛的论证逻辑</div>
+              <p style="color:var(--text-secondary);line-height:1.65;">${f.convergenceLogic}</p>
+            </div>
+            <div>
+              <div class="sc-ins-block-label">上游关联微观情景</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">${upstreamBtns}</div>
+            </div>
+            <div class="sc-ins-box" style="border-color:${f.border};background:${f.bg};">
+              <div style="font-weight:700;color:${f.color};margin-bottom:5px;">核心应对机制：${f.mechanismTitle}</div>
+              <ul style="padding-left:16px;display:flex;flex-direction:column;gap:4px;color:var(--text-main);">
+                ${f.mechanismItems.map(m => `<li>${m}</li>`).join('')}
+              </ul>
+            </div>
+          `;
+        }
+
+        body.querySelectorAll('[data-sc-jump]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            scState.selectedNode = { type: 'scenario', id: btn.dataset.scJump };
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+            renderInspector();
+          });
+        });
+      }
+
+      function renderMatrixView() {
+        const tbody = document.getElementById('sc-matrix-tbody');
+        if (!tbody) return;
+        let html = '';
+        SC_DIMENSIONS.forEach(dim => {
+          const dimScs = SC_SCENARIOS.filter(s => s.dimId === dim.id);
+          dimScs.forEach((sc, idx) => {
+            html += `<tr><td style="background:#fff;">
+              ${idx === 0 ? `<div style="font-size:10px;font-weight:800;color:${dim.color};margin-bottom:2px;">${dim.code} · ${dim.name}</div>` : ''}
+              <div style="font-weight:700;color:var(--text-main);">${sc.num} ${sc.name}</div>
+              <div style="font-size:11px;color:var(--text-muted);">${sc.tag}</div>
+            </td>`;
+            SC_PAPERS.forEach(paper => {
+              const pHit = sc.primaryPapers.find(x => x.paperId === paper.id);
+              const aHit = sc.auxPapers.find(x => x.paperId === paper.id);
+              const hit = pHit || aHit;
+              const isPrimary = Boolean(pHit);
+              const isSelected = scState.selectedMatrixCell.scenarioId === sc.id && scState.selectedMatrixCell.paperId === paper.id;
+              if (!hit) {
+                html += `<td style="text-align:center;color:#cbd5e1;vertical-align:middle;">—</td>`;
+              } else {
+                html += `<td>
+                  <button type="button" data-sc-msc="${sc.id}" data-sc-mpaper="${paper.id}" class="sc-mcell-btn ${isSelected ? 'active' : ''}">
+                    <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;">
+                      <span class="sc-paper-dot" style="${isPrimary ? `background:${paper.color};` : `border:1.5px solid ${paper.color};background:#fff;`}"></span>
+                      <span style="font-size:10px;font-weight:700;color:${paper.color};">${isPrimary ? '主对应' : '交叉'}</span>
+                    </div>
+                    <div style="font-weight:600;color:var(--text-main);line-height:1.35;">
+                      ${hit.terms.slice(0, 3).map(t => `<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:118px;" title="${t}">${t}</div>`).join('')}
+                      ${hit.terms.length > 3 ? `<div style="font-size:10px;color:var(--text-muted);">+${hit.terms.length - 3} 项术语</div>` : ''}
+                    </div>
+                  </button>
+                </td>`;
+              }
+            });
+            html += `</tr>`;
+          });
+        });
+        tbody.innerHTML = html;
+        tbody.querySelectorAll('.sc-mcell-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            scState.selectedMatrixCell = { scenarioId: btn.dataset.scMsc, paperId: btn.dataset.scMpaper };
+            renderMatrixView();
+            renderMatrixDetail();
+          });
+        });
+        renderMatrixDetail();
+      }
+
+      function renderMatrixDetail() {
+        const panel = document.getElementById('sc-matrix-detail-panel');
+        if (!panel) return;
+        const { scenarioId, paperId } = scState.selectedMatrixCell;
+        const sc = getScenario(scenarioId);
+        const paper = getPaper(paperId);
+        const pHit = sc.primaryPapers.find(x => x.paperId === paperId);
+        const aHit = sc.auxPapers.find(x => x.paperId === paperId);
+        const hit = pHit || aHit;
+        if (!hit) return;
+        const isPrimary = Boolean(pHit);
+        const termObjs = getTermObjects(paperId, hit.terms);
+        panel.innerHTML = `
+          <div style="padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px;">
+              <span style="font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;${isPrimary ? `background:${paper.color};color:#fff;` : `border:1px solid ${paper.color};color:${paper.color};background:#fff;`}">${isPrimary ? '主对应依据' : '交叉补充视角'}</span>
+              <span style="font-size:12px;color:var(--text-muted);">${paper.shortName}</span>
+            </div>
+            <h4 style="font-size:15px;font-weight:800;color:var(--text-main);">情景 ${sc.num} ${sc.name}</h4>
+            <p style="font-size:12.5px;color:var(--text-secondary);margin-top:4px;line-height:1.55;">${hit.note}</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            ${termObjs.map(t => `
+              <div class="sc-paper-card">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:6px;flex-wrap:wrap;">
+                  <strong style="font-size:12.5px;color:var(--text-main);">${t.term}</strong>
+                  <span style="font-size:10.5px;font-family:monospace;color:var(--text-muted);">${t.cite}</span>
+                </div>
+                <div style="font-size:11.5px;font-weight:700;color:${paper.color};">${t.cn}</div>
+                <div class="sc-quote-text" style="background:#f8fafc;padding:8px 10px;border-radius:6px;border-left:3px solid ${paper.color};">“${t.quote}”</div>
+                <p style="font-size:12px;color:var(--text-secondary);line-height:1.55;">${t.explanation}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function getPaperDiagramSVG(type) {
+        if (type === 'dornyei') {
+          return `<svg viewBox="0 0 640 165" style="width:100%;max-width:640px;height:auto;display:block;" role="img" aria-label="Dörnyei and Scott 1997 二维分类示意图">
+            <defs><marker id="sc-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#9CA3AF"/></marker></defs>
+            <rect x="0" y="0" width="640" height="165" rx="8" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="20" y="26" font-size="11" font-weight="600" fill="#111827">四大二语交际问题域（纵轴） × 三维策略解决路径（横轴）</text>
+            <g font-size="10.5" fill="#111827">
+              <rect x="20" y="40" width="165" height="24" rx="4" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.2"/>
+              <text x="30" y="56" font-weight="600" fill="#0F766E">1. 资源不足 Resource Deficits</text>
+              <rect x="20" y="70" width="165" height="24" rx="4" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.2"/>
+              <text x="30" y="86" font-weight="600" fill="#0F766E">2. 加工时间压力 Time Pressure</text>
+              <rect x="20" y="100" width="165" height="24" rx="4" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.2"/>
+              <text x="30" y="116" font-weight="600" fill="#0F766E">3. 自身产出问题 Own-perf.</text>
+              <rect x="20" y="130" width="165" height="24" rx="4" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.2"/>
+              <text x="30" y="146" font-weight="600" fill="#0F766E">4. 对方产出问题 Other-perf.</text>
+            </g>
+            <path d="M 192 96 L 222 96" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#sc-arrow)"/>
+            <g>
+              <rect x="232" y="40" width="122" height="114" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+              <rect x="232" y="40" width="122" height="24" rx="6" fill="#F0FDFA"/>
+              <text x="293" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F766E">直接策略 Direct</text>
+              <text x="242" y="82" font-size="10" fill="#4B5563">• 迂回 Circumlocution</text>
+              <text x="242" y="100" font-size="10" fill="#4B5563">• 回避 / 信息放弃</text>
+              <text x="242" y="118" font-size="10" fill="#4B5563">• 自我修复 Self-repair</text>
+              <text x="242" y="136" font-size="10" fill="#4B5563">• 语码切换 Code switch</text>
+              <rect x="366" y="40" width="122" height="114" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+              <rect x="366" y="40" width="122" height="24" rx="6" fill="#F0FDFA"/>
+              <text x="427" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F766E">间接策略 Indirect</text>
+              <text x="376" y="82" font-size="10" fill="#4B5563">• 填充拖延 Stalling</text>
+              <text x="376" y="100" font-size="10" fill="#4B5563">• 重复争取加工时间</text>
+              <text x="376" y="118" font-size="10" fill="#4B5563">• 假装听懂 Feigning</text>
+              <text x="376" y="136" font-size="10" fill="#4B5563">• 维系沟通频道不断</text>
+              <rect x="500" y="40" width="122" height="114" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+              <rect x="500" y="40" width="122" height="24" rx="6" fill="#F0FDFA"/>
+              <text x="561" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F766E">交互策略 Interact.</text>
+              <text x="510" y="82" font-size="10" fill="#4B5563">• 求助 Appeal for help</text>
+              <text x="510" y="100" font-size="10" fill="#4B5563">• 表达未理解 Non-und.</text>
+              <text x="510" y="118" font-size="10" fill="#4B5563">• 请求重复/澄清</text>
+              <text x="510" y="136" font-size="10" fill="#4B5563">• 确认核对 Check</text>
+            </g>
+          </svg>`;
+        }
+        if (type === 'lyster') {
+          return `<svg viewBox="0 0 640 155" style="width:100%;max-width:640px;height:auto;display:block;" role="img" aria-label="Lyster and Ranta 1997 错误治疗序列">
+            <rect x="0" y="0" width="640" height="155" rx="8" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="20" y="25" font-size="11" font-weight="600" fill="#111827">错误治疗序列（Error Treatment Sequence）：Error → 6 类纠错反馈 → Uptake</text>
+            <rect x="20" y="55" width="95" height="54" rx="6" fill="#FFFFFF" stroke="#111827" stroke-width="1.3"/>
+            <text x="67" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#111827">Learner Error</text>
+            <text x="67" y="95" text-anchor="middle" font-size="10" fill="#6B7280">学习者语言偏差</text>
+            <path d="M 115 82 L 145 82" stroke="#6B7280" stroke-width="1.5"/>
+            <rect x="148" y="38" width="232" height="96" rx="6" fill="#FFFFFF" stroke="#0D6E5B" stroke-width="1.3"/>
+            <text x="264" y="56" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0D6E5B">6 类口语纠错反馈 Corrective Feedback</text>
+            <rect x="158" y="64" width="102" height="26" rx="4" fill="#ECFDF5"/>
+            <text x="209" y="81" text-anchor="middle" font-size="9.5" fill="#0D6E5B">隐性重铸 Recasts</text>
+            <rect x="268" y="64" width="102" height="26" rx="4" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="319" y="81" text-anchor="middle" font-size="9.5" fill="#4B5563">显性纠错 Explicit</text>
+            <rect x="158" y="96" width="212" height="28" rx="4" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="264" y="114" text-anchor="middle" font-size="9.5" fill="#374151">促形式协商：引导 · 元语言 · 澄清 · 重复</text>
+            <path d="M 380 82 L 410 82" stroke="#6B7280" stroke-width="1.5"/>
+            <rect x="413" y="44" width="104" height="76" rx="6" fill="#FFFFFF" stroke="#0D6E5B" stroke-width="1.3"/>
+            <text x="465" y="66" text-anchor="middle" font-size="11" font-weight="600" fill="#0D6E5B">Uptake 吸收</text>
+            <text x="465" y="86" text-anchor="middle" font-size="9.5" fill="#111827">① Repair 成功修复</text>
+            <text x="465" y="104" text-anchor="middle" font-size="9.5" fill="#6B7280">② Needs-repair</text>
+            <path d="M 517 82 L 542 82" stroke="#6B7280" stroke-width="1.5"/>
+            <rect x="545" y="55" width="76" height="54" rx="6" fill="#FFFFFF" stroke="#E5E7EB"/>
+            <text x="583" y="78" text-anchor="middle" font-size="10.5" font-weight="600" fill="#374151">话题延续</text>
+            <text x="583" y="95" text-anchor="middle" font-size="9.5" fill="#6B7280">Continuation</text>
+          </svg>`;
+        }
+        if (type === 'varonis') {
+          return `<svg viewBox="0 0 640 165" style="width:100%;max-width:640px;height:auto;display:block;" role="img" aria-label="Varonis and Gass 1985 非理解修复下压弹回图">
+            <rect x="0" y="0" width="640" height="165" rx="8" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="20" y="25" font-size="11" font-weight="600" fill="#111827">非理解修复序列（T → I → R → RR）：主线暂停、下压修复（Push down）与弹回（Pop back up）</text>
+            <line x1="25" y1="62" x2="170" y2="62" stroke="#111827" stroke-width="2"/>
+            <rect x="82" y="45" width="96" height="34" rx="6" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+            <text x="130" y="61" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B45309">Trigger (T)</text>
+            <text x="130" y="73" text-anchor="middle" font-size="9" fill="#6B7280">理解障碍触发源</text>
+            <line x1="178" y1="62" x2="455" y2="62" stroke="#D1D5DB" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <text x="318" y="54" text-anchor="middle" font-size="9.5" fill="#6B7280">若 Ignoring the trigger（假装听懂）→ 断层潜伏</text>
+            <path d="M 178 72 L 210 112" stroke="#B45309" stroke-width="1.8"/>
+            <text x="165" y="102" font-size="9.5" font-weight="600" fill="#B45309">Push down</text>
+            <rect x="210" y="98" width="110" height="44" rx="6" fill="#FFFBEB" stroke="#B45309" stroke-width="1.3"/>
+            <text x="265" y="117" text-anchor="middle" font-size="10.5" font-weight="600" fill="#B45309">Indicator (I)</text>
+            <text x="265" y="132" text-anchor="middle" font-size="9" fill="#4B5563">显性表露未理解</text>
+            <line x1="320" y1="120" x2="346" y2="120" stroke="#B45309" stroke-width="1.5"/>
+            <rect x="348" y="98" width="118" height="44" rx="6" fill="#FFFFFF" stroke="#B45309" stroke-width="1.3"/>
+            <text x="407" y="117" text-anchor="middle" font-size="10.5" font-weight="600" fill="#111827">Response (R)</text>
+            <text x="407" y="132" text-anchor="middle" font-size="9" fill="#4B5563">改写 / 降维 / 澄清</text>
+            <path d="M 466 112 L 495 74" stroke="#0F766E" stroke-width="1.8"/>
+            <text x="492" y="105" font-size="9.5" font-weight="600" fill="#0F766E">Pop back up</text>
+            <rect x="492" y="45" width="126" height="34" rx="6" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.4"/>
+            <text x="555" y="61" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F766E">Reaction (RR)</text>
+            <text x="555" y="73" text-anchor="middle" font-size="9" fill="#6B7280">确认理解 · 回到主线</text>
+          </svg>`;
+        }
+        if (type === 'skantze') {
+          return `<svg viewBox="0 0 640 158" style="width:100%;max-width:640px;height:auto;display:block;" role="img" aria-label="Skantze 2021 话轮 Pause Gap Lapse 时间轴对比">
+            <rect x="0" y="0" width="640" height="158" rx="8" fill="#F8F9FA" stroke="#E5E7EB"/>
+            <text x="20" y="25" font-size="11" font-weight="600" fill="#111827">话轮时间轴对比：句内停顿（Pause）vs. 交棒间隙（Gap）vs. 冷场停滞（Lapse）</text>
+            <text x="20" y="64" font-size="10" font-weight="600" fill="#334155">学习者</text>
+            <rect x="70" y="48" width="100" height="24" rx="4" fill="#334155"/>
+            <text x="120" y="64" text-anchor="middle" font-size="9.5" fill="#FFFFFF">IPU 1 (未闭合)</text>
+            <rect x="172" y="48" width="76" height="24" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-dasharray="3 2"/>
+            <text x="210" y="63" text-anchor="middle" font-size="9.5" font-weight="600" fill="#B45309">Pause 构思</text>
+            <text x="210" y="42" text-anchor="middle" font-size="8.5" fill="#B45309">固定阈值易在此误抢断</text>
+            <rect x="250" y="48" width="90" height="24" rx="4" fill="#334155"/>
+            <text x="295" y="64" text-anchor="middle" font-size="9.5" fill="#FFFFFF">IPU 2 (TRP闭合)</text>
+            <rect x="342" y="75" width="38" height="20" rx="3" fill="#E0E7FF"/>
+            <text x="361" y="89" text-anchor="middle" font-size="9" font-weight="600" fill="#3730A3">Gap</text>
+            <text x="20" y="117" font-size="10" font-weight="600" fill="#0F766E">AI代理</text>
+            <rect x="120" y="102" width="44" height="20" rx="10" fill="#F0FDFA" stroke="#0F766E"/>
+            <text x="142" y="115" text-anchor="middle" font-size="8.5" fill="#0F766E">点头附和</text>
+            <rect x="382" y="100" width="110" height="24" rx="4" fill="#0F766E"/>
+            <text x="437" y="116" text-anchor="middle" font-size="9.5" fill="#FFFFFF">AI 正常接棒回应</text>
+            <rect x="498" y="66" width="122" height="44" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-dasharray="4 3"/>
+            <text x="559" y="85" text-anchor="middle" font-size="9.5" font-weight="600" fill="#334155">Lapse 社交冷场</text>
+            <text x="559" y="100" text-anchor="middle" font-size="8.5" fill="#64748B">无人接话 → AI需搭桥</text>
+          </svg>`;
+        }
+        return `<svg viewBox="0 0 640 165" style="width:100%;max-width:640px;height:auto;display:block;" role="img" aria-label="MacIntyre and Legatto 2011 秒级 WTC 动态骤降曲线">
+          <rect x="0" y="0" width="640" height="165" rx="8" fill="#F8F9FA" stroke="#E5E7EB"/>
+          <text x="20" y="25" font-size="11" font-weight="600" fill="#111827">个体动态法（Idiodynamic Method）：秒级 WTC 波动与非线性阈值崩塌曲线</text>
+          <polygon points="90,42 35,142 145,142" fill="#EEF2FF" stroke="#3730A3" stroke-width="1.2"/>
+          <line x1="69" y1="80" x2="111" y2="80" stroke="#C7D2FE"/>
+          <line x1="52" y1="111" x2="128" y2="111" stroke="#C7D2FE"/>
+          <text x="90" y="72" text-anchor="middle" font-size="9" font-weight="600" fill="#3730A3">WTC</text>
+          <text x="90" y="99" text-anchor="middle" font-size="8.5" fill="#3730A3">状态自信/焦虑</text>
+          <text x="90" y="131" text-anchor="middle" font-size="8.5" fill="#4B5563">动机与人格特质</text>
+          <line x1="190" y1="138" x2="615" y2="138" stroke="#9CA3AF" stroke-width="1.2"/>
+          <line x1="190" y1="44" x2="190" y2="138" stroke="#9CA3AF" stroke-width="1.2"/>
+          <text x="176" y="54" text-anchor="end" font-size="8.5" fill="#6B7280">高WTC</text>
+          <text x="176" y="136" text-anchor="end" font-size="8.5" fill="#6B7280">低WTC</text>
+          <text x="615" y="152" text-anchor="end" font-size="8.5" fill="#6B7280">时间（秒）</text>
+          <path d="M 195 66 Q 245 55, 295 62 T 365 65 L 395 128 Q 425 134, 465 126 C 505 118, 535 78, 600 72" fill="none" stroke="#3730A3" stroke-width="2.2"/>
+          <circle cx="365" cy="65" r="4" fill="#B45309"/>
+          <line x1="365" y1="69" x2="365" y2="138" stroke="#B45309" stroke-dasharray="3 3"/>
+          <text x="365" y="53" text-anchor="middle" font-size="9.5" font-weight="600" fill="#B45309">突发词汇卡壳（跨过阈值）</text>
+          <text x="412" y="122" font-size="9" font-weight="600" fill="#B45309">断崖下跌 ("crashed")</text>
+          <circle cx="510" cy="108" r="4" fill="#0F766E"/>
+          <text x="548" y="102" text-anchor="middle" font-size="9" font-weight="600" fill="#0F766E">AI 共情+脚手架托底回升</text>
+        </svg>`;
+      }
+
+      function renderDictionaryView() {
+        const nav = document.getElementById('sc-dict-paper-nav');
+        const content = document.getElementById('sc-dict-paper-content');
+        if (!nav || !content) return;
+
+        nav.innerHTML = SC_PAPERS.map(p => {
+          const active = scState.activeDictPaper === p.id;
+          return `<button type="button" data-sc-dict="${p.id}" class="sc-dict-nav-btn ${active ? 'active' : ''}">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <span class="sc-paper-dot" style="background:${p.color};"></span>
+              <strong style="font-size:12.5px;color:var(--text-main);">${p.shortName}</strong>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);padding-left:14px;margin-top:2px;">${p.tag} · ${p.terms.length} 项原话</div>
+          </button>`;
+        }).join('');
+
+        nav.querySelectorAll('[data-sc-dict]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            scState.activeDictPaper = btn.dataset.scDict;
+            renderDictionaryView();
+          });
+        });
+
+        const paper = getPaper(scState.activeDictPaper);
+        content.innerHTML = `
+          <div style="border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+              <span style="font-size:11px;font-weight:700;color:#fff;padding:2px 10px;border-radius:999px;background:${paper.color};">${paper.tag}</span>
+              <span style="font-size:12px;font-family:monospace;color:var(--text-muted);">${paper.journal}</span>
+            </div>
+            <h3 style="font-size:19px;font-weight:800;color:var(--text-main);">${paper.shortName}</h3>
+            <p style="font-size:13.5px;color:var(--text-secondary);font-style:italic;margin-top:4px;">${paper.fullTitle}</p>
+            <div class="sc-ins-box" style="margin-top:12px;color:var(--text-main);">
+              <strong>在本图谱中的分工地盘：</strong>${paper.roleSummary}
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size:14.5px;font-weight:800;color:var(--primary);margin-bottom:6px;">一、理论框架与核心贡献</h4>
+            <div class="sc-fw-grid">
+              ${paper.frameworkDetail.map(fd => `
+                <div class="sc-fw-card">
+                  <div style="font-size:12.5px;font-weight:700;color:${paper.color};margin-bottom:4px;">${fd.title}</div>
+                  <p style="font-size:12.5px;color:var(--text-secondary);line-height:1.6;">${fd.text}</p>
+                </div>
+              `).join('')}
+            </div>
+            <div style="overflow-x:auto;padding-bottom:4px;">${getPaperDiagramSVG(paper.diagramType)}</div>
+          </div>
+
+          <div style="margin-top:18px;">
+            <h4 style="font-size:14.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">二、官方核心术语与英文原话词典（共 ${paper.terms.length} 条）</h4>
+            <div>
+              ${paper.terms.map((t, i) => `
+                <div class="sc-term-card">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+                    <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+                      <strong style="font-size:13.5px;color:var(--text-main);">${t.term}</strong>
+                      <span style="font-size:12.5px;color:var(--text-secondary);">· ${t.cn}</span>
+                      <span style="font-size:11px;font-family:monospace;color:var(--text-muted);background:var(--surface-soft);padding:1px 7px;border-radius:5px;border:1px solid var(--border);">${t.cite}</span>
+                    </div>
+                    <button type="button" data-sc-copy-quote="${i}" class="sc-copy-btn">复制原话</button>
+                  </div>
+                  <div class="sc-quote-text" style="border-left:3px solid ${paper.color};padding-left:12px;">“${t.quote}”</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                    <p style="font-size:12.5px;color:var(--text-secondary);line-height:1.55;flex:1;min-width:220px;">${t.explanation}</p>
+                    <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                      ${t.scenarios.map(sid => {
+                        const s = getScenario(sid);
+                        return `<span style="font-size:11px;padding:2px 7px;border-radius:5px;background:var(--surface-soft);border:1px solid var(--border);color:var(--text-muted);">情景 ${s.num}</span>`;
+                      }).join('')}
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        content.querySelectorAll('[data-sc-copy-quote]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const t = paper.terms[Number(btn.dataset.scCopyQuote)];
+            copyScText(`"${t.quote}" (${t.cite})`, `已复制 ${t.term} 英文原话`);
+          });
+        });
+
+        renderReferencesSection();
+      }
+
+      function renderReferencesSection() {
+        const btnApa = document.getElementById('sc-ref-btn-apa');
+        const btnGb = document.getElementById('sc-ref-btn-gb');
+        const list = document.getElementById('sc-references-list');
+        if (!btnApa || !btnGb || !list) return;
+
+        const isApa = scState.refStyle === 'apa';
+        btnApa.classList.toggle('active', isApa);
+        btnGb.classList.toggle('active', !isApa);
+
+        const items = SC_REFERENCES[scState.refStyle];
+        list.innerHTML = items.map((ref, idx) => `
+          <li class="sc-ref-item">
+            <div style="display:flex;gap:8px;">
+              <span style="font-family:monospace;font-size:12px;color:var(--text-muted);">[${idx + 1}]</span>
+              <span style="color:var(--text-main);">${ref}</span>
+            </div>
+            <button type="button" data-sc-copy-ref="${idx}" class="sc-copy-btn">复制</button>
+          </li>
+        `).join('');
+
+        list.querySelectorAll('[data-sc-copy-ref]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            copyScText(items[Number(btn.dataset.scCopyRef)], '已复制该条参考文献');
+          });
+        });
+      }
+
+      function initScenarioModule() {
+        renderPaperFilterBar();
+        renderGraphColumns();
+        applyGraphHighlightState();
+        renderInspector();
+        renderMatrixView();
+        renderDictionaryView();
+
+        const resetBtn = document.getElementById('sc-btn-reset-graph');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            scState.activePaperFilter = 'all';
+            scState.selectedNode = { type: 'scenario', id: 'sc-2' };
+            scState.hoveredNode = null;
+            renderPaperFilterBar();
+            applyGraphHighlightState();
+            drawScenarioGraphEdges();
+            renderInspector();
+          });
+        }
+
+        const refApa = document.getElementById('sc-ref-btn-apa');
+        const refGb = document.getElementById('sc-ref-btn-gb');
+        const copyAll = document.getElementById('sc-btn-copy-all-refs');
+        if (refApa) refApa.addEventListener('click', () => { scState.refStyle = 'apa'; renderReferencesSection(); });
+        if (refGb) refGb.addEventListener('click', () => { scState.refStyle = 'gb'; renderReferencesSection(); });
+        if (copyAll) {
+          copyAll.addEventListener('click', () => {
+            copyScText(SC_REFERENCES[scState.refStyle].join('\n\n'), `已复制全部 7 条 ${scState.refStyle === 'apa' ? 'APA 7th' : 'GB/T 7714-2015'} 参考文献`);
+          });
+        }
+
+        const safeDraw = () => {
+          const panel = document.getElementById('view-scenarios');
+          if (panel && panel.classList.contains('active') && scState.activeSubTab === 'overview') {
+            requestAnimationFrame(drawScenarioGraphEdges);
+          }
+        };
+        window.addEventListener('resize', safeDraw);
+        const stage = document.getElementById('sc-graph-stage');
+        if (stage && typeof ResizeObserver !== 'undefined') {
+          new ResizeObserver(safeDraw).observe(stage);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScenarioModule);
+      } else {
+        initScenarioModule();
+      }
+    })();
 
   </script>
 </body>
