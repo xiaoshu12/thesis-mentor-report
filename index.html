@@ -2408,6 +2408,168 @@
       transform: translateY(0);
     }
 
+    /* =========================================================
+       Supplementary WTC Evidence Side Drawer (Ayedoun et al., 2019)
+       ========================================================= */
+    .btn-wtc-drawer {
+      border: 1px solid #99f6e4;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-wtc-drawer:hover {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(15, 118, 110, 0.2);
+    }
+
+    .wtc-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1050;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .wtc-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .wtc-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1060;
+      width: min(640px, 94vw);
+      height: 100vh;
+      background: #ffffff;
+      box-shadow: -12px 0 36px rgba(15, 23, 42, 0.18);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .wtc-drawer.open {
+      transform: translateX(0);
+    }
+
+    .wtc-drawer-header {
+      padding: 16px 22px;
+      background: linear-gradient(135deg, #162c47 0%, #1e3a5f 60%, #134e4a 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .wtc-drawer-header h3 {
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    .wtc-drawer-close {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+
+    .wtc-drawer-close:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .wtc-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 24px 40px;
+      font-size: 13.5px;
+      line-height: 1.72;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .wtc-drawer-body strong { color: var(--text-main); }
+
+    .wtc-sec-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 10px;
+    }
+
+    .wtc-quote-block {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      margin: 10px 0;
+    }
+
+    .wtc-quote-en {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      color: #0f172a;
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin-bottom: 5px;
+    }
+
+    .wtc-quote-zh {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .wtc-list {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin: 8px 0;
+    }
+
+    .wtc-gap-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--indigo);
+      border-radius: 8px;
+      padding: 11px 14px;
+    }
+
+    .wtc-gap-card + .wtc-gap-card { margin-top: 8px; }
+
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -2436,7 +2598,7 @@
 
     /* Print All Views cleanly */
     @media print {
-      .top-nav, .btn-print, .toggle-btn, .seg-tabs, .rq-filter-bar, .scene-switcher, .btn-jump, .word-toolbar, .word-statusbar, #wordPreviewModal, .btn-research-go, .sc-filter-bar, .sc-copy-btn, #sc-toast, #sc-btn-reset-graph { display: none !important; }
+      .top-nav, .btn-print, .toggle-btn, .seg-tabs, .rq-filter-bar, .scene-switcher, .btn-jump, .word-toolbar, .word-statusbar, #wordPreviewModal, .btn-research-go, .sc-filter-bar, .sc-copy-btn, #sc-toast, #sc-btn-reset-graph, .btn-wtc-drawer, .wtc-drawer-backdrop, .wtc-drawer { display: none !important; }
       body { background: #fff; font-size: 12.5px; }
       .container { max-width: 100%; padding: 0; }
       .view-panel, .seg-panel, .accordion-body, .sc-sub-panel { display: block !important; opacity: 1 !important; }
@@ -2634,7 +2796,10 @@
         <div class="section-header">
           <span class="section-num">03</span>
           <h2 class="section-title">贯通两个实验的三类口语表达困难情境</h2>
-          <button type="button" class="toggle-btn" style="margin-left:auto;" onclick="jumpToScenarioDerivation('overview')">查看理论推导图谱（4 维度 → 8 情景 → 3 场景）→</button>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="btn-wtc-drawer" onclick="openWtcDrawer()">WTC 实证依据：Ayedoun et al. (2019)</button>
+            <button type="button" class="toggle-btn" onclick="jumpToScenarioDerivation('overview')">查看理论推导图谱（4 维度 → 8 情景 → 3 场景）→</button>
+          </div>
         </div>
         <div class="grid-3">
           <div class="context-card" style="background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);padding:16px 18px;">
@@ -3351,10 +3516,13 @@
         </div>
       </header>
 
-      <div class="seg-tabs" id="sc-sub-tabs">
-        <button type="button" class="seg-btn active" data-sc-tab="overview" onclick="switchScenarioSubTab('overview')">01 理论推演全景图</button>
-        <button type="button" class="seg-btn" data-sc-tab="matrix" onclick="switchScenarioSubTab('matrix')">02 5×8 文献交叉矩阵</button>
-        <button type="button" class="seg-btn" data-sc-tab="dictionary" onclick="switchScenarioSubTab('dictionary')">03 奠基文献与原话词典</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+        <div class="seg-tabs" id="sc-sub-tabs" style="margin-bottom:0;">
+          <button type="button" class="seg-btn active" data-sc-tab="overview" onclick="switchScenarioSubTab('overview')">01 理论推演全景图</button>
+          <button type="button" class="seg-btn" data-sc-tab="matrix" onclick="switchScenarioSubTab('matrix')">02 5×8 文献交叉矩阵</button>
+          <button type="button" class="seg-btn" data-sc-tab="dictionary" onclick="switchScenarioSubTab('dictionary')">03 奠基文献与原话词典</button>
+        </div>
+        <button type="button" class="btn-wtc-drawer" onclick="openWtcDrawer()">WTC 实证依据：Ayedoun et al. (2019)</button>
       </div>
 
       <!-- Sub-panel 1: 理论推演全景图 -->
@@ -4127,6 +4295,114 @@
 
   <div id="sc-toast">已复制到剪贴板</div>
 
+  <!-- Supplementary Evidence Side Drawer: Ayedoun, Hayashi, & Seta (2019) -->
+  <div class="wtc-drawer-backdrop" id="wtcDrawerBackdrop" onclick="closeWtcDrawer()"></div>
+  <aside class="wtc-drawer" id="wtcEvidenceDrawer" role="dialog" aria-modal="true" aria-label="Ayedoun et al. (2019) WTC 实证依据">
+    <div class="wtc-drawer-header">
+      <div>
+        <span style="font-size:11px;font-weight:700;color:#5eead4;letter-spacing:0.04em;">补充文献支撑 · IJAIED 2019</span>
+        <h3>Ayedoun, Hayashi, &amp; Seta (2019)：为什么三类困难干预能提升情景开口意愿（WTC）</h3>
+      </div>
+      <button type="button" class="wtc-drawer-close" onclick="closeWtcDrawer()">✕ 关闭</button>
+    </div>
+
+    <div class="wtc-drawer-body">
+      <div class="note-banner teal" style="margin-top:0;">
+        <strong>核心观点：</strong>Ayedoun, Hayashi, &amp; Seta（2019）发表在教育人工智能顶刊 <em>International Journal of Artificial Intelligence in Education</em>（IJAIED）的论文指出：<strong>与其只把 AI 数字人做成纠语法的“语言考官”，不如赋予代理主动化解沟通陷阱的“交际策略（CS）”与营造温暖氛围的“情感附和（AB）”，通过“提信心 + 降焦虑”双轨并进，把解决对话困境的心理重担从学习者肩上接过来，从而显著提升二语学习者的交际意愿（WTC）</strong>。
+      </div>
+
+      <div>
+        <div class="wtc-sec-title">一、研究背景与核心破局点：把“排障重担”交给 AI 代理</div>
+        <p>在东亚 EFL（英语作为外语）环境中，大量学习者学了多年英语却依然不敢开口，症结不在于语法知识不足，而在于<strong>交际意愿（WTC）过低</strong>。作者指出，过去多数二语口语对话系统存在两个致命盲区：</p>
+        <ul class="wtc-list">
+          <li><strong>重认知操练、轻情感意愿：</strong>传统 CALL（计算机辅助语言学习）系统大多把语言当成纯认知技能去刷正确率，很少专门针对影响开口的情感与行为状态去设计对话代理。</li>
+          <li><strong>把“化解中断”的责任全推给学习者：</strong>二语学习者在对话中不可避免地频繁遭遇卡壳、听不懂和沟通陷阱（communication pitfalls）；在早期的无策略对话系统中，一旦发生理解断层，系统无法提供有效协助，导致对话频频卡死，反而进一步挫伤了学习者的 WTC。</li>
+        </ul>
+        <p>因此，这篇论文提出了一个非常关键的范式转向——<strong>提升代理自身的策略能力（Strategic Competence）</strong>，由数字人主动出手接住沟通困境：</p>
+        <div class="wtc-quote-block">
+          <div class="wtc-quote-en">“By enabling the ECA to make use of [CS], our idea is to enhance its own strategic competence to release learners from the challenging and WTC-inhibiting burden of resolving communication pitfalls by themselves.”</div>
+          <div class="wtc-quote-zh">（通过让具身对话代理掌握交际策略，我们的核心思路是增强代理自身的策略能力，从而将学习者从“独自解决沟通陷阱”这一极具挑战且抑制 WTC 的重担中解放出来。）</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="wtc-sec-title">二、核心理论架构：DiMaCA 双轨对话管理模型</div>
+        <p>依托 MacIntyre 等人（1998）的 WTC 模型——即“低交际焦虑 + 足够的自我感知交际能力（信心）= 高 WTC”——作者构建了 <strong>DiMaCA</strong>（Dialogue Management model based on Communication strategies and Affective backchannels）双轨对话管理模型，让两套策略精准对应两个心理杠杆：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:22%;">策略维度</th>
+                <th style="width:26%;">核心功能定位</th>
+                <th style="width:30%;">典型交互表现</th>
+                <th style="width:22%;">对应的 WTC 心理杠杆</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>交际策略（CS）</strong><br><span style="font-size:11.5px;color:var(--text-muted);">Communication Strategies</span></td>
+                <td>让代理具备处理自身理解困难与学习者表达困境的能力，保障对话顺畅推进（Conversation Smoothness）</td>
+                <td>在日常场景（如餐厅点餐）对话发生卡壳、理解受阻或偏离时，主动通过引导、复述、协商等方式带用户平滑渡过沟通陷阱</td>
+                <td><strong>提升学习者的交际信心</strong><br><span class="pill teal" style="margin-top:4px;">Perceived Competence ↑</span></td>
+              </tr>
+              <tr>
+                <td><strong>情感附和（AB）</strong><br><span style="font-size:11.5px;color:var(--text-muted);">Affective Backchannels</span></td>
+                <td>在对话的次要通道（Secondary Channel）中发出不带新信息、但承载元对话功能的口头或非语言反馈</td>
+                <td>传递理解、兴趣与情绪温度，包括鼓励（Encouraging）、共情体谅（Sympathetic）、安抚（Reassuring）以及短促附和、简短提问或顺手补句</td>
+                <td><strong>降低学习者的交际焦虑</strong><br><span class="pill indigo" style="margin-top:4px;">Communication Anxiety ↓</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wtc-quote-block">
+          <div class="wtc-quote-en">“Hence, the rationale of implementing DiMaCA can be explained in terms of increasing L2 learners' confidence via CSs and reducing their level of anxiety towards communication via ABs.”</div>
+          <div class="wtc-quote-zh">（实施 DiMaCA 的核心理据可以归结为：通过交际策略提升二语学习者的信心，同时通过情感附和降低其交际焦虑。）</div>
+        </div>
+        <p>此外，作者特意选择了具身对话代理（ECA）而非纯文字聊天框，依据的是“计算机作为社会行动者”的交互心理——虚拟角色的表情、口型同步和拟人线索会让学习者将其视为真实的社会伙伴，从而放大情感附和的温暖感与沉浸感。</p>
+      </div>
+
+      <div>
+        <div class="wtc-sec-title">三、实验设计与核心实证结论</div>
+        <p>为了验证 CS 与 AB 各自以及联合使用时的实际效果，作者在高校 EFL 环境中开展了一项对照先导研究（Pilot Study）：</p>
+        <ul class="wtc-list">
+          <li><strong>被试与任务场景：</strong>招募了 <strong>40 名日本大学生</strong>作为 EFL 学习者，在模拟日常英语对话情境（如餐厅等半脚本化任务对话场景）中与具身对话代理展开语音/对话互动。</li>
+          <li><strong>实验分组对比（3 种版本代理交互后的预期交际意愿 Expected WTC）：</strong>
+            <br>1. <strong>CS + AB 联合版</strong>：同时具备交际策略与情感附和的完整 DiMaCA 代理；
+            <br>2. <strong>仅 CS 版（CS-only）</strong>：只负责解决沟通流畅度与陷阱，不提供情感附和；
+            <br>3. <strong>仅 AB 版（AB-only）</strong>：只提供温暖的情感附和与鼓励，不配备交际排障策略。
+          </li>
+        </ul>
+        <p style="margin-top:6px;"><strong>三大核心实证结论：</strong></p>
+        <ol class="wtc-list">
+          <li><strong>双轨联合效果最优：</strong>将交际策略（CS）与情感附和（AB）结合在一起，最能赋能对话代理，使学习者展现出<strong>更高的预期交际意愿（Expected WTC）</strong>。</li>
+          <li><strong>纯情感支持本身也具备独立正向价值：</strong>即便在仅使用情感附和（AB-only）的版本中，系统同样展现出在一定程度上提升学习者 WTC 的潜力——说明在二语开口这件事上，代理传递出的温暖、体谅与非评判感本身就是极强的助推器。</li>
+          <li><strong>用户主观体验印证：</strong>结合其系列研究的访谈反馈，学习者高度认可代理在“听不懂”和“说不出”时主动伸出援手的价值（<em>"appreciating the help they got from the chatbot to understand and express what they have got to say"</em>），证明这种“搭把手”的伙伴体验能有效减轻心理负担。</li>
+        </ol>
+      </div>
+
+      <div>
+        <div class="wtc-sec-title">四、这篇论文的历史局限与本课题创新切入点</div>
+        <p style="margin-bottom:10px;">Ayedoun 等人（2019）虽然在理念上非常超前，但受限于当时的技术条件与实验设计，留下了 4 个清晰的研究空白，恰好对应本课题的创新设计：</p>
+        <div class="wtc-gap-card">
+          <strong>1. 停留在前大模型时代的“固定/半脚本场景”</strong><br>
+          系统依赖传统意图识别和预设场景（如餐厅点餐），缺乏大语言模型（LLM）时代的开放生成能力，无法绑定学习者<strong>真实、个性化的日常生活语境</strong>，容易让练习显得像在背情景剧本。
+        </div>
+        <div class="wtc-gap-card">
+          <strong>2. 干预策略“一刀切”，缺乏精细颗粒度与动态退隐</strong><br>
+          2019 年的 DiMaCA 没有区分不同脚手架颗粒度（比如给关键词提示 vs. 直接给完整句子）对自主表达能力的差异化影响，也没有根据学习者状态动态调整策略强度（作者本人在 2020 年的 <em>IEEE TLT</em> 后续研究中才刚刚开始探索个性化支架与退隐机制）。
+        </div>
+        <div class="wtc-gap-card">
+          <strong>3. 情感支持停留在浅层礼貌附和，未细分共情机制</strong><br>
+          论文中的 AB 主要是通用的鼓励、安慰和表扬，尚未深入探讨不同共情策略（如平行共情 vs. 回应式共情）以及具身非语言线索在特定高压瞬间（卡壳 vs. 说错 vs. 误解）的差异化心理效应。
+        </div>
+        <div class="wtc-gap-card">
+          <strong>4. 衡量的是事后“预期 WTC”，缺乏沉浸空间与动态过程追踪</strong><br>
+          该研究基于桌面端屏幕代理，且以事后自评的“预期 WTC”为主，尚未在更具社会临场感的空间计算/沉浸虚拟代理环境中，针对具体受阻瞬间检验支架策略与情感支持对<strong>情景 WTC、独立表达迁移及自我决定感</strong>的交互作用。
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <script>
     /* ========================
        1. Master View Switcher
@@ -4340,8 +4616,30 @@
       if (host) host.innerHTML = '';
     }
 
+    function openWtcDrawer() {
+      const backdrop = document.getElementById('wtcDrawerBackdrop');
+      const drawer = document.getElementById('wtcEvidenceDrawer');
+      if (backdrop) backdrop.classList.add('open');
+      if (drawer) drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWtcDrawer() {
+      const backdrop = document.getElementById('wtcDrawerBackdrop');
+      const drawer = document.getElementById('wtcEvidenceDrawer');
+      if (backdrop) backdrop.classList.remove('open');
+      if (drawer) drawer.classList.remove('open');
+      const modal = document.getElementById('wordPreviewModal');
+      if (!modal || !modal.classList.contains('open')) {
+        document.body.style.overflow = '';
+      }
+    }
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeWordModal();
+      if (e.key === 'Escape') {
+        closeWordModal();
+        closeWtcDrawer();
+      }
     });
 
     function filterInterviewStage(stageKey, btnEl) {
