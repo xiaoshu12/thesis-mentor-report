@@ -818,6 +818,10 @@
       opacity: 0.42;
     }
 
+    tr.linked-active { background: #f0fdfa; }
+    tr.linked-active td:first-child { border-left: 3px solid var(--teal); }
+    tr.linked-dim { opacity: 0.36; transition: opacity 0.2s ease; }
+
     .badge-code {
       flex-shrink: 0;
       font-size: 12.5px;
@@ -2687,8 +2691,9 @@
       </div>
       <div class="sub-nav-inner" id="subNavExp2" style="display:none;">
         <span class="sub-nav-label">实验二导览：</span>
-        <a href="#e2-iv">自变量与理论支撑</a>
-        <a href="#e2-rq-dv">RQ·假设·因变量联动</a>
+        <a href="#e2-iv">自变量与理论</a>
+        <a href="#e2-rq">RQ与假设</a>
+        <a href="#e2-dv">因变量</a>
       </div>
     </div>
   </nav>
@@ -3878,15 +3883,16 @@
         <div class="section-header">
           <span class="section-num">03</span>
           <h2 class="section-title">研究问题（RQ）与研究假设（H）</h2>
-          <span class="section-desc">按表达学习效果、心理体验与困难情境适配递进展开</span>
         </div>
         <div class="grid-2">
           <div>
+            <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">一、核心研究问题（RQ1–RQ3）</h3>
             <div class="rq-item"><div class="badge-code badge-rq">RQ1</div><div class="rq-body"><h4>表达与学习效果</h4><p>AI 帮助的介入方式与语言帮助的具体程度，会对学习者的<strong>即时口语表达表现</strong>以及<strong>无帮助条件下的独立表达效果</strong>产生什么样的影响？</p></div></div>
             <div class="rq-item"><div class="badge-code badge-rq">RQ2</div><div class="rq-body"><h4>心理感受与使用体验</h4><p>不同的 AI 帮助介入方式与语言帮助具体程度，是否会影响学习者在口语练习中的<strong>表达压力、打断感、自主感</strong>以及<strong>整体使用体验</strong>？</p></div></div>
             <div class="rq-item"><div class="badge-code badge-rq">RQ3</div><div class="rq-body"><h4>困难情境适配</h4><p>在<strong>表达受阻、表达错误与沟通受阻</strong>三种不同困难情境下，学习者对 AI 介入方式与帮助具体程度的适配效果及最优组合是否存在差异？</p></div></div>
           </div>
           <div>
+            <h3 style="font-size:15.5px;font-weight:800;color:var(--teal);margin-bottom:10px;">二、研究假设（H1–H3）</h3>
             <div class="h-item"><div class="badge-code badge-h">H1</div><div class="h-body"><h4>介入方式主效应</h4><p>相比用户主动触发，AI 主动直接介入能更快帮助学习者恢复表达，但会带来更高的打断感与更低的自主感；AI 主动征询居中，但额外确认决策可能分散注意力，不利于无帮助迁移。</p></div></div>
             <div class="h-item"><div class="badge-code badge-h">H2</div><div class="h-body"><h4>具体程度主效应</h4><p>相比线索提示，完整示范能更明显地降低当下表达压力、提升即时流畅度；但在撤去帮助的独立表达测试中，线索提示组的迁移表现更好。</p></div></div>
             <div class="h-item"><div class="badge-code badge-h">H3</div><div class="h-body"><h4>交互与情境调节</h4><p>AI 介入方式与帮助具体程度之间存在显著交互作用，且最优帮助策略会随困难情境（表达受阻、表达错误、沟通受阻）的不同而变化。</p></div></div>
@@ -3969,11 +3975,11 @@
         </div>
       </header>
 
-      <!-- E2-1: 自变量与理论支撑（交互式双 Tab + 卡片探索 + 文献抽屉） -->
+      <!-- E2-1: 自变量与理论支撑 -->
       <section class="section" id="e2-iv">
         <div class="section-header">
           <span class="section-num teal">01</span>
-          <h2 class="section-title">实验二自变量与理论支撑（交互探索）</h2>
+          <h2 class="section-title">自变量设计与理论支撑</h2>
         </div>
 
         <div class="card">
@@ -4109,7 +4115,7 @@
             </div>
 
             <!-- Accordion Literature Chain -->
-            <h4 style="font-size:15px;font-weight:800;color:var(--text-main);margin-bottom:10px;">核心理论文献演进链（点击展开精读）</h4>
+            <h4 style="font-size:15px;font-weight:800;color:var(--text-main);margin-bottom:10px;">核心理论文献演进链</h4>
 
             <div class="accordion-item open">
               <button type="button" class="accordion-head" onclick="toggleAccordion(this)">
@@ -4163,11 +4169,11 @@
         </div>
       </section>
 
-      <!-- E2-2: RQ · H · DV 联动视图 -->
-      <section class="section" id="e2-rq-dv">
+      <!-- E2-2: RQ & H -->
+      <section class="section" id="e2-rq">
         <div class="section-header">
           <span class="section-num teal">02</span>
-          <h2 class="section-title">研究问题（RQ）、假设（H）与因变量（DV）联动对照</h2>
+          <h2 class="section-title">研究问题（RQ）与研究假设（H）</h2>
         </div>
 
         <!-- Interactive Linked Filter Bar -->
@@ -4178,7 +4184,7 @@
           <button type="button" class="rq-filter-btn" onclick="filterE2Links('rq3', this)">只聚焦 RQ3 · 交互与困难情境适配</button>
         </div>
 
-        <div class="grid-2" style="margin-bottom:20px;">
+        <div class="grid-2">
           <!-- RQs -->
           <div>
             <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">一、核心研究问题（RQ1–RQ3）</h3>
@@ -4231,67 +4237,62 @@
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- 5 DV Cards -->
-        <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">三、必测核心因变量（4 项主观维度 + 1 项短访谈）</h3>
-        <div class="dv-grid">
-          <div class="dv-card" data-link="rq1 rq3">
-            <div class="dv-card-top">
-              <h4>1. 即时表达压力</h4>
-              <span class="pill amber">主观打分 · RQ1</span>
-            </div>
-            <ul class="dv-list">
-              <li><strong>具体怎么测：</strong>1 道题（SNRS-11，0–10 分数字打分：0 = 完全无压力，10 = 压力极大）</li>
-            </ul>
-            <div class="dv-ref">对应依据：直接复用梁楚晗论文口径</div>
-          </div>
-
-          <div class="dv-card" data-link="rq1 rq3">
-            <div class="dv-card-top">
-              <h4>2. 情境性开口意愿（State WTC）</h4>
-              <span class="pill teal">主观量表 · RQ1</span>
-            </div>
-            <ul class="dv-list">
-              <li><strong>具体怎么测：</strong>3 道题（5 级李克特量表，测当下敢不敢说、有无信心说完、愿不愿意多说）</li>
-            </ul>
-            <div class="dv-ref">对应依据：借鉴 Ayedoun et al. (2019/2020) 与 MacIntyre (1998)，补齐前人只测未来预期 WTC 的局限</div>
-          </div>
-
-          <div class="dv-card" data-link="rq2 rq3">
-            <div class="dv-card-top">
-              <h4>3. 共情与关系感知</h4>
-              <span class="pill indigo">主观量表 · RQ2</span>
-            </div>
-            <ul class="dv-list">
-              <li><strong>具体怎么测：</strong>3 道题（5 级李克特量表，测感到被理解体谅、被接纳不评判、亲近自然）</li>
-            </ul>
-            <div class="dv-ref">对应依据：借鉴 PETS-ER（CHI 2024）与 SDT 配套 IMI 关系感分量表，补齐课题 SDT 闭环</div>
-          </div>
-
-          <div class="dv-card" data-link="rq2 rq3">
-            <div class="dv-card-top">
-              <h4>4. 持续使用意愿与总体评价</h4>
-              <span class="pill violet">主观量表 · RQ2</span>
-            </div>
-            <ul class="dv-list">
-              <li><strong>具体怎么测：</strong>4 道题（5 级李克特量表：3 题持续使用意愿 + 1 题总体喜欢度）</li>
-            </ul>
-            <div class="dv-ref">对应依据：借鉴 TAM，直接复用梁楚晗第 5 章表 5.3 句式</div>
-          </div>
-
-          <div class="dv-card" data-link="rq1 rq2 rq3" style="grid-column: 1 / -1;">
-            <div class="dv-card-top">
-              <h4>5. 补充短访谈</h4>
-              <span class="pill gray">质性补充 · RQ1–RQ3</span>
-            </div>
-            <ul class="dv-list">
-              <li><strong>具体怎么测：</strong>每组抽 3–5 人聊 3–5 分钟，问不同情境下为什么偏好或反感某种话术与神态</li>
-            </ul>
-            <div class="dv-ref">对应依据：直接复用梁楚晗 5.3.3 做法，用来解释定量结果的“为什么”</div>
-          </div>
+      <!-- E2-3: DV (Unified Card + Table Layout matching Exp 1) -->
+      <section class="section" id="e2-dv">
+        <div class="section-header">
+          <span class="section-num teal">03</span>
+          <h2 class="section-title">因变量与测量方式：4 项主观维度 + 1 项短访谈</h2>
         </div>
-        <div class="note-banner teal">
-          （注：第 2、3、4 项合并在同一张 10 题问卷表里发放，各维度求均值直接进 SPSS 跑方差分析。）
+        <div class="card">
+          <div class="table-wrap" style="margin-top:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:11%;">对应 RQ</th>
+                  <th style="width:21%;">因变量（DV）</th>
+                  <th style="width:39%;">具体怎么测</th>
+                  <th style="width:29%;">对应依据（直接可引用）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-link="rq1 rq3">
+                  <td><span class="pill">RQ1</span></td>
+                  <td><strong>1. 即时表达压力</strong></td>
+                  <td>1 道题（SNRS-11，0–10 分数字打分：0 = 完全无压力，10 = 压力极大）</td>
+                  <td>直接复用梁楚晗论文口径</td>
+                </tr>
+                <tr data-link="rq1 rq3">
+                  <td><span class="pill">RQ1</span></td>
+                  <td><strong>2. 情境性开口意愿（State WTC）</strong></td>
+                  <td>3 道题（5 级李克特量表，测当下敢不敢说、有无信心说完、愿不愿意多说）</td>
+                  <td>借鉴 Ayedoun et al. (2019/2020) 与 MacIntyre (1998)，补齐前人只测未来预期 WTC 的局限</td>
+                </tr>
+                <tr data-link="rq2 rq3">
+                  <td><span class="pill indigo">RQ2</span></td>
+                  <td><strong>3. 共情与关系感知</strong></td>
+                  <td>3 道题（5 级李克特量表，测感到被理解体谅、被接纳不评判、亲近自然）</td>
+                  <td>借鉴 PETS-ER（CHI 2024）与 SDT 配套 IMI 关系感分量表，补齐课题 SDT 闭环</td>
+                </tr>
+                <tr data-link="rq2 rq3">
+                  <td><span class="pill indigo">RQ2</span></td>
+                  <td><strong>4. 持续使用意愿与总体评价</strong></td>
+                  <td>4 道题（5 级李克特量表：3 题持续使用意愿 + 1 题总体喜欢度）</td>
+                  <td>借鉴 TAM，直接复用梁楚晗第 5 章表 5.3 句式</td>
+                </tr>
+                <tr data-link="rq1 rq2 rq3">
+                  <td><span class="pill gray">RQ1–3</span></td>
+                  <td><strong>5. 补充短访谈</strong></td>
+                  <td>每组抽 3–5 人聊 3–5 分钟，问不同情境下为什么偏好或反感某种话术与神态</td>
+                  <td>直接复用梁楚晗 5.3.3 做法，用来解释定量结果的“为什么”</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note-banner teal">
+            （注：第 2、3、4 项合并在同一张 10 题问卷表里发放，各维度求均值直接进 SPSS 跑方差分析。）
+          </div>
         </div>
       </section>
     </div>
@@ -4712,7 +4713,7 @@
       document.querySelectorAll('.rq-filter-btn').forEach(b => b.classList.remove('active'));
       btnEl.classList.add('active');
 
-      const items = document.querySelectorAll('#e2-rq-dv [data-link]');
+      const items = document.querySelectorAll('#view-exp2 [data-link]');
       items.forEach(el => {
         const links = el.dataset.link.split(' ');
         if (filterKey === 'all') {
