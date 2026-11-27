@@ -3701,7 +3701,7 @@
           </div>
           <div class="hero-meta-item">
             <div class="label">核心评估</div>
-            <div class="value">2 客观（含无帮助迁移）+ 2 主观</div>
+            <div class="value">纯客观口语表现（3 项，零转写）</div>
           </div>
         </div>
       </header>
@@ -3898,25 +3898,41 @@
       <section class="section" id="e1-dv">
         <div class="section-header">
           <span class="section-num">04</span>
-          <h2 class="section-title">因变量与测量方式（2 客观 + 2 主观）</h2>
+          <h2 class="section-title">因变量与测量方式：纯客观口语表现（3 项，零转写）</h2>
         </div>
         <div class="card">
+          <div class="note-banner" style="margin-top:0;margin-bottom:14px;">
+            实验一不发主观体验问卷，完全把“体验”阵地留给实验二，仅采集以下 3 项连续客观数据（录屏/录音 + Excel 即可完成全部核算）：
+          </div>
           <div class="table-wrap" style="margin-top:0;">
             <table>
               <thead>
                 <tr>
-                  <th style="width:9%;">对应 RQ</th>
-                  <th style="width:18%;">因变量（DV）</th>
-                  <th style="width:11%;">类型</th>
-                  <th style="width:40%;">具体测量方式</th>
-                  <th style="width:22%;">方法对标</th>
+                  <th style="width:18%;">客观因变量（DV）</th>
+                  <th style="width:31%;">操作定义与计算公式</th>
+                  <th style="width:28%;">具体实操步骤（无需转写）</th>
+                  <th style="width:23%;">同门与文献对标</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td><span class="pill">RQ1</span></td><td><strong>1. 即时表达表现</strong></td><td><span class="pill teal">客观行为</span></td><td>① 表达恢复时间（困难至重新开口耗时）；② 本轮表达完成情况。</td><td>同门论文（陈星微）恢复时间范式</td></tr>
-                <tr><td><span class="pill">RQ1</span></td><td><strong>2. 无帮助迁移表现</strong></td><td><span class="pill teal">客观测试</span></td><td>撤掉提示后在相似语境独立口头表达，统计独立表达准确率。</td><td>同门论文（梁楚晗）保持率 & Cody (2020) 后测</td></tr>
-                <tr><td><span class="pill indigo">RQ2</span></td><td><strong>3. 口语心理体验</strong></td><td><span class="pill amber">主观量表</span></td><td>表达压力（0–10 单题 Stress NRS-11）；打断感（2 题）；自主感（2–3 题）。</td><td>梁楚晗压力单题 + SDT 核心维度</td></tr>
-                <tr><td><span class="pill indigo">RQ2</span></td><td><strong>4. 产品使用体验</strong></td><td><span class="pill amber">主观量表</span></td><td>UEQ-S 短版量表（8 题，实用性 UE_1 与享乐性 UE_2）。</td><td>复用同门论文（梁楚晗）标准量表</td></tr>
+                <tr>
+                  <td><strong>1. 表达恢复时间（秒）</strong></td>
+                  <td>从口语困难触发并出现辅助提示（或被试主动点击求助）时刻 <em>T</em><sub>1</sub> 起，至被试重新说出有效英文时刻 <em>T</em><sub>2</sub> 为止：<em>RT</em> = <em>T</em><sub>2</sub> − <em>T</em><sub>1</sub></td>
+                  <td>拖动录屏/录音进度条记录 <em>T</em><sub>1</sub>、<em>T</em><sub>2</sub>，Excel 直接相减求均值</td>
+                  <td>同门陈星微“注意力恢复时间”范式（<em>T</em><sub>4</sub> − <em>T</em><sub>3</sub>）</td>
+                </tr>
+                <tr>
+                  <td><strong>2. 单轮任务完成时长（秒）</strong></td>
+                  <td>从该轮对话启动时刻 <em>T</em><sub>0</sub> 起，至被试顺利表达完本轮目标语义时刻 <em>T</em><sub>3</sub> 为止：<em>TT</em> = <em>T</em><sub>3</sub> − <em>T</em><sub>0</sub></td>
+                  <td>与指标 1 看同一条音频时间轴，仅多记一头一尾两个时间点</td>
+                  <td>同门陈星微任务耗时、梁楚晗总任务时长范式</td>
+                </tr>
+                <tr>
+                  <td><strong>3. 无帮助独立表达准确率（%）</strong></td>
+                  <td>练习结束间隔数分钟、撤去全部提示后，在相似语境下独立口头重述；按预设目标表达要点清单计分：<em>Acc</em> = <em>n</em><sub>correct</sub> / <em>n</em><sub>total</sub> × 100%</td>
+                  <td>提前为 3 类情境拟定目标表达要点清单（如每情境 2 个、共 6 个核心要点），听一遍后测录音逐项打勾算百分比</td>
+                  <td>同门梁楚晗准确率公式（<code>acc_STM</code> / <code>acc_LTM</code>）与无帮助后测范式</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -3947,8 +3963,8 @@
             <div class="value">平行共情 vs. 回应式共情</div>
           </div>
           <div class="hero-meta-item">
-            <div class="label">补齐的 SDT 闭环</div>
-            <div class="value">关系感 · 感知共情 · 行为层 WTC</div>
+            <div class="label">核心评估</div>
+            <div class="value">4 项主观维度 + 1 项短访谈</div>
           </div>
         </div>
       </header>
@@ -4216,56 +4232,66 @@
           </div>
         </div>
 
-        <!-- 4 DV Cards -->
-        <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">三、因变量测量体系（1 组客观行为 + 3 组标准主观量表）</h3>
+        <!-- 5 DV Cards -->
+        <h3 style="font-size:15.5px;font-weight:800;color:var(--primary);margin-bottom:10px;">三、必测核心因变量（4 项主观维度 + 1 项短访谈）</h3>
         <div class="dv-grid">
           <div class="dv-card" data-link="rq1 rq3">
             <div class="dv-card-top">
-              <h4>1. 客观口语行为：表达恢复与行为层开口意愿</h4>
-              <span class="pill teal">客观录音 · RQ1</span>
+              <h4>1. 即时表达压力</h4>
+              <span class="pill amber">主观打分 · RQ1</span>
             </div>
             <ul class="dv-list">
-              <li><strong>① 表达恢复时间：</strong>后台录音自动提取从收到 NPC 情感回应到用户重新开口的停顿秒数。</li>
-              <li><strong>② 自发口语产出长度：</strong>收到情感回应后的平均话轮词数（Mean Turn Length），或在对话末尾开放延伸句里的自由发言词数。</li>
+              <li><strong>具体怎么测：</strong>1 道题（SNRS-11，0–10 分数字打分：0 = 完全无压力，10 = 压力极大）</li>
             </ul>
-            <div class="dv-ref">对标：延续实验一及同门论文恢复计时范式；补齐 Ayedoun (2019) 缺乏真实行为层 WTC 的研究局限。</div>
+            <div class="dv-ref">对应依据：直接复用梁楚晗论文口径</div>
           </div>
 
           <div class="dv-card" data-link="rq1 rq3">
             <div class="dv-card-top">
-              <h4>2. 核心口语心理：即时表达焦虑与情境性开口意愿</h4>
-              <span class="pill amber">主观快评 · RQ1</span>
+              <h4>2. 情境性开口意愿（State WTC）</h4>
+              <span class="pill teal">主观量表 · RQ1</span>
             </div>
             <ul class="dv-list">
-              <li><strong>① 即时表达压力/焦虑（Stress NRS-11）：</strong>0–10 分压力单题（0=完全放松，10=非常紧张尴尬）。</li>
-              <li><strong>② 情境性开口意愿（State WTC）：</strong>精简 3 题（7 级量表），测量“此时此刻”的表达自信（Confidence）、继续交谈渴望（Desire）与敢于尝试开口意愿。</li>
+              <li><strong>具体怎么测：</strong>3 道题（5 级李克特量表，测当下敢不敢说、有无信心说完、愿不愿意多说）</li>
             </ul>
-            <div class="dv-ref">对标：Stress NRS-11 复用同门论文（梁楚晗）及实验一口径；State WTC 源于 MacIntyre (1998) &amp; Ayedoun (2019/2020)。</div>
+            <div class="dv-ref">对应依据：借鉴 Ayedoun et al. (2019/2020) 与 MacIntyre (1998)，补齐前人只测未来预期 WTC 的局限</div>
           </div>
 
           <div class="dv-card" data-link="rq2 rq3">
             <div class="dv-card-top">
-              <h4>3. 共情与关系体验：感知共情与关系感</h4>
+              <h4>3. 共情与关系感知</h4>
               <span class="pill indigo">主观量表 · RQ2</span>
             </div>
             <ul class="dv-list">
-              <li><strong>① 感知共情（PETS-ER）：</strong>采用 CHI 2024 科技感知共情量表（PETS）的情绪回应性核心题项（如“NPC 考虑了我的情绪状态 / 帮助我应对了尴尬情境”），同时兼作 IV1×IV2 操纵检验。</li>
-              <li><strong>② 关系感（IMI-Relatedness）：</strong>采用内在动机量表 IMI 的 Relatedness 子量表精简 3–4 题（如“觉得和 NPC 交流亲近、被理解接纳”）。</li>
+              <li><strong>具体怎么测：</strong>3 道题（5 级李克特量表，测感到被理解体谅、被接纳不评判、亲近自然）</li>
             </ul>
-            <div class="dv-ref">对标：Schmidmaier et al. (CHI 2024) PETS；Ryan (1982) IMI，精准补齐 SDT 的关系感闭环。</div>
+            <div class="dv-ref">对应依据：借鉴 PETS-ER（CHI 2024）与 SDT 配套 IMI 关系感分量表，补齐课题 SDT 闭环</div>
           </div>
 
           <div class="dv-card" data-link="rq2 rq3">
             <div class="dv-card-top">
-              <h4>4. 产品整体体验：使用体验与持续使用意愿</h4>
+              <h4>4. 持续使用意愿与总体评价</h4>
               <span class="pill violet">主观量表 · RQ2</span>
             </div>
             <ul class="dv-list">
-              <li><strong>① UEQ-S 短版量表：</strong>共 8 题（-3 到 +3 语义差异），拆分为实用性体验（UE_1）与享乐性体验（UE_2）分别统计。</li>
-              <li><strong>② 持续使用意愿：</strong>精简 2–3 题（7 级量表，如“今后练英语口语时，我愿意继续和这样的 NPC 对话”）。</li>
+              <li><strong>具体怎么测：</strong>4 道题（5 级李克特量表：3 题持续使用意愿 + 1 题总体喜欢度）</li>
             </ul>
-            <div class="dv-ref">对标：UEQ-S（Schrepp et al., 2023）与持续使用意愿均直接对齐同门论文（梁楚晗）实验二评估范式。</div>
+            <div class="dv-ref">对应依据：借鉴 TAM，直接复用梁楚晗第 5 章表 5.3 句式</div>
           </div>
+
+          <div class="dv-card" data-link="rq1 rq2 rq3" style="grid-column: 1 / -1;">
+            <div class="dv-card-top">
+              <h4>5. 补充短访谈</h4>
+              <span class="pill gray">质性补充 · RQ1–RQ3</span>
+            </div>
+            <ul class="dv-list">
+              <li><strong>具体怎么测：</strong>每组抽 3–5 人聊 3–5 分钟，问不同情境下为什么偏好或反感某种话术与神态</li>
+            </ul>
+            <div class="dv-ref">对应依据：直接复用梁楚晗 5.3.3 做法，用来解释定量结果的“为什么”</div>
+          </div>
+        </div>
+        <div class="note-banner teal">
+          （注：第 2、3、4 项合并在同一张 10 题问卷表里发放，各维度求均值直接进 SPSS 跑方差分析。）
         </div>
       </section>
     </div>
